@@ -1,9 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Definition } from '@/Definition';
 import { Instance } from '@/Instance';
-import { Operations } from '@/Operations';
 import { createRegistry, Registry } from '@/Registry';
-import { Item } from '@fjell/core';
 
 vi.mock('@/logger', () => {
   const logger = {
@@ -38,11 +36,9 @@ describe('LibRegistry', () => {
 
   it('should register a library', () => {
     const lib = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
-    // @ts-expect-error
+    } as unknown as Instance<'test'>;
     registry.register(['testLib'], lib);
     expect(registry.get(['testLib'])).toBe(lib);
   });
@@ -53,41 +49,33 @@ describe('LibRegistry', () => {
 
   it('should register and retrieve library with multi-element key array', () => {
     const lib = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
-    // @ts-expect-error
+    } as unknown as Instance<'test'>;
     registry.register(['test', 'nested', 'lib'], lib);
     expect(registry.get(['test', 'nested', 'lib'])).toBe(lib);
   });
 
   it('should return undefined when partial key array match', () => {
     const lib = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
-    // @ts-expect-error
+    } as unknown as Instance<'test'>;
     registry.register(['test', 'nested', 'lib'], lib);
     expect(() => registry.get(['test', 'nested'])).toThrow();
   });
 
   it('should handle multiple libraries with different key arrays', () => {
     const lib1 = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
     const lib2 = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
 
-    // @ts-expect-error
     registry.register(['test', 'lib1'], lib1);
-    // @ts-expect-error
     registry.register(['test', 'lib2'], lib2);
 
     expect(registry.get(['test', 'lib1'])).toBe(lib1);
@@ -96,33 +84,25 @@ describe('LibRegistry', () => {
 
   it('should handle multiple libraries with very different key arrays', () => {
     const element = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
     const container = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
     const region = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
     const nation = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
 
-    // @ts-expect-error
     registry.register(['nation'], nation);
-    // @ts-expect-error
     registry.register(['region', 'nation'], region);
-    // @ts-expect-error
     registry.register(['container', 'region', 'nation'], container);
-    // @ts-expect-error
     registry.register(['element', 'container', 'region', 'nation'], element);
 
     expect(registry.get(['element', 'container', 'region', 'nation'])).toBe(element);
@@ -133,33 +113,25 @@ describe('LibRegistry', () => {
 
   it('should handle multiple libraries with very different key arrays', () => {
     const element = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
     const container = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
     const region = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
     const nation = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
 
-    // @ts-expect-error
     registry.register(['element', 'container', 'region', 'nation'], element);
-    // @ts-expect-error
     registry.register(['nation'], nation);
-    // @ts-expect-error
     registry.register(['region', 'nation'], region);
-    // @ts-expect-error
     registry.register(['container', 'region', 'nation'], container);
 
     expect(registry.get(['nation'])).toBe(nation);
@@ -170,26 +142,20 @@ describe('LibRegistry', () => {
 
   it('should handle multiple libraries with different scopes', () => {
     const nationDefault = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
     const nationFirestore = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
     const nationSequelize = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
 
-    // @ts-expect-error
     registry.register(['nation'], nationDefault);
-    // @ts-expect-error
     registry.register(['nation'], nationFirestore, { scopes: ['firestore'] });
-    // @ts-expect-error
     registry.register(['nation'], nationSequelize, { scopes: ['sequelize'] });
 
     expect(registry.get(['nation'])).toBe(nationDefault);
@@ -200,82 +166,62 @@ describe('LibRegistry', () => {
   it('should handle multiple libraries with very different key arrays', () => {
     const elementFirestore1 =
       {
-        definition: {} as Definition<Item<'test'>, 'test'>,
-        operations: {} as Operations<Item<'test'>, 'test'>,
+        definition: {} as Definition<'test'>,
         registry: {} as Registry,
-      } as unknown as Instance<Item<'test'>, 'test'>;
+      } as unknown as Instance<'test'>;
     const elementSequelize1 =
       {
-        definition: {} as Definition<Item<'test'>, 'test'>,
-        operations: {} as Operations<Item<'test'>, 'test'>,
+        definition: {} as Definition<'test'>,
         registry: {} as Registry,
-      } as unknown as Instance<Item<'test'>, 'test'>;
+      } as unknown as Instance<'test'>;
     const elementSequelize2 =
       {
-        definition: {} as Definition<Item<'test'>, 'test'>,
-        operations: {} as Operations<Item<'test'>, 'test'>,
+        definition: {} as Definition<'test'>,
         registry: {} as Registry,
-      } as unknown as Instance<Item<'test'>, 'test'>;
+      } as unknown as Instance<'test'>;
     const elementFirestore2 =
       {
-        definition: {} as Definition<Item<'test'>, 'test'>,
-        operations: {} as Operations<Item<'test'>, 'test'>,
+        definition: {} as Definition<'test'>,
         registry: {} as Registry,
-      } as unknown as Instance<Item<'test'>, 'test'>;
+      } as unknown as Instance<'test'>;
     const elementSequelizeBlamo2 =
       {
-        definition: {} as Definition<Item<'test'>, 'test'>,
-        operations: {} as Operations<Item<'test'>, 'test'>,
+        definition: {} as Definition<'test'>,
         registry: {} as Registry,
-      } as unknown as Instance<Item<'test'>, 'test'>;
+      } as unknown as Instance<'test'>;
     const container = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
     const containerFirestore =
       {
-        definition: {} as Definition<Item<'test'>, 'test'>,
-        operations: {} as Operations<Item<'test'>, 'test'>,
+        definition: {} as Definition<'test'>,
         registry: {} as Registry,
-      } as unknown as Instance<Item<'test'>, 'test'>;
+      } as unknown as Instance<'test'>;
     const containerSequelize =
       {
-        definition: {} as Definition<Item<'test'>, 'test'>,
-        operations: {} as Operations<Item<'test'>, 'test'>,
+        definition: {} as Definition<'test'>,
         registry: {} as Registry,
-      } as unknown as Instance<Item<'test'>, 'test'>;
+      } as unknown as Instance<'test'>;
     const region = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
     const nation = {
-      definition: {} as Definition<Item<'test'>, 'test'>,
-      operations: {} as Operations<Item<'test'>, 'test'>,
+      definition: {} as Definition<'test'>,
       registry: {} as Registry,
-    } as unknown as Instance<Item<'test'>, 'test'>;
+    } as unknown as Instance<'test'>;
 
-    // @ts-expect-error
     registry.register(['element', 'container', 'region', 'nation'], elementFirestore1, { scopes: ['firestore'] });
-    // @ts-expect-error
     registry.register(['element', 'container', 'region', 'nation'], elementSequelize1, { scopes: ['sequelize'] });
-    // @ts-expect-error
     registry.register(['element2', 'container', 'region', 'nation'], elementSequelize2, { scopes: ['sequelize'] });
-    // @ts-expect-error
     registry.register(['element2', 'container', 'region', 'nation'], elementFirestore2, { scopes: ['firestore'] });
     registry.register(['element2', 'container', 'region', 'nation'],
-      // @ts-expect-error
       elementSequelizeBlamo2, { scopes: ['sequelize', 'blamo'] });
-    // @ts-expect-error
     registry.register(['nation'], nation);
-    // @ts-expect-error
     registry.register(['region', 'nation'], region);
-    // @ts-expect-error
     registry.register(['container', 'region', 'nation'], container);
-    // @ts-expect-error
     registry.register(['container', 'region', 'nation'], containerFirestore, { scopes: ['firestore'] });
-    // @ts-expect-error
     registry.register(['container', 'region', 'nation'], containerSequelize, { scopes: ['sequelize'] });
 
     expect(registry.get(['nation'])).toBe(nation);

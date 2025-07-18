@@ -1,8 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 import { createCoordinate } from "@/Coordinate";
 import { createDefinition } from "@/Definition";
-import { Options } from "@/Options";
-import { Item } from "@fjell/core";
 
 vi.mock('@fjell/logging', () => {
   const logger = {
@@ -29,57 +27,32 @@ vi.mock('@fjell/logging', () => {
 });
 
 describe('Definition', () => {
-  // Mock interfaces and types
-  interface TestItem extends Item<'test', 'loc1', 'loc2'> {
-    name: string;
-  }
 
   describe('createDefinition', () => {
     const mockCoordinate = createCoordinate(['test'], ['scope1', 'scope2']);
 
     test('should create definition with coordinate and default options when no options provided', () => {
-      const definition = createDefinition<TestItem, 'test', 'loc1', 'loc2'>(mockCoordinate);
+      const definition = createDefinition<'test', 'loc1', 'loc2'>(mockCoordinate);
 
       expect(definition.coordinate).toBe(mockCoordinate);
-      expect(definition.options).toBeDefined();
-      expect(definition.options?.hooks).toBeDefined();
-      expect(definition.options?.hooks?.preCreate).toBeDefined();
-      expect(definition.options?.hooks?.preUpdate).toBeDefined();
     });
 
     test('should create definition with provided options', () => {
-      const mockOptions: Options<TestItem, 'test', 'loc1', 'loc2'> = {
-        hooks: {
-          preCreate: async (item) => item,
-          preUpdate: async (key, item) => item
-        }
-      };
 
-      const definition = createDefinition<TestItem, 'test', 'loc1', 'loc2'>(
-        mockCoordinate,
-        mockOptions
+      const definition = createDefinition<'test', 'loc1', 'loc2'>(
+        mockCoordinate
       );
 
       expect(definition.coordinate).toBe(mockCoordinate);
-      expect(definition.options).toBeDefined();
-      expect(definition.options?.hooks).toStrictEqual(mockOptions.hooks);
     });
 
     test('should merge provided options with default options', () => {
-      const partialOptions: Partial<Options<TestItem, 'test', 'loc1', 'loc2'>> = {
-        hooks: {
-          preCreate: async (item) => ({ ...item, name: 'modified' })
-        }
-      };
 
-      const definition = createDefinition<TestItem, 'test', 'loc1', 'loc2'>(
-        mockCoordinate,
-        partialOptions
+      const definition = createDefinition<'test', 'loc1', 'loc2'>(
+        mockCoordinate
       );
 
       expect(definition.coordinate).toBe(mockCoordinate);
-      expect(definition.options?.hooks?.preCreate).toBeDefined();
-      expect(definition.options?.hooks?.preUpdate).toBeDefined();
     });
   });
 });

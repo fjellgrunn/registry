@@ -1,14 +1,12 @@
 {
-    "name": "@fjell/lib",
-    "version": "4.4.10",
+    "name": "@fjell/registry",
+    "version": "4.4.2",
     "keywords": [
-        "library",
-        "persistence",
-        "database",
+        "registry",
         "fjell"
     ],
     "license": "Apache-2.0",
-    "description": "Server-side Library for Fjell",
+    "description": "Common Registry for Fjell",
     "engines": {
         "node": ">=21"
     },
@@ -38,7 +36,7 @@
     "devDependencies": {
         "@eslint/eslintrc": "^3.3.1",
         "@eslint/js": "^9.31.0",
-        "@swc/core": "^1.12.14",
+        "@swc/core": "^1.13.0",
         "@tsconfig/recommended": "^1.0.10",
         "@types/multer": "^2.0.0",
         "@types/node": "^24.0.14",
@@ -52,7 +50,7 @@
         "ts-node": "^10.9.2",
         "tsc-alias": "^1.8.16",
         "typescript": "^5.8.3",
-        "vite": "^7.0.4",
+        "vite": "^7.0.5",
         "vite-plugin-dts": "^4.5.4",
         "vite-plugin-node": "^7.0.0",
         "vitest": "^3.2.4"
@@ -60,6 +58,6 @@
     "packageManager": "pnpm@10.13.1",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/getfjell/lib.git"
+        "url": "git+https://github.com/getfjell/registry.git"
     }
 }

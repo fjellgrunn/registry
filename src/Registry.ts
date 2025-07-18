@@ -1,11 +1,10 @@
-import { Item } from '@fjell/core';
 import LibLogger from '@/logger';
 import { Instance, isInstance } from './Instance';
 
 const logger = LibLogger.get("Registry");
 
 /**
- * The Registry interface provides a central registry for managing and accessing library instances.
+ * The Registry interface provides a central registry for managing and accessing instances of services.
  * It serves as a dependency injection container that allows libraries to reference and access
  * other library instances they depend on.
  *
@@ -23,7 +22,7 @@ export interface Registry {
    */
   register: (
     kta: string[],
-    instance: Instance<any, any, any | never, any | never, any | never, any | never, any | never>,
+    instance: Instance<any, any | never, any | never, any | never, any | never, any | never>,
     options?: { scopes?: string[] },
   ) => void;
 
@@ -36,7 +35,7 @@ export interface Registry {
   get: (
     kta: string[],
     options?: { scopes?: string[] },
-  ) => Instance<any, any, any | never, any | never, any | never, any | never, any | never> | null;
+  ) => Instance<any, any | never, any | never, any | never, any | never, any | never> | null;
 
   /** The tree structure representing the hierarchy of library instances */
   libTree: LibTree;
@@ -44,7 +43,7 @@ export interface Registry {
 
 interface ScopedInstance {
   scopes?: string[];
-  instance: Instance<any, any, any | never, any | never, any | never, any | never, any | never>;
+  instance: Instance<any, any | never, any | never, any | never, any | never, any | never>;
 }
 
 const isScopedInstance = (instance: ScopedInstance): instance is ScopedInstance => {
@@ -55,9 +54,8 @@ const isScopedInstance = (instance: ScopedInstance): instance is ScopedInstance 
 const retrieveScopedInstance = (
   scopedInstanceArray: ScopedInstance[],
   scopes?: string[],
-): Instance<any, any, any | never, any | never, any | never, any | never, any | never> => {
+): Instance<any, any | never, any | never, any | never, any | never, any | never> => {
   let instance: Instance<
-    any,
     any,
     any | never,
     any | never,
@@ -87,14 +85,13 @@ export const createRegistry = (): Registry => {
   const libTree: LibTree = {};
 
   const register = <
-    V extends Item<S, L1, L2, L3, L4, L5>,
     S extends string,
     L1 extends string = never,
     L2 extends string = never,
     L3 extends string = never,
     L4 extends string = never,
     L5 extends string = never,
-  >(kta: S[], instance: Instance<V, S, L1, L2, L3, L4, L5>, options?: { scopes?: string[] }): void => {
+  >(kta: S[], instance: Instance<S, L1, L2, L3, L4, L5>, options?: { scopes?: string[] }): void => {
     const ktaArray = [...kta];
     let currentTree = libTree;
 
@@ -132,17 +129,16 @@ export const createRegistry = (): Registry => {
   }
 
   const get = <
-    V extends Item<S, L1, L2, L3, L4, L5>,
     S extends string,
     L1 extends string = never,
     L2 extends string = never,
     L3 extends string = never,
     L4 extends string = never,
     L5 extends string = never,
-  >(kta: S[], options?: { scopes?: string[] }): Instance<V, S, L1, L2, L3, L4, L5> | null => {
+  >(kta: S[], options?: { scopes?: string[] }): Instance<S, L1, L2, L3, L4, L5> | null => {
     const ktaArray = [...kta];
     let currentTree = libTree;
-    let instance: Instance<V, S, L1, L2, L3, L4, L5> | null = null;
+    let instance: Instance<S, L1, L2, L3, L4, L5> | null = null;
 
     // logger.debug(`Getting lib for KTA and scopes`, ktaArray, options?.scopes);
 

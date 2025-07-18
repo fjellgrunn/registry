@@ -26,5 +26,5 @@ jobs:
       - run: pnpm test
       - uses: codecov/codecov-action@v5
         with:
-          slug: getfjell/lib
+          slug: getfjell/registry
           token: ${{ secrets.CODECOV_TOKEN }}

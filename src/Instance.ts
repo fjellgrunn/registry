@@ -1,7 +1,6 @@
 /* eslint-disable no-undefined */
-import { Item } from "@fjell/core";
+/* eslint-disable indent */
 import { Definition } from "./Definition";
-import { Operations } from "./Operations";
 import LibLogger from "@/logger";
 import { Registry } from "./Registry";
 
@@ -24,7 +23,6 @@ const logger = LibLogger.get("Instance");
  * @template L1-L5 - Optional string literal types for location hierarchy levels
  */
 export interface Instance<
-  V extends Item<S, L1, L2, L3, L4, L5>,
   S extends string,
   L1 extends string = never,
   L2 extends string = never,
@@ -33,17 +31,13 @@ export interface Instance<
   L5 extends string = never
 > {
   /** The definition object that describes the structure and relationships of the data model */
-  definition: Definition<V, S, L1, L2, L3, L4, L5>;
-
-  /** The operations object that provides methods for interacting with the data model */
-  operations: Operations<V, S, L1, L2, L3, L4, L5>;
+  definition: Definition<S, L1, L2, L3, L4, L5>;
 
   /** The registry object that manages the registration and lookup of model instances */
   registry: Registry;
 }
 
 export const createInstance = <
-  V extends Item<S, L1, L2, L3, L4, L5>,
   S extends string,
   L1 extends string = never,
   L2 extends string = never,
@@ -51,18 +45,16 @@ export const createInstance = <
   L4 extends string = never,
   L5 extends string = never
 >(
-    definition: Definition<V, S, L1, L2, L3, L4, L5>,
-    operations: Operations<V, S, L1, L2, L3, L4, L5>,
-    registry: Registry
-  ): Instance<V, S, L1, L2, L3, L4, L5> => {
-  logger.debug("createInstance", { definition, operations, registry });
-  return { definition, operations, registry };
+  definition: Definition<S, L1, L2, L3, L4, L5>,
+  registry: Registry
+): Instance<S, L1, L2, L3, L4, L5> => {
+  logger.debug("createInstance", { definition, registry });
+  return { definition, registry };
 }
 
-export const isInstance = (instance: any): instance is Instance<any, any, any, any, any, any, any> => {
+export const isInstance = (instance: any): instance is Instance<any, any, any, any, any, any> => {
   return instance !== null &&
     instance !== undefined &&
     instance.definition !== undefined &&
-    instance.operations !== undefined &&
     instance.registry !== undefined;
 }

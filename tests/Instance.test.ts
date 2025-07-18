@@ -2,8 +2,6 @@
 import { describe, expect, test, vi } from 'vitest';
 import { createInstance, isInstance } from '@/Instance';
 import { Definition } from '@/Definition';
-import { Operations } from '@/Operations';
-import { Item } from '@fjell/core';
 import { Registry } from '@/Registry';
 
 vi.mock('@fjell/logging', () => {
@@ -33,15 +31,13 @@ vi.mock('@fjell/logging', () => {
 describe('Instance', () => {
   describe('createInstance', () => {
     test('should create instance with definition and operations', () => {
-      const mockDefinition = {} as Definition<Item<'test'>, 'test'>;
-      const mockOperations = {} as Operations<Item<'test'>, 'test'>;
+      const mockDefinition = {} as Definition<'test'>;
       const mockRegistry = {} as Registry;
 
-      const instance = createInstance(mockDefinition, mockOperations, mockRegistry);
+      const instance = createInstance(mockDefinition, mockRegistry);
 
       expect(instance).toBeDefined();
       expect(instance.definition).toBe(mockDefinition);
-      expect(instance.operations).toBe(mockOperations);
       expect(instance.registry).toBe(mockRegistry);
     });
   });
