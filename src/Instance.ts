@@ -1,8 +1,8 @@
 /* eslint-disable no-undefined */
 /* eslint-disable indent */
-import { Definition } from "./Definition";
 import LibLogger from "@/logger";
 import { Registry } from "./Registry";
+import { Coordinate } from "./Coordinate";
 
 const logger = LibLogger.get("Instance");
 
@@ -30,8 +30,7 @@ export interface Instance<
   L4 extends string = never,
   L5 extends string = never
 > {
-  /** The definition object that describes the structure and relationships of the data model */
-  definition: Definition<S, L1, L2, L3, L4, L5>;
+  coordinate: Coordinate<S, L1, L2, L3, L4, L5>;
 
   /** The registry object that manages the registration and lookup of model instances */
   registry: Registry;
@@ -45,16 +44,16 @@ export const createInstance = <
   L4 extends string = never,
   L5 extends string = never
 >(
-  definition: Definition<S, L1, L2, L3, L4, L5>,
+  coordinate: Coordinate<S, L1, L2, L3, L4, L5>,
   registry: Registry
 ): Instance<S, L1, L2, L3, L4, L5> => {
-  logger.debug("createInstance", { definition, registry });
-  return { definition, registry };
+  logger.debug("createInstance", { coordinate, registry });
+  return { coordinate, registry };
 }
 
 export const isInstance = (instance: any): instance is Instance<any, any, any, any, any, any> => {
   return instance !== null &&
     instance !== undefined &&
-    instance.definition !== undefined &&
+    instance.coordinate !== undefined &&
     instance.registry !== undefined;
 }

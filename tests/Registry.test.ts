@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { Definition } from '@/Definition';
 import { Instance } from '@/Instance';
 import { createRegistry, Registry } from '@/Registry';
+import { Coordinate } from '@/Coordinate';
 
 vi.mock('@/logger', () => {
   const logger = {
@@ -36,7 +36,7 @@ describe('LibRegistry', () => {
 
   it('should register a library', () => {
     const lib = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     registry.register(['testLib'], lib);
@@ -49,7 +49,7 @@ describe('LibRegistry', () => {
 
   it('should register and retrieve library with multi-element key array', () => {
     const lib = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     registry.register(['test', 'nested', 'lib'], lib);
@@ -58,7 +58,7 @@ describe('LibRegistry', () => {
 
   it('should return undefined when partial key array match', () => {
     const lib = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     registry.register(['test', 'nested', 'lib'], lib);
@@ -67,11 +67,11 @@ describe('LibRegistry', () => {
 
   it('should handle multiple libraries with different key arrays', () => {
     const lib1 = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     const lib2 = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
 
@@ -84,19 +84,19 @@ describe('LibRegistry', () => {
 
   it('should handle multiple libraries with very different key arrays', () => {
     const element = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     const container = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     const region = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     const nation = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
 
@@ -113,19 +113,19 @@ describe('LibRegistry', () => {
 
   it('should handle multiple libraries with very different key arrays', () => {
     const element = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     const container = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     const region = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     const nation = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
 
@@ -142,15 +142,15 @@ describe('LibRegistry', () => {
 
   it('should handle multiple libraries with different scopes', () => {
     const nationDefault = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     const nationFirestore = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     const nationSequelize = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
 
@@ -166,49 +166,49 @@ describe('LibRegistry', () => {
   it('should handle multiple libraries with very different key arrays', () => {
     const elementFirestore1 =
       {
-        definition: {} as Definition<'test'>,
+        coordinate: {} as Coordinate<'test'>,
         registry: {} as Registry,
       } as unknown as Instance<'test'>;
     const elementSequelize1 =
       {
-        definition: {} as Definition<'test'>,
+        coordinate: {} as Coordinate<'test'>,
         registry: {} as Registry,
       } as unknown as Instance<'test'>;
     const elementSequelize2 =
       {
-        definition: {} as Definition<'test'>,
+        coordinate: {} as Coordinate<'test'>,
         registry: {} as Registry,
       } as unknown as Instance<'test'>;
     const elementFirestore2 =
       {
-        definition: {} as Definition<'test'>,
+        coordinate: {} as Coordinate<'test'>,
         registry: {} as Registry,
       } as unknown as Instance<'test'>;
     const elementSequelizeBlamo2 =
       {
-        definition: {} as Definition<'test'>,
+        coordinate: {} as Coordinate<'test'>,
         registry: {} as Registry,
       } as unknown as Instance<'test'>;
     const container = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     const containerFirestore =
       {
-        definition: {} as Definition<'test'>,
+        coordinate: {} as Coordinate<'test'>,
         registry: {} as Registry,
       } as unknown as Instance<'test'>;
     const containerSequelize =
       {
-        definition: {} as Definition<'test'>,
+        coordinate: {} as Coordinate<'test'>,
         registry: {} as Registry,
       } as unknown as Instance<'test'>;
     const region = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     const nation = {
-      definition: {} as Definition<'test'>,
+      coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
 

@@ -1,8 +1,8 @@
 /* eslint-disable no-undefined */
 import { describe, expect, test, vi } from 'vitest';
 import { createInstance, isInstance } from '@/Instance';
-import { Definition } from '@/Definition';
 import { Registry } from '@/Registry';
+import { Coordinate } from '@/Coordinate';
 
 vi.mock('@fjell/logging', () => {
   const logger = {
@@ -31,13 +31,13 @@ vi.mock('@fjell/logging', () => {
 describe('Instance', () => {
   describe('createInstance', () => {
     test('should create instance with definition and operations', () => {
-      const mockDefinition = {} as Definition<'test'>;
+      const mockCoordinate = {} as Coordinate<'test'>;
       const mockRegistry = {} as Registry;
 
-      const instance = createInstance(mockDefinition, mockRegistry);
+      const instance = createInstance(mockCoordinate, mockRegistry);
 
       expect(instance).toBeDefined();
-      expect(instance.definition).toBe(mockDefinition);
+      expect(instance.coordinate).toBe(mockCoordinate);
       expect(instance.registry).toBe(mockRegistry);
     });
   });
@@ -45,8 +45,7 @@ describe('Instance', () => {
   describe('isInstance', () => {
     test('should return true for valid instance', () => {
       const mockInstance = {
-        definition: {},
-        operations: {},
+        coordinate: {},
         registry: {}
       };
 
