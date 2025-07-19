@@ -34,7 +34,7 @@ describe('Instance', () => {
       const mockCoordinate = {} as Coordinate<'test'>;
       const mockRegistry = {} as Registry;
 
-      const instance = createInstance(mockCoordinate, mockRegistry);
+      const instance = createInstance(mockRegistry, mockCoordinate);
 
       expect(instance).toBeDefined();
       expect(instance.coordinate).toBe(mockCoordinate);

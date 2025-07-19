@@ -1,88 +1,130 @@
+/* eslint-disable indent */
 import LibLogger from '@/logger';
 import { Instance, isInstance } from './Instance';
+import { createCoordinate } from './Coordinate';
+import {
+  InstanceFactory,
+  InstanceTree,
+  Registry,
+  RegistryHub,
+  ScopedInstance
+} from './types';
+
+// Re-export types for backward compatibility
+export type { Registry, RegistryHub, InstanceFactory, RegistryFactory } from './types';
 
 const logger = LibLogger.get("Registry");
 
-/**
- * The Registry interface provides a central registry for managing and accessing instances of services.
- * It serves as a dependency injection container that allows libraries to reference and access
- * other library instances they depend on.
- *
- * The registry maintains a tree structure of library instances and provides methods to:
- * 1. Register new library instances with their key types and optional scopes
- * 2. Retrieve library instances by their key types and optional scopes
- * 3. Access the library tree structure for dependency resolution
- */
-export interface Registry {
-  /**
-   * Registers a new library instance in the registry.
-   * @param kta - Array of key types that identify this library instance
-   * @param instance - The library instance to register
-   * @param options - Optional configuration including scopes for the instance
-   */
-  register: (
-    kta: string[],
-    instance: Instance<any, any | never, any | never, any | never, any | never, any | never>,
-    options?: { scopes?: string[] },
-  ) => void;
+const findScopedInstance = (
+  scopedInstances: ScopedInstance[],
+  requestedScopes?: string[],
 
-  /**
-   * Retrieves a library instance from the registry.
-   * @param kta - Array of key types to identify the library instance
-   * @param options - Optional configuration including scopes to search in
-   * @returns The found library instance or null if not found
-   */
-  get: (
-    kta: string[],
-    options?: { scopes?: string[] },
-  ) => Instance<any, any | never, any | never, any | never, any | never, any | never> | null;
-
-  /** The tree structure representing the hierarchy of library instances */
-  libTree: LibTree;
-}
-
-interface ScopedInstance {
-  scopes?: string[];
-  instance: Instance<any, any | never, any | never, any | never, any | never, any | never>;
-}
-
-const isScopedInstance = (instance: ScopedInstance): instance is ScopedInstance => {
-  // eslint-disable-next-line no-undefined
-  return instance.instance !== undefined;
-}
-
-const retrieveScopedInstance = (
-  scopedInstanceArray: ScopedInstance[],
-  scopes?: string[],
 ): Instance<any, any | never, any | never, any | never, any | never, any | never> => {
-  let instance: Instance<
-    any,
-    any | never,
-    any | never,
-    any | never,
-    any | never,
-    any | never
-  > | undefined;
-  if (scopes) {
-    instance = scopedInstanceArray.find(sl => {
-      return sl.scopes && scopes && scopes.every(scope => sl.scopes && sl.scopes.includes(scope));
-    })?.instance;
-  } else {
-    instance = scopedInstanceArray[0]?.instance;
+  if (!requestedScopes || requestedScopes.length === 0) {
+    // Return first instance if no scopes specified
+    const firstInstance = scopedInstances[0]?.instance;
+    if (!firstInstance) {
+      throw new Error('No instances available');
+    }
+    return firstInstance;
   }
-  if (!instance) {
-    throw new Error(`No Scoped Instance for ${scopes?.join(', ')}`);
+
+  // Find instance that matches all requested scopes
+  const matchingInstance = scopedInstances.find(scopedInstance => {
+    if (!scopedInstance.scopes) return false;
+    return requestedScopes.every(scope =>
+      scopedInstance.scopes && scopedInstance.scopes.includes(scope)
+    );
+  });
+
+  if (!matchingInstance) {
+    throw new Error(`No instance found matching scopes: ${requestedScopes.join(', ')}`);
   }
-  return instance;
+
+  return matchingInstance.instance;
 }
 
-interface LibTree {
-  [kt: string]: [ScopedInstance[], LibTree | null];
-}
+export const createRegistry = (type: string, registryHub?: RegistryHub): Registry => {
+  const instanceTree: InstanceTree = {};
 
-export const createRegistry = (): Registry => {
-  // TODO: My use of Generics has Boxes be into a corner where I can't reference AbstractLib without the types
-  const libTree: LibTree = {};
+  const createInstance = <
+    S extends string,
+    L1 extends string = never,
+    L2 extends string = never,
+    L3 extends string = never,
+    L4 extends string = never,
+    L5 extends string = never,
+  >(
+    kta: S[],
+    scopes: string[],
+    factory: InstanceFactory<S, L1, L2, L3, L4, L5>
+  ): Instance<S, L1, L2, L3, L4, L5> => {
+    logger.debug(`Creating and registering instance for key path and scopes`, kta, scopes, `in registry type: ${type}`);
+
+    // Create coordinate for the instance
+    const coordinate = createCoordinate(kta as any, scopes);
+
+    // Use factory to create the instance with the new context parameter
+    const instance = factory(coordinate, {
+      registry,
+      registryHub,
+    });
+
+    // Validate the created instance
+    if (!isInstance(instance)) {
+      throw new Error(`Factory did not return a valid instance for: ${kta.join('.')}`);
+    }
+
+    // Register the instance
+    registerInternal(kta, instance, { scopes });
+
+    return instance;
+  };
+
+  const registerInternal = <
+    S extends string,
+    L1 extends string = never,
+    L2 extends string = never,
+    L3 extends string = never,
+    L4 extends string = never,
+    L5 extends string = never,
+  >(kta: S[], instance: Instance<S, L1, L2, L3, L4, L5>, options?: { scopes?: string[] }): void => {
+    const keyPath = [...kta].reverse(); // Work from most specific to least specific
+    let currentLevel = instanceTree;
+
+    logger.debug(`Registering instance for key path and scopes`, keyPath, options?.scopes, `in registry type: ${type}`);
+
+    if (!isInstance(instance)) {
+      throw new Error(`Attempting to register a non-instance: ${kta.join('.')}`);
+    }
+
+    // Navigate to the correct location in the tree
+    for (let i = 0; i < keyPath.length; i++) {
+      const keyType = keyPath[i];
+      const isLeaf = i === keyPath.length - 1;
+
+      if (!currentLevel[keyType]) {
+        currentLevel[keyType] = {
+          instances: [],
+          children: isLeaf ? null : {}
+        };
+      }
+
+      if (isLeaf) {
+        // Add instance to the leaf node
+        currentLevel[keyType].instances.push({
+          scopes: options?.scopes,
+          instance
+        });
+      } else {
+        // Navigate deeper into the tree
+        if (!currentLevel[keyType].children) {
+          currentLevel[keyType].children = {};
+        }
+        currentLevel = currentLevel[keyType].children!;
+      }
+    }
+  };
 
   const register = <
     S extends string,
@@ -92,41 +134,9 @@ export const createRegistry = (): Registry => {
     L4 extends string = never,
     L5 extends string = never,
   >(kta: S[], instance: Instance<S, L1, L2, L3, L4, L5>, options?: { scopes?: string[] }): void => {
-    const ktaArray = [...kta];
-    let currentTree = libTree;
-
-    logger.debug(`Registering lib for KTA and scopes`, ktaArray, options?.scopes);
-
-    if (!isInstance(instance)) {
-      throw new Error(`Attempting to register a non-instance as an instance: ${ktaArray.join('.')}`);
-    }
-
-    while (ktaArray.length > 0) {
-      const kt = ktaArray.pop();
-      if (kt) {
-        if (ktaArray.length === 0) {
-          if (!currentTree[kt]) {
-            currentTree[kt] = [[], null];
-          }
-          currentTree[kt][0].push({ scopes: options?.scopes, instance });
-        } else {
-          if (!currentTree[kt]) {
-            const newTree: LibTree = {};
-            currentTree[kt] = [[], newTree];
-            currentTree = newTree;
-          } else if (!currentTree[kt][1]) {
-            const newTree: LibTree = {};
-            currentTree[kt][1] = newTree;
-            currentTree = newTree;
-          } else {
-            currentTree = currentTree[kt][1] as LibTree;
-          }
-        }
-      } else {
-        throw new Error(`Invalid KTA containing an empty false or undefined kt: ${ktaArray.join('.')}`);
-      }
-    }
-  }
+    logger.debug('Using deprecated register method. Consider using createInstance instead.');
+    registerInternal(kta, instance, options);
+  };
 
   const get = <
     S extends string,
@@ -136,47 +146,47 @@ export const createRegistry = (): Registry => {
     L4 extends string = never,
     L5 extends string = never,
   >(kta: S[], options?: { scopes?: string[] }): Instance<S, L1, L2, L3, L4, L5> | null => {
-    const ktaArray = [...kta];
-    let currentTree = libTree;
-    let instance: Instance<S, L1, L2, L3, L4, L5> | null = null;
+    const keyPath = [...kta].reverse();
+    let currentLevel = instanceTree;
 
-    // logger.debug(`Getting lib for KTA and scopes`, ktaArray, options?.scopes);
+    // Navigate to the target node
+    for (let i = 0; i < keyPath.length; i++) {
+      const keyType = keyPath[i];
+      const isLeaf = i === keyPath.length - 1;
 
-    while (ktaArray.length > 0) {
-      const kt = ktaArray.pop();
-      if (kt) {
-        if (ktaArray.length === 0 && currentTree[kt]) {
-          const element = currentTree[kt];
-          const scopedInstanceArray: ScopedInstance[] = element[0];
-          if (scopedInstanceArray.length > 0 && isScopedInstance(scopedInstanceArray[0])) {
-            instance = retrieveScopedInstance(scopedInstanceArray, options?.scopes);
-            // eslint-disable-next-line max-depth
-            if (!instance) {
-              throw new Error(
-                `No Instance not found for kta: ${JSON.stringify(ktaArray)}, Scopes: ${options?.scopes?.join(', ')}`);
-            }
-          } else {
-            throw new Error(`No Instance not found for kta: ${JSON.stringify(ktaArray)}, Last Key not a instance: ${kt}`);
-          }
-        } else {
-          if (!currentTree[kt]) {
-            throw new Error(`Lib not found for kta: ${JSON.stringify(ktaArray)}, Subtree Not Found: ${kt}`);
-          } else {
-            currentTree = currentTree[kt][1] as LibTree;
-          }
+      if (!currentLevel[keyType]) {
+        throw new Error(`Instance not found for key path: ${kta.join('.')}, Missing key: ${keyType}`);
+      }
+
+      if (isLeaf) {
+        // Found the target node, extract instance
+        const scopedInstances = currentLevel[keyType].instances;
+
+        if (scopedInstances.length === 0) {
+          throw new Error(`No instances registered for key path: ${kta.join('.')}`);
         }
+
+        return findScopedInstance(scopedInstances, options?.scopes);
       } else {
-        throw new Error(`Invalid KTA containing an empty false or undefined kt: ${JSON.stringify(ktaArray)}`);
+        // Continue navigation
+        if (!currentLevel[keyType].children) {
+          throw new Error(`Instance not found for key path: ${kta.join('.')}, No children for: ${keyType}`);
+        }
+        currentLevel = currentLevel[keyType].children!;
       }
     }
-    return instance;
-  }
 
-  return {
+    return null;
+  };
+
+  const registry: Registry = {
+    type,
+    registryHub,
+    createInstance,
     register,
     get,
-    // TODO: Remove this once we have a better way to test
-    libTree,
+    instanceTree,
   };
-}
 
+  return registry;
+}

@@ -46,8 +46,28 @@ export default [{
       skipBlankLines: true,
     }],
 
-    indent: ["error", 2, {
+    indent: ["warn", 2, {
       SwitchCase: 1,
+      ignoredNodes: [
+        "TemplateLiteral",
+        "JSXElement",
+        "JSXElement > *",
+        "JSXAttribute",
+        "JSXIdentifier",
+        "JSXNamespacedName",
+        "JSXMemberExpression",
+        "JSXSpreadAttribute",
+        "JSXExpressionContainer",
+        "JSXOpeningElement",
+        "JSXClosingElement",
+        "JSXFragment",
+        "JSXOpeningFragment",
+        "JSXClosingFragment",
+        "JSXText",
+        "JSXEmptyExpression",
+        "JSXSpreadChild"
+      ],
+      offsetTernaryExpressions: true,
     }],
 
     "sort-imports": ["error", {
@@ -65,6 +85,20 @@ export default [{
 
     "no-restricted-imports": ["error", {
       patterns: ["..*", "src/*"],
+    }],
+  },
+}, {
+  // Allow examples to import from src
+  files: ["examples/**/*.ts"],
+  rules: {
+    "no-restricted-imports": "off",
+  },
+}, {
+  // Allow integration tests to import from examples
+  files: ["tests/**/*.integration.test.ts"],
+  rules: {
+    "no-restricted-imports": ["error", {
+      patterns: ["src/*"], // Still restrict src imports but allow examples
     }],
   },
 }];

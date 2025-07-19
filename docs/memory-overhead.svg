@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .axis { stroke: #333; stroke-width: 1; }
+    .grid { stroke: #ddd; stroke-width: 0.5; }
+    .label { font-family: Arial, sans-serif; font-size: 14px; fill: #333; }
+    .title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #333; }
+    .subtitle { font-family: Arial, sans-serif; font-size: 12px; fill: #666; }
+    .per-instance { stroke: #3498db; stroke-width: 3; fill: none; }
+    .per-instance-dot { fill: #3498db; }
+    .legend { font-family: Arial, sans-serif; font-size: 12px; fill: #333; }
+    .axis-title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #333; }
+    .metadata-section { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #444; }
+    .metadata-label { font-family: Arial, sans-serif; font-size: 10px; fill: #666; }
+    .metadata-value { font-family: Arial, sans-serif; font-size: 10px; fill: #333; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1200" height="800" fill="white"/>
+
+  <!-- Title -->
+  <text x="600" y="25" text-anchor="middle" class="title">Memory Efficiency Per Instance</text>
+  <text x="600" y="45" text-anchor="middle" class="subtitle">Average memory overhead per registry instance across different scale sizes</text>
+
+  <!-- Plot area -->
+  <g transform="translate(110,60)">
+
+    <!-- Grid lines (Y-axis - memory in KB) -->
+    <line x1="0" y1="350.12472493372275" x2="990" y2="350.12472493372275" class="grid"/>
+    <text x="-10" y="354.12472493372275" text-anchor="end" class="label">2KB</text>
+    <line x1="0" y1="150.79051143084922" x2="990" y2="150.79051143084922" class="grid"/>
+    <text x="-10" y="154.79051143084922" text-anchor="end" class="label">5KB</text>
+    <line x1="0" y1="0" x2="990" y2="0" class="grid"/>
+    <text x="-10" y="4" text-anchor="end" class="label">10KB</text>
+    <line x1="0" y1="0" x2="0" y2="460" class="grid"/>
+    <text x="0" y="480" text-anchor="middle" class="label">10</text>
+    <line x1="99.33989856911381" y1="0" x2="99.33989856911381" y2="460" class="grid"/>
+    <text x="99.33989856911381" y="480" text-anchor="middle" class="label">20</text>
+    <line x1="230.6601014308862" y1="0" x2="230.6601014308862" y2="460" class="grid"/>
+    <text x="230.6601014308862" y="480" text-anchor="middle" class="label">50</text>
+    <line x1="330" y1="0" x2="330" y2="460" class="grid"/>
+    <text x="330" y="480" text-anchor="middle" class="label">100</text>
+    <line x1="429.3398985691138" y1="0" x2="429.3398985691138" y2="460" class="grid"/>
+    <text x="429.3398985691138" y="480" text-anchor="middle" class="label">200</text>
+    <line x1="560.6601014308862" y1="0" x2="560.6601014308862" y2="460" class="grid"/>
+    <text x="560.6601014308862" y="480" text-anchor="middle" class="label">500</text>
+    <line x1="660" y1="0" x2="660" y2="460" class="grid"/>
+    <text x="660" y="480" text-anchor="middle" class="label">1k</text>
+    <line x1="759.3398985691139" y1="0" x2="759.3398985691139" y2="460" class="grid"/>
+    <text x="759.3398985691139" y="480" text-anchor="middle" class="label">2k</text>
+    <line x1="890.6601014308862" y1="0" x2="890.6601014308862" y2="460" class="grid"/>
+    <text x="890.6601014308862" y="480" text-anchor="middle" class="label">5k</text>
+    <line x1="990" y1="0" x2="990" y2="460" class="grid"/>
+    <text x="990" y="480" text-anchor="middle" class="label">10k</text>
+    <!-- Y-axis -->
+    <line x1="0" y1="0" x2="0" y2="460" class="axis"/>
+
+    <!-- X-axis -->
+    <line x1="0" y1="460" x2="990" y2="460" class="axis"/>
+
+    <!-- Axis labels -->
+    <text x="495" y="510" text-anchor="middle" class="axis-title">Instance Count - Log Scale</text>
+    <text transform="rotate(-90,-70,230)" x="-70" y="230" text-anchor="middle" class="axis-title">Memory Usage (KB)</text>
+    <path d="M 0 214.73814943678775 L 99.33989856911381 294.1957220213991 L 230.6601014308862 318.7046587671789 L 330 333.16519783546573 L 429.3398985691138 321.20756970253024 L 560.6601014308862 362.414113545941 L 660 345.20990285866213 L 759.3398985691139 367.0226975001063 L 890.6601014308862 411.4562979279757 L 990 378.1877188461964" class="per-instance"/>
+    <circle cx="0" cy="214.73814943678775" r="4" class="per-instance-dot"/>
+    <circle cx="99.33989856911381" cy="294.1957220213991" r="4" class="per-instance-dot"/>
+    <circle cx="230.6601014308862" cy="318.7046587671789" r="4" class="per-instance-dot"/>
+    <circle cx="330" cy="333.16519783546573" r="4" class="per-instance-dot"/>
+    <circle cx="429.3398985691138" cy="321.20756970253024" r="4" class="per-instance-dot"/>
+    <circle cx="560.6601014308862" cy="362.414113545941" r="4" class="per-instance-dot"/>
+    <circle cx="660" cy="345.20990285866213" r="4" class="per-instance-dot"/>
+    <circle cx="759.3398985691139" cy="367.0226975001063" r="4" class="per-instance-dot"/>
+    <circle cx="890.6601014308862" cy="411.4562979279757" r="4" class="per-instance-dot"/>
+    <circle cx="990" cy="378.1877188461964" r="4" class="per-instance-dot"/>
+    <!-- Legend -->
+    <g transform="translate(20, 20)">
+      <rect x="0" y="0" width="190" height="60" fill="white" stroke="#ccc" stroke-width="1"/>
+
+      <!-- Memory Per Instance Legend -->
+      <text x="10" y="20" class="legend" font-weight="bold">Memory Per Instance</text>
+      <line x1="10" y1="30" x2="40" y2="30" class="per-instance"/>
+      <circle cx="25" cy="30" r="3" class="per-instance-dot"/>
+      <text x="45" y="34" class="legend">Average Performance</text>
+    </g>
+
+  </g>
+
+  <!-- Test Metadata Section - match timing chart layout exactly -->
+  <g transform="translate(50, 620)">
+    <!-- Left Column: System Information -->
+    <g transform="translate(20, 20)">
+      <text x="0" y="0" class="metadata-section">System Information</text>
+
+      <text x="0" y="25" class="metadata-label">Test Date:</text>
+      <text x="150" y="25" class="metadata-value">2025-07-19</text>
+
+      <text x="0" y="45" class="metadata-label">Package Version:</text>
+      <text x="150" y="45" class="metadata-value">@fjell/registry v4.4.5</text>
+
+      <text x="0" y="65" class="metadata-label">Node.js Version:</text>
+      <text x="150" y="65" class="metadata-value">v22.0.0 (darwin arm64)</text>
+
+      <text x="0" y="85" class="metadata-label">Platform:</text>
+      <text x="150" y="85" class="metadata-value">darwin arm64</text>
+
+      <text x="0" y="105" class="metadata-label">Compiler:</text>
+      <text x="150" y="105" class="metadata-value">TypeScript + Vite</text>
+    </g>
+
+    <!-- Right Column: Test Notes -->
+    <g transform="translate(400, 20)">
+      <text x="0" y="0" class="metadata-section">Test Notes</text>
+      <text x="0" y="25" class="metadata-label">• Memory measurements use Node.js process.memoryUsage() with heap precision</text>
+      <text x="0" y="42" class="metadata-label">• Each test includes garbage collection to minimize measurement variance</text>
+      <text x="0" y="59" class="metadata-label">• Logging is mocked during memory tests to eliminate overhead</text>
+      <text x="0" y="76" class="metadata-label">• Tests verify memory efficiency and consistency across instance counts</text>
+      <text x="0" y="93" class="metadata-label">• Statistical analysis ensures reliable performance measurements</text>
+    </g>
+  </g>
+</svg>

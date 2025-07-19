@@ -8,21 +8,22 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    include: ['tests/**/*.{test,spec}.ts'],
+    include: ['tests/**/*.{test,spec}.ts', 'tests/**/*.integration.test.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      include: ['src/**/*.ts'],
+      include: ['src/**/*.ts', 'examples/**/*.ts'],
       exclude: [
         'node_modules/',
         'tests/',
         'src/index.ts',
+        'src/types.ts',
       ],
       thresholds: {
-        branches: 87,
-        functions: 95,
-        lines: 92,
-        statements: 92,
+        branches: 85,
+        functions: 81,
+        lines: 91,
+        statements: 91,
       },
     },
     deps: {

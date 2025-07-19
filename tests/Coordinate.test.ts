@@ -2,29 +2,25 @@ import { describe, expect, test, vi } from 'vitest';
 import { createCoordinate } from '@/Coordinate';
 import { ItemTypeArray } from '@fjell/core';
 
-vi.mock('@fjell/logging', () => {
-  const logger = {
-    get: vi.fn().mockReturnThis(),
-    error: vi.fn(),
-    warning: vi.fn(),
-    info: vi.fn(),
-    debug: vi.fn(),
-    trace: vi.fn(),
-    emergency: vi.fn(),
-    alert: vi.fn(),
-    critical: vi.fn(),
-    notice: vi.fn(),
-    time: vi.fn().mockReturnThis(),
-    end: vi.fn(),
-    log: vi.fn(),
-  };
-
-  return {
-    default: {
-      getLogger: () => logger,
-    }
+vi.mock('@/logger', () => ({
+  default: {
+    get: vi.fn(() => ({
+      get: vi.fn().mockReturnThis(),
+      error: vi.fn(),
+      warning: vi.fn(),
+      info: vi.fn(),
+      debug: vi.fn(),
+      trace: vi.fn(),
+      emergency: vi.fn(),
+      alert: vi.fn(),
+      critical: vi.fn(),
+      notice: vi.fn(),
+      time: vi.fn().mockReturnThis(),
+      end: vi.fn(),
+      log: vi.fn(),
+    })),
   }
-});
+}));
 
 describe('Coordinate', () => {
   describe('createCoordinate', () => {
@@ -50,6 +46,17 @@ describe('Coordinate', () => {
       expect(coordinate.scopes).toEqual(scopes);
     });
 
+    test('should create coordinate with single string parameter', () => {
+      const kta = 'test';
+      const scopes = ['scope1'];
+
+      const coordinate = createCoordinate(kta, scopes);
+
+      expect(coordinate).toBeDefined();
+      expect(coordinate.kta).toEqual(['test']);
+      expect(coordinate.scopes).toEqual(scopes);
+    });
+
     test('toString should return formatted string representation', () => {
       const kta = ['test', 'other'] as ItemTypeArray<'test', 'other'>;
       const scopes = ['scope1', 'scope2'];
@@ -68,6 +75,26 @@ describe('Coordinate', () => {
       const expected = 'test - ';
 
       expect(coordinate.toString()).toBe(expected);
+    });
+
+    test('toString should work with createCoordinate variations', () => {
+      const kta = ['test'] as ItemTypeArray<'test'>;
+      const scopes = ['scope1'];
+
+      const coordinate = createCoordinate(kta, scopes);
+
+      coordinate.toString();
+
+      // Just ensure it doesn't throw
+      expect(coordinate.toString()).toBeTruthy();
+    });
+
+    test('createCoordinate should work with default scopes', () => {
+      const kta = ['test'] as ItemTypeArray<'test'>;
+
+      const coordinate = createCoordinate(kta);
+
+      expect(coordinate.scopes).toEqual([]);
     });
   });
 });

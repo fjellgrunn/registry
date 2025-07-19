@@ -44,8 +44,8 @@ export const createInstance = <
   L4 extends string = never,
   L5 extends string = never
 >(
+  registry: Registry,
   coordinate: Coordinate<S, L1, L2, L3, L4, L5>,
-  registry: Registry
 ): Instance<S, L1, L2, L3, L4, L5> => {
   logger.debug("createInstance", { coordinate, registry });
   return { coordinate, registry };

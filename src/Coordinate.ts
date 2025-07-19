@@ -24,11 +24,12 @@ export const createCoordinate = <
   L3 extends string = never,
   L4 extends string = never,
   L5 extends string = never,
->(kta: ItemTypeArray<S, L1, L2, L3, L4, L5>, scopes: string[]): Coordinate<S, L1, L2, L3, L4, L5> => {
+>(kta: ItemTypeArray<S, L1, L2, L3, L4, L5> | S, scopes: string[] = []): Coordinate<S, L1, L2, L3, L4, L5> => {
+  const ktArray = Array.isArray(kta) ? kta : [kta];
   const toString = () => {
     logger.debug("toString", { kta, scopes });
-    return `${kta.join(', ')} - ${scopes.join(', ')}`;
+    return `${ktArray.join(', ')} - ${scopes.join(', ')}`;
   }
-  logger.debug("createCoordinate", { kta, scopes, toString });
-  return { kta, scopes, toString };
+  logger.debug("createCoordinate", { kta: ktArray, scopes, toString });
+  return { kta: ktArray as ItemTypeArray<S, L1, L2, L3, L4, L5>, scopes, toString };
 }

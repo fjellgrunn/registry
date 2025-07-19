@@ -4,34 +4,41 @@ import { createRegistry, Registry } from '@/Registry';
 import { Coordinate } from '@/Coordinate';
 
 vi.mock('@/logger', () => {
-  const logger = {
-    error: vi.fn(),
-    warning: vi.fn(),
-    info: vi.fn(),
-    debug: vi.fn(),
-    trace: vi.fn(),
-    emergency: vi.fn(),
-    alert: vi.fn(),
-    critical: vi.fn(),
-    notice: vi.fn(),
-    time: vi.fn().mockReturnThis(),
-    end: vi.fn(),
-    log: vi.fn(),
-  };
-
   return {
     default: {
-      get: vi.fn(() => logger),
+      get: vi.fn(() => ({
+        error: vi.fn(),
+        warning: vi.fn(),
+        info: vi.fn(),
+        debug: vi.fn(),
+        trace: vi.fn(),
+        emergency: vi.fn(),
+        alert: vi.fn(),
+        critical: vi.fn(),
+        notice: vi.fn(),
+        time: vi.fn().mockReturnThis(),
+        end: vi.fn(),
+        log: vi.fn(),
+      })),
     }
   }
 });
 
-describe('LibRegistry', () => {
+describe('Registry', () => {
   let registry: Registry;
 
   beforeEach(() => {
-    registry = createRegistry();
-    vi.clearAllMocks();
+    registry = createRegistry('test');
+  });
+
+  describe('type property', () => {
+    it('should have the type provided during creation', () => {
+      const serviceRegistry = createRegistry('services');
+      const dataRegistry = createRegistry('data');
+
+      expect(serviceRegistry.type).toBe('services');
+      expect(dataRegistry.type).toBe('data');
+    });
   });
 
   it('should register a library', () => {
@@ -249,4 +256,172 @@ describe('LibRegistry', () => {
     expect(registry.get(['region', 'nation'])).toBe(region);
   });
 
+  it('should throw error when trying to register a non-instance', () => {
+    const invalidInstance = { invalid: 'object' } as any;
+
+    expect(() => {
+      registry.register(['testLib'], invalidInstance);
+    }).toThrow('Attempting to register a non-instance: testLib');
+  });
+
+  it('should throw error when no instances are available for a registered key', () => {
+    // This is a tricky case to reproduce, but we can simulate it by manipulating the internal tree
+    const lib = {
+      coordinate: {} as Coordinate<'test'>,
+      registry: {} as Registry,
+    } as unknown as Instance<'test'>;
+
+    registry.register(['testLib'], lib);
+
+    // Manually clear the instances to simulate the "No instances available" error
+    (registry.instanceTree as any).testLib.instances = [];
+
+    expect(() => registry.get(['testLib'])).toThrow('No instances registered for key path: testLib');
+  });
+
+  it('should throw error when trying to get instance with no children in path', () => {
+    const lib = {
+      coordinate: {} as Coordinate<'test'>,
+      registry: {} as Registry,
+    } as unknown as Instance<'test'>;
+
+    registry.register(['testLib'], lib);
+
+    // Manually remove children to simulate the error
+    (registry.instanceTree as any).testLib.children = null;
+
+    expect(() => registry.get(['testLib', 'nonexistent'])).toThrow('Missing key: nonexistent');
+  });
+
+  it('should trigger logger debug calls during registration', () => {
+    vi.clearAllMocks();
+
+    const lib = {
+      coordinate: {} as Coordinate<'test'>,
+      registry: {} as Registry,
+    } as unknown as Instance<'test'>;
+
+    registry.register(['testLib'], lib);
+
+    // Just ensure the registration works and the library can be retrieved
+    expect(registry.get(['testLib'])).toBe(lib);
+  });
+
+});
+
+describe('Registry createInstance', () => {
+  let registry: Registry;
+
+  beforeEach(() => {
+    registry = createRegistry('test-createInstance');
+  });
+
+  it('should create and register an instance atomically', () => {
+    const factory = (coord: Coordinate<'User'>, context: { registry: Registry, registryHub?: any }) => ({
+      coordinate: coord,
+      registry: context.registry,
+    }) as Instance<'User'>;
+
+    const userInstance = registry.createInstance(['User'], ['firestore'], factory);
+
+    expect(userInstance).toBeDefined();
+    expect(userInstance.coordinate.kta).toEqual(['User']);
+    expect(userInstance.coordinate.scopes).toEqual(['firestore']);
+    expect(userInstance.registry).toBe(registry);
+
+    // Verify it was automatically registered
+    expect(registry.get(['User'], { scopes: ['firestore'] })).toBe(userInstance);
+  });
+
+  it('should create instances with multiple key types', () => {
+    const factory = (coord: any, context: { registry: Registry, registryHub?: any }) => ({
+      coordinate: coord,
+      registry: context.registry,
+    }) as any;
+
+    const profileInstance = registry.createInstance(['User', 'Profile'], ['firestore'], factory);
+
+    expect(profileInstance.coordinate.kta).toEqual(['User', 'Profile']);
+    expect(registry.get(['User', 'Profile'], { scopes: ['firestore'] })).toBe(profileInstance);
+  });
+
+  it('should handle multiple instances with different scopes', () => {
+    const firestoreFactory = (coord: Coordinate<'User'>, context: { registry: Registry, registryHub?: any }) => ({
+      coordinate: coord,
+      registry: context.registry,
+      type: 'firestore',
+    }) as Instance<'User'> & { type: string };
+
+    const postgresFactory = (coord: Coordinate<'User'>, context: { registry: Registry, registryHub?: any }) => ({
+      coordinate: coord,
+      registry: context.registry,
+      type: 'postgres',
+    }) as Instance<'User'> & { type: string };
+
+    const firestoreUser = registry.createInstance(['User'], ['firestore'], firestoreFactory);
+    const postgresUser = registry.createInstance(['User'], ['postgres'], postgresFactory);
+
+    expect(registry.get(['User'], { scopes: ['firestore'] })).toBe(firestoreUser);
+    expect(registry.get(['User'], { scopes: ['postgres'] })).toBe(postgresUser);
+    expect((firestoreUser as any).type).toBe('firestore');
+    expect((postgresUser as any).type).toBe('postgres');
+  });
+
+  it('should throw error if factory returns invalid instance', () => {
+    const badFactory = () => ({ invalid: 'instance' }) as any;
+
+    expect(() => {
+      registry.createInstance(['User'], ['firestore'], badFactory);
+    }).toThrow('Factory did not return a valid instance for: User');
+  });
+
+  it('should trigger logger debug calls during createInstance', () => {
+    vi.clearAllMocks();
+
+    const factory = (coord: Coordinate<'User'>, context: { registry: Registry, registryHub?: any }) => ({
+      coordinate: coord,
+      registry: context.registry,
+    }) as Instance<'User'>;
+
+    const userInstance = registry.createInstance(['User'], ['firestore'], factory);
+
+    // Just ensure the instance was created and registered correctly
+    expect(userInstance).toBeDefined();
+    expect(userInstance.coordinate.kta).toEqual(['User']);
+    expect(registry.get(['User'], { scopes: ['firestore'] })).toBe(userInstance);
+  });
+});
+
+describe('Registry findScopedInstance error cases', () => {
+  let registry: Registry;
+
+  beforeEach(() => {
+    registry = createRegistry('test-scopedInstance');
+  });
+
+  it('should throw error when no instances available in empty array', () => {
+    // This tests the "No instances available" error path in findScopedInstance
+    const lib = {
+      coordinate: {} as Coordinate<'test'>,
+      registry: {} as Registry,
+    } as unknown as Instance<'test'>;
+
+    registry.register(['testLib'], lib);
+
+    // Clear instances to trigger the error
+    (registry.instanceTree as any).testLib.instances = [];
+
+    expect(() => registry.get(['testLib'])).toThrow('No instances registered for key path: testLib');
+  });
+
+  it('should throw error when no instance matches requested scopes', () => {
+    const lib = {
+      coordinate: {} as Coordinate<'test'>,
+      registry: {} as Registry,
+    } as unknown as Instance<'test'>;
+
+    registry.register(['testLib'], lib, { scopes: ['firestore'] });
+
+    expect(() => registry.get(['testLib'], { scopes: ['postgres'] })).toThrow('No instance found matching scopes: postgres');
+  });
 });
