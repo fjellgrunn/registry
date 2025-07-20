@@ -1,6 +1,6 @@
 {
   "name": "@fjell/registry",
-  "version": "4.4.6",
+  "version": "4.4.7",
   "keywords": [
     "registry",
     "fjell"
@@ -38,7 +38,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.31.0",
-    "@swc/core": "^1.13.0",
+    "@swc/core": "^1.13.1",
     "@tsconfig/recommended": "^1.0.10",
     "@types/multer": "^2.0.0",
     "@types/node": "^24.0.15",
