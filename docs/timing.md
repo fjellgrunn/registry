@@ -1,7 +1,7 @@
 # Performance Timing Report
 
-Generated: 2025-07-19T19:08:20.231Z
-Version: 4.4.5
+Generated: 2025-07-21T04:04:11.800Z
+Version: 4.4.7
 Node.js: v22.0.0
 Platform: darwin arm64
 
@@ -15,43 +15,43 @@ Timing results are reported in microseconds (µs) for precision.
 
 | Operation | Description | Avg Time (µs) | Min Time (µs) | Max Time (µs) | Threshold (µs) | Status |
 |-----------|-------------|---------------|---------------|---------------|----------------|--------|
-| createRegistry | Time to create a new registry | 0.2 | 0.0 | 865.0 | 5000 | ✅ PASS |
-| createRegistryHub | Time to create a new registry hub | 0.1 | 0.0 | 395.9 | 5000 | ✅ PASS |
-| createInstance | Time to create a new instance | 1.0 | 0.2 | 3362.4 | 10000 | ✅ PASS |
-| registerInstance | Time to register an instance in registry | 6.0 | 0.7 | 14657.3 | 5000 | ✅ PASS |
-| lookupInstance | Time to lookup an existing instance from registry | 0.3 | 0.0 | 685.2 | 2000 | ✅ PASS |
-| completeWorkflow | Time for complete workflow: create hub, registry, instance, register, and lookup | 6.4 | 2.1 | 7064.8 | 25000 | ✅ PASS |
+| createRegistry | Time to create a new registry | 0.2 | 0.0 | 558.5 | 5000 | ✅ PASS |
+| createRegistryHub | Time to create a new registry hub | 0.1 | 0.0 | 321.1 | 5000 | ✅ PASS |
+| createInstance | Time to create a new instance | 1.0 | 0.2 | 3170.4 | 10000 | ✅ PASS |
+| registerInstance | Time to register an instance in registry | 6.9 | 0.8 | 40163.7 | 5000 | ✅ PASS |
+| lookupInstance | Time to lookup an existing instance from registry | 0.5 | 0.1 | 2411.6 | 2000 | ✅ PASS |
+| completeWorkflow | Time for complete workflow: create hub, registry, instance, register, and lookup | 6.4 | 2.1 | 8119.5 | 25000 | ✅ PASS |
 
 ## Scaling Performance Tests
 
 | Operation | Tree Size | Avg Time (µs) | Min Time (µs) | Max Time (µs) | Threshold (µs) | Status |
 |-----------|-----------|---------------|---------------|---------------|----------------|--------|
-| registerInstance_10 | 10 | 2.9 | 0.8 | 8043.9 | 5000 | ✅ PASS |
-| lookupInstance_10 | 10 | 0.2 | 0.0 | 57.5 | 2000 | ✅ PASS |
-| registerInstance_20 | 20 | 4.0 | 0.8 | 5138.1 | 5000 | ✅ PASS |
-| lookupInstance_20 | 20 | 0.4 | 0.0 | 2896.7 | 2000 | ✅ PASS |
-| registerInstance_50 | 50 | 1.8 | 0.7 | 3538.8 | 5000 | ✅ PASS |
-| lookupInstance_50 | 50 | 0.2 | 0.0 | 17.3 | 2000 | ✅ PASS |
-| registerInstance_100 | 100 | 3.0 | 0.8 | 3714.0 | 5000 | ✅ PASS |
-| lookupInstance_100 | 100 | 0.3 | 0.0 | 2029.2 | 2000 | ✅ PASS |
-| registerInstance_200 | 200 | 1.6 | 0.8 | 2891.4 | 10000 | ✅ PASS |
-| lookupInstance_200 | 200 | 0.3 | 0.0 | 2867.3 | 5000 | ✅ PASS |
-| registerInstance_500 | 500 | 1.5 | 0.7 | 3092.2 | 10000 | ✅ PASS |
-| lookupInstance_500 | 500 | 0.3 | 0.0 | 3657.6 | 5000 | ✅ PASS |
-| registerInstance_1000 | 1000 | 1.6 | 0.7 | 4527.8 | 10000 | ✅ PASS |
-| lookupInstance_1000 | 1000 | 0.2 | 0.0 | 2594.0 | 5000 | ✅ PASS |
-| registerInstance_2000 | 2000 | 1.1 | 0.8 | 63.3 | 20000 | ✅ PASS |
-| lookupInstance_2000 | 2000 | 0.2 | 0.0 | 8.2 | 10000 | ✅ PASS |
-| registerInstance_5000 | 5000 | 1.7 | 1.1 | 291.6 | 20000 | ✅ PASS |
-| lookupInstance_5000 | 5000 | 1.8 | 0.0 | 7794.5 | 10000 | ✅ PASS |
-| registerInstance_10000 | 10000 | 4.7 | 1.1 | 4041.7 | 20000 | ✅ PASS |
-| lookupInstance_10000 | 10000 | 0.3 | 0.0 | 46.0 | 10000 | ✅ PASS |
-| registerInstance_20000 | 20000 | 1.2 | 0.9 | 5.8 | 50000 | ✅ PASS |
-| lookupInstance_20000 | 20000 | 0.3 | 0.1 | 4.8 | 25000 | ✅ PASS |
-| registerInstance_50000 | 50000 | 1.2 | 0.9 | 18.1 | 50000 | ✅ PASS |
-| lookupInstance_50000 | 50000 | 0.2 | 0.1 | 3.4 | 25000 | ✅ PASS |
-| registerInstance_100000 | 100000 | 1.3 | 0.9 | 31.5 | 50000 | ✅ PASS |
-| lookupInstance_100000 | 100000 | 0.2 | 0.1 | 5.2 | 25000 | ✅ PASS |
+| registerInstance_10 | 10 | 2.5 | 0.9 | 8034.8 | 5000 | ✅ PASS |
+| lookupInstance_10 | 10 | 0.2 | 0.0 | 87.8 | 2000 | ✅ PASS |
+| registerInstance_20 | 20 | 2.1 | 0.8 | 6723.3 | 5000 | ✅ PASS |
+| lookupInstance_20 | 20 | 0.1 | 0.0 | 31.5 | 2000 | ✅ PASS |
+| registerInstance_50 | 50 | 2.4 | 0.8 | 3273.2 | 5000 | ✅ PASS |
+| lookupInstance_50 | 50 | 0.1 | 0.0 | 446.4 | 2000 | ✅ PASS |
+| registerInstance_100 | 100 | 2.0 | 0.8 | 3239.7 | 5000 | ✅ PASS |
+| lookupInstance_100 | 100 | 0.1 | 0.0 | 36.8 | 2000 | ✅ PASS |
+| registerInstance_200 | 200 | 1.9 | 0.8 | 3083.9 | 10000 | ✅ PASS |
+| lookupInstance_200 | 200 | 0.1 | 0.0 | 12.0 | 5000 | ✅ PASS |
+| registerInstance_500 | 500 | 1.8 | 0.8 | 1154.4 | 10000 | ✅ PASS |
+| lookupInstance_500 | 500 | 0.5 | 0.0 | 6698.5 | 5000 | ✅ PASS |
+| registerInstance_1000 | 1000 | 3.3 | 0.8 | 7510.2 | 10000 | ✅ PASS |
+| lookupInstance_1000 | 1000 | 0.2 | 0.0 | 138.5 | 5000 | ✅ PASS |
+| registerInstance_2000 | 2000 | 3.1 | 1.1 | 370.3 | 20000 | ✅ PASS |
+| lookupInstance_2000 | 2000 | 0.2 | 0.1 | 8.5 | 10000 | ✅ PASS |
+| registerInstance_5000 | 5000 | 2.1 | 1.1 | 379.8 | 20000 | ✅ PASS |
+| lookupInstance_5000 | 5000 | 0.2 | 0.1 | 4.3 | 10000 | ✅ PASS |
+| registerInstance_10000 | 10000 | 2.3 | 0.9 | 1541.2 | 20000 | ✅ PASS |
+| lookupInstance_10000 | 10000 | 0.4 | 0.1 | 35.2 | 10000 | ✅ PASS |
+| registerInstance_20000 | 20000 | 1.2 | 0.9 | 22.7 | 50000 | ✅ PASS |
+| lookupInstance_20000 | 20000 | 0.3 | 0.0 | 29.1 | 25000 | ✅ PASS |
+| registerInstance_50000 | 50000 | 1.4 | 0.9 | 37.1 | 50000 | ✅ PASS |
+| lookupInstance_50000 | 50000 | 0.2 | 0.1 | 2.3 | 25000 | ✅ PASS |
+| registerInstance_100000 | 100000 | 1.5 | 1.0 | 44.6 | 50000 | ✅ PASS |
+| lookupInstance_100000 | 100000 | 0.3 | 0.1 | 2.4 | 25000 | ✅ PASS |
 
 ## Scaling Performance Visualization
 
@@ -73,7 +73,7 @@ consistent performance, while wider bands show more variability.*
 **Iterations:** 20000
 **Average Time:** 0.2 µs
 **Min Time:** 0.0 µs
-**Max Time:** 865.0 µs
+**Max Time:** 558.5 µs
 **Threshold:** 5000 µs
 **Status:** ✅ PASS
 
@@ -83,7 +83,7 @@ consistent performance, while wider bands show more variability.*
 **Iterations:** 20000
 **Average Time:** 0.1 µs
 **Min Time:** 0.0 µs
-**Max Time:** 395.9 µs
+**Max Time:** 321.1 µs
 **Threshold:** 5000 µs
 **Status:** ✅ PASS
 
@@ -93,7 +93,7 @@ consistent performance, while wider bands show more variability.*
 **Iterations:** 20000
 **Average Time:** 1.0 µs
 **Min Time:** 0.2 µs
-**Max Time:** 3362.4 µs
+**Max Time:** 3170.4 µs
 **Threshold:** 10000 µs
 **Status:** ✅ PASS
 
@@ -101,9 +101,9 @@ consistent performance, while wider bands show more variability.*
 
 **Description:** Time to register an instance in registry
 **Iterations:** 20000
-**Average Time:** 6.0 µs
-**Min Time:** 0.7 µs
-**Max Time:** 14657.3 µs
+**Average Time:** 6.9 µs
+**Min Time:** 0.8 µs
+**Max Time:** 40163.7 µs
 **Threshold:** 5000 µs
 **Status:** ✅ PASS
 
@@ -111,9 +111,9 @@ consistent performance, while wider bands show more variability.*
 
 **Description:** Time to lookup an existing instance from registry
 **Iterations:** 20000
-**Average Time:** 0.3 µs
-**Min Time:** 0.0 µs
-**Max Time:** 685.2 µs
+**Average Time:** 0.5 µs
+**Min Time:** 0.1 µs
+**Max Time:** 2411.6 µs
 **Threshold:** 2000 µs
 **Status:** ✅ PASS
 
@@ -123,7 +123,7 @@ consistent performance, while wider bands show more variability.*
 **Iterations:** 10000
 **Average Time:** 6.4 µs
 **Min Time:** 2.1 µs
-**Max Time:** 7064.8 µs
+**Max Time:** 8119.5 µs
 **Threshold:** 25000 µs
 **Status:** ✅ PASS
 
@@ -134,9 +134,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to register instance with 10 existing items in tree
 **Tree Size:** 10 items
 **Iterations:** 10000
-**Average Time:** 2.9 µs
-**Min Time:** 0.8 µs
-**Max Time:** 8043.9 µs
+**Average Time:** 2.5 µs
+**Min Time:** 0.9 µs
+**Max Time:** 8034.8 µs
 **Threshold:** 5000 µs
 **Status:** ✅ PASS
 
@@ -147,7 +147,7 @@ consistent performance, while wider bands show more variability.*
 **Iterations:** 20000
 **Average Time:** 0.2 µs
 **Min Time:** 0.0 µs
-**Max Time:** 57.5 µs
+**Max Time:** 87.8 µs
 **Threshold:** 2000 µs
 **Status:** ✅ PASS
 
@@ -156,9 +156,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to register instance with 20 existing items in tree
 **Tree Size:** 20 items
 **Iterations:** 10000
-**Average Time:** 4.0 µs
+**Average Time:** 2.1 µs
 **Min Time:** 0.8 µs
-**Max Time:** 5138.1 µs
+**Max Time:** 6723.3 µs
 **Threshold:** 5000 µs
 **Status:** ✅ PASS
 
@@ -167,9 +167,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to lookup instance with 20 items in tree
 **Tree Size:** 20 items
 **Iterations:** 20000
-**Average Time:** 0.4 µs
+**Average Time:** 0.1 µs
 **Min Time:** 0.0 µs
-**Max Time:** 2896.7 µs
+**Max Time:** 31.5 µs
 **Threshold:** 2000 µs
 **Status:** ✅ PASS
 
@@ -178,9 +178,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to register instance with 50 existing items in tree
 **Tree Size:** 50 items
 **Iterations:** 10000
-**Average Time:** 1.8 µs
-**Min Time:** 0.7 µs
-**Max Time:** 3538.8 µs
+**Average Time:** 2.4 µs
+**Min Time:** 0.8 µs
+**Max Time:** 3273.2 µs
 **Threshold:** 5000 µs
 **Status:** ✅ PASS
 
@@ -189,9 +189,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to lookup instance with 50 items in tree
 **Tree Size:** 50 items
 **Iterations:** 20000
-**Average Time:** 0.2 µs
+**Average Time:** 0.1 µs
 **Min Time:** 0.0 µs
-**Max Time:** 17.3 µs
+**Max Time:** 446.4 µs
 **Threshold:** 2000 µs
 **Status:** ✅ PASS
 
@@ -200,9 +200,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to register instance with 100 existing items in tree
 **Tree Size:** 100 items
 **Iterations:** 10000
-**Average Time:** 3.0 µs
+**Average Time:** 2.0 µs
 **Min Time:** 0.8 µs
-**Max Time:** 3714.0 µs
+**Max Time:** 3239.7 µs
 **Threshold:** 5000 µs
 **Status:** ✅ PASS
 
@@ -211,9 +211,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to lookup instance with 100 items in tree
 **Tree Size:** 100 items
 **Iterations:** 20000
-**Average Time:** 0.3 µs
+**Average Time:** 0.1 µs
 **Min Time:** 0.0 µs
-**Max Time:** 2029.2 µs
+**Max Time:** 36.8 µs
 **Threshold:** 2000 µs
 **Status:** ✅ PASS
 
@@ -222,9 +222,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to register instance with 200 existing items in tree
 **Tree Size:** 200 items
 **Iterations:** 10000
-**Average Time:** 1.6 µs
+**Average Time:** 1.9 µs
 **Min Time:** 0.8 µs
-**Max Time:** 2891.4 µs
+**Max Time:** 3083.9 µs
 **Threshold:** 10000 µs
 **Status:** ✅ PASS
 
@@ -233,9 +233,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to lookup instance with 200 items in tree
 **Tree Size:** 200 items
 **Iterations:** 20000
-**Average Time:** 0.3 µs
+**Average Time:** 0.1 µs
 **Min Time:** 0.0 µs
-**Max Time:** 2867.3 µs
+**Max Time:** 12.0 µs
 **Threshold:** 5000 µs
 **Status:** ✅ PASS
 
@@ -244,9 +244,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to register instance with 500 existing items in tree
 **Tree Size:** 500 items
 **Iterations:** 10000
-**Average Time:** 1.5 µs
-**Min Time:** 0.7 µs
-**Max Time:** 3092.2 µs
+**Average Time:** 1.8 µs
+**Min Time:** 0.8 µs
+**Max Time:** 1154.4 µs
 **Threshold:** 10000 µs
 **Status:** ✅ PASS
 
@@ -255,9 +255,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to lookup instance with 500 items in tree
 **Tree Size:** 500 items
 **Iterations:** 20000
-**Average Time:** 0.3 µs
+**Average Time:** 0.5 µs
 **Min Time:** 0.0 µs
-**Max Time:** 3657.6 µs
+**Max Time:** 6698.5 µs
 **Threshold:** 5000 µs
 **Status:** ✅ PASS
 
@@ -266,9 +266,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to register instance with 1000 existing items in tree
 **Tree Size:** 1000 items
 **Iterations:** 10000
-**Average Time:** 1.6 µs
-**Min Time:** 0.7 µs
-**Max Time:** 4527.8 µs
+**Average Time:** 3.3 µs
+**Min Time:** 0.8 µs
+**Max Time:** 7510.2 µs
 **Threshold:** 10000 µs
 **Status:** ✅ PASS
 
@@ -279,7 +279,7 @@ consistent performance, while wider bands show more variability.*
 **Iterations:** 20000
 **Average Time:** 0.2 µs
 **Min Time:** 0.0 µs
-**Max Time:** 2594.0 µs
+**Max Time:** 138.5 µs
 **Threshold:** 5000 µs
 **Status:** ✅ PASS
 
@@ -288,9 +288,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to register instance with 2000 existing items in tree
 **Tree Size:** 2000 items
 **Iterations:** 2500
-**Average Time:** 1.1 µs
-**Min Time:** 0.8 µs
-**Max Time:** 63.3 µs
+**Average Time:** 3.1 µs
+**Min Time:** 1.1 µs
+**Max Time:** 370.3 µs
 **Threshold:** 20000 µs
 **Status:** ✅ PASS
 
@@ -300,8 +300,8 @@ consistent performance, while wider bands show more variability.*
 **Tree Size:** 2000 items
 **Iterations:** 5000
 **Average Time:** 0.2 µs
-**Min Time:** 0.0 µs
-**Max Time:** 8.2 µs
+**Min Time:** 0.1 µs
+**Max Time:** 8.5 µs
 **Threshold:** 10000 µs
 **Status:** ✅ PASS
 
@@ -310,9 +310,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to register instance with 5000 existing items in tree
 **Tree Size:** 5000 items
 **Iterations:** 2500
-**Average Time:** 1.7 µs
+**Average Time:** 2.1 µs
 **Min Time:** 1.1 µs
-**Max Time:** 291.6 µs
+**Max Time:** 379.8 µs
 **Threshold:** 20000 µs
 **Status:** ✅ PASS
 
@@ -321,9 +321,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to lookup instance with 5000 items in tree
 **Tree Size:** 5000 items
 **Iterations:** 5000
-**Average Time:** 1.8 µs
-**Min Time:** 0.0 µs
-**Max Time:** 7794.5 µs
+**Average Time:** 0.2 µs
+**Min Time:** 0.1 µs
+**Max Time:** 4.3 µs
 **Threshold:** 10000 µs
 **Status:** ✅ PASS
 
@@ -332,9 +332,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to register instance with 10000 existing items in tree
 **Tree Size:** 10000 items
 **Iterations:** 2500
-**Average Time:** 4.7 µs
-**Min Time:** 1.1 µs
-**Max Time:** 4041.7 µs
+**Average Time:** 2.3 µs
+**Min Time:** 0.9 µs
+**Max Time:** 1541.2 µs
 **Threshold:** 20000 µs
 **Status:** ✅ PASS
 
@@ -343,9 +343,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to lookup instance with 10000 items in tree
 **Tree Size:** 10000 items
 **Iterations:** 5000
-**Average Time:** 0.3 µs
-**Min Time:** 0.0 µs
-**Max Time:** 46.0 µs
+**Average Time:** 0.4 µs
+**Min Time:** 0.1 µs
+**Max Time:** 35.2 µs
 **Threshold:** 10000 µs
 **Status:** ✅ PASS
 
@@ -356,7 +356,7 @@ consistent performance, while wider bands show more variability.*
 **Iterations:** 500
 **Average Time:** 1.2 µs
 **Min Time:** 0.9 µs
-**Max Time:** 5.8 µs
+**Max Time:** 22.7 µs
 **Threshold:** 50000 µs
 **Status:** ✅ PASS
 
@@ -366,8 +366,8 @@ consistent performance, while wider bands show more variability.*
 **Tree Size:** 20000 items
 **Iterations:** 1250
 **Average Time:** 0.3 µs
-**Min Time:** 0.1 µs
-**Max Time:** 4.8 µs
+**Min Time:** 0.0 µs
+**Max Time:** 29.1 µs
 **Threshold:** 25000 µs
 **Status:** ✅ PASS
 
@@ -376,9 +376,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to register instance with 50000 existing items in tree
 **Tree Size:** 50000 items
 **Iterations:** 500
-**Average Time:** 1.2 µs
+**Average Time:** 1.4 µs
 **Min Time:** 0.9 µs
-**Max Time:** 18.1 µs
+**Max Time:** 37.1 µs
 **Threshold:** 50000 µs
 **Status:** ✅ PASS
 
@@ -389,7 +389,7 @@ consistent performance, while wider bands show more variability.*
 **Iterations:** 1250
 **Average Time:** 0.2 µs
 **Min Time:** 0.1 µs
-**Max Time:** 3.4 µs
+**Max Time:** 2.3 µs
 **Threshold:** 25000 µs
 **Status:** ✅ PASS
 
@@ -398,9 +398,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to register instance with 100000 existing items in tree
 **Tree Size:** 100000 items
 **Iterations:** 500
-**Average Time:** 1.3 µs
-**Min Time:** 0.9 µs
-**Max Time:** 31.5 µs
+**Average Time:** 1.5 µs
+**Min Time:** 1.0 µs
+**Max Time:** 44.6 µs
 **Threshold:** 50000 µs
 **Status:** ✅ PASS
 
@@ -409,9 +409,9 @@ consistent performance, while wider bands show more variability.*
 **Description:** Time to lookup instance with 100000 items in tree
 **Tree Size:** 100000 items
 **Iterations:** 1250
-**Average Time:** 0.2 µs
+**Average Time:** 0.3 µs
 **Min Time:** 0.1 µs
-**Max Time:** 5.2 µs
+**Max Time:** 2.4 µs
 **Threshold:** 25000 µs
 **Status:** ✅ PASS
 

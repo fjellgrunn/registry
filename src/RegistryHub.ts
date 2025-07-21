@@ -1,6 +1,6 @@
- 
+
 import LibLogger from '@/logger';
-import { Registry, RegistryFactory, RegistryHub } from './types';
+import { CoordinateWithRegistry, Registry, RegistryFactory, RegistryHub } from './types';
 import { Instance } from './Instance';
 import {
   DuplicateRegistryTypeError,
@@ -94,12 +94,32 @@ export const createRegistryHub = (): RegistryHub => {
     return false;
   };
 
+  const getAllCoordinates = (): CoordinateWithRegistry[] => {
+    const allCoordinates: CoordinateWithRegistry[] = [];
+
+    for (const registryType in registries) {
+      const registry = registries[registryType];
+      const coordinates = registry.getCoordinates();
+
+      coordinates.forEach(coordinate => {
+        allCoordinates.push({
+          coordinate,
+          registryType
+        });
+      });
+    }
+
+    logger.debug(`Retrieved ${allCoordinates.length} total coordinates from ${Object.keys(registries).length} registries`);
+    return allCoordinates;
+  };
+
   const hub: RegistryHub = {
     createRegistry,
     registerRegistry,
     get,
     getRegistry,
     getRegisteredTypes,
+    getAllCoordinates,
     unregisterRegistry,
   };
 

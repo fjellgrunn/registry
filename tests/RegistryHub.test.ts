@@ -230,4 +230,158 @@ describe('RegistryHub', () => {
       expect(receivedHub).toBe(hub);
     });
   });
+
+  describe('getAllCoordinates', () => {
+    it('should return empty array when no registries are registered', () => {
+      const coordinates = hub.getAllCoordinates();
+      expect(coordinates).toEqual([]);
+    });
+
+    it('should return coordinates from single registry with registry type', () => {
+      hub.registerRegistry(serviceRegistry);
+
+      // Create an instance in the service registry
+      const coordinate = createCoordinate(['User'], ['production']);
+      const instance = createInstance(serviceRegistry, coordinate);
+      serviceRegistry.register(['User'], instance, { scopes: ['production'] });
+
+      const coordinates = hub.getAllCoordinates();
+
+      expect(coordinates).toHaveLength(1);
+      expect(coordinates[0].coordinate).toBe(coordinate);
+      expect(coordinates[0].registryType).toBe('services');
+    });
+
+    it('should return coordinates from multiple registries with their registry types', () => {
+      hub.registerRegistry(serviceRegistry);
+      hub.registerRegistry(dataRegistry);
+
+      // Create instances in service registry
+      const serviceCoord1 = createCoordinate(['Auth'], ['jwt']);
+      const serviceInstance1 = createInstance(serviceRegistry, serviceCoord1);
+      serviceRegistry.register(['Auth'], serviceInstance1, { scopes: ['jwt'] });
+
+      const serviceCoord2 = createCoordinate(['Payment'], ['stripe']);
+      const serviceInstance2 = createInstance(serviceRegistry, serviceCoord2);
+      serviceRegistry.register(['Payment'], serviceInstance2, { scopes: ['stripe'] });
+
+      // Create instances in data registry
+      const dataCoord1 = createCoordinate(['User'], ['firestore']);
+      const dataInstance1 = createInstance(dataRegistry, dataCoord1);
+      dataRegistry.register(['User'], dataInstance1, { scopes: ['firestore'] });
+
+      const dataCoord2 = createCoordinate(['Order'], ['postgresql']);
+      const dataInstance2 = createInstance(dataRegistry, dataCoord2);
+      dataRegistry.register(['Order'], dataInstance2, { scopes: ['postgresql'] });
+
+      const coordinates = hub.getAllCoordinates();
+
+      expect(coordinates).toHaveLength(4);
+
+      // Verify service registry coordinates
+      const serviceCoords = coordinates.filter(c => c.registryType === 'services');
+      expect(serviceCoords).toHaveLength(2);
+      expect(serviceCoords.some(c => c.coordinate === serviceCoord1)).toBe(true);
+      expect(serviceCoords.some(c => c.coordinate === serviceCoord2)).toBe(true);
+
+      // Verify data registry coordinates
+      const dataCoords = coordinates.filter(c => c.registryType === 'data');
+      expect(dataCoords).toHaveLength(2);
+      expect(dataCoords.some(c => c.coordinate === dataCoord1)).toBe(true);
+      expect(dataCoords.some(c => c.coordinate === dataCoord2)).toBe(true);
+    });
+
+    it('should handle registries with no instances', () => {
+      const emptyRegistry = createRegistry('empty');
+      hub.registerRegistry(serviceRegistry);
+      hub.registerRegistry(emptyRegistry);
+
+      // Add instance only to service registry
+      const coordinate = createCoordinate(['Service'], ['scope']);
+      const instance = createInstance(serviceRegistry, coordinate);
+      serviceRegistry.register(['Service'], instance, { scopes: ['scope'] });
+
+      const coordinates = hub.getAllCoordinates();
+
+      expect(coordinates).toHaveLength(1);
+      expect(coordinates[0].registryType).toBe('services');
+      expect(coordinates[0].coordinate).toBe(coordinate);
+    });
+
+    it('should handle multiple instances in same registry with different scopes', () => {
+      hub.registerRegistry(serviceRegistry);
+
+      // Create multiple instances with same key path but different scopes
+      const coord1 = createCoordinate(['Database'], ['production']);
+      const instance1 = createInstance(serviceRegistry, coord1);
+      serviceRegistry.register(['Database'], instance1, { scopes: ['production'] });
+
+      const coord2 = createCoordinate(['Database'], ['development']);
+      const instance2 = createInstance(serviceRegistry, coord2);
+      serviceRegistry.register(['Database'], instance2, { scopes: ['development'] });
+
+      const coordinates = hub.getAllCoordinates();
+
+      expect(coordinates).toHaveLength(2);
+      expect(coordinates.every(c => c.registryType === 'services')).toBe(true);
+      expect(coordinates.some(c => c.coordinate === coord1)).toBe(true);
+      expect(coordinates.some(c => c.coordinate === coord2)).toBe(true);
+    });
+
+    it('should include coordinates from registries created via hub.createRegistry', () => {
+      const registryFactory = (type: string, registryHub?: RegistryHub) => {
+        return createRegistry(type, registryHub);
+      };
+
+      const createdRegistry = hub.createRegistry('created', registryFactory);
+
+      // Add instance to created registry
+      const coordinate = createCoordinate(['CreatedService'], ['test']);
+      const instance = createInstance(createdRegistry, coordinate);
+      createdRegistry.register(['CreatedService'], instance, { scopes: ['test'] });
+
+      const coordinates = hub.getAllCoordinates();
+
+      expect(coordinates).toHaveLength(1);
+      expect(coordinates[0].registryType).toBe('created');
+      expect(coordinates[0].coordinate).toBe(coordinate);
+    });
+
+    it('should group coordinates correctly by registry type in result', () => {
+      const cacheRegistry = createRegistry('cache');
+
+      hub.registerRegistry(serviceRegistry);
+      hub.registerRegistry(dataRegistry);
+      hub.registerRegistry(cacheRegistry);
+
+      // Add instances to each registry
+      const serviceCoord = createCoordinate(['Service'], []);
+      const serviceInstance = createInstance(serviceRegistry, serviceCoord);
+      serviceRegistry.register(['Service'], serviceInstance);
+
+      const dataCoord = createCoordinate(['Data'], []);
+      const dataInstance = createInstance(dataRegistry, dataCoord);
+      dataRegistry.register(['Data'], dataInstance);
+
+      const cacheCoord = createCoordinate(['Cache'], []);
+      const cacheInstance = createInstance(cacheRegistry, cacheCoord);
+      cacheRegistry.register(['Cache'], cacheInstance);
+
+      const coordinates = hub.getAllCoordinates();
+
+      expect(coordinates).toHaveLength(3);
+
+      // Group by registry type
+      const grouped = coordinates.reduce((acc, item) => {
+        if (!acc[item.registryType]) acc[item.registryType] = [];
+        acc[item.registryType].push(item);
+        return acc;
+      }, {} as Record<string, typeof coordinates>);
+
+      expect(Object.keys(grouped)).toHaveLength(3);
+      expect(grouped['services']).toHaveLength(1);
+      expect(grouped['data']).toHaveLength(1);
+      expect(grouped['cache']).toHaveLength(1);
+    });
+  });
 });

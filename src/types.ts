@@ -2,6 +2,14 @@ import { Instance } from './Instance';
 import { Coordinate } from './Coordinate';
 
 /**
+ * Represents a coordinate along with information about which registry contains it.
+ */
+export interface CoordinateWithRegistry {
+  coordinate: Coordinate<any, any | never, any | never, any | never, any | never, any | never>;
+  registryType: string;
+}
+
+/**
  * The RegistryHub interface provides a higher-level registry that manages multiple Registry instances.
  */
 export interface RegistryHub {
@@ -29,6 +37,11 @@ export interface RegistryHub {
    * Lists all registered type keys.
    */
   readonly getRegisteredTypes: () => string[];
+
+  /**
+   * Retrieves all coordinates from all registered registries along with their registry type information.
+   */
+  readonly getAllCoordinates: () => CoordinateWithRegistry[];
 
   /**
    * Removes a registry from the hub.
@@ -126,4 +139,9 @@ export interface Registry {
 
   /** The tree structure representing the hierarchy of instances */
   instanceTree: InstanceTree;
+
+  /**
+   * Retrieves all coordinates currently registered in the registry.
+   */
+  getCoordinates: () => Coordinate<any, any | never, any | never, any | never, any | never, any | never>[];
 }

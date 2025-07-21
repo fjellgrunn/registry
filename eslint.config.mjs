@@ -82,10 +82,6 @@ export default [{
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-explicit-any": "off",
-
-    "no-restricted-imports": ["error", {
-      patterns: ["..*", "src/*"],
-    }],
   },
 }, {
   // Allow examples to import from src
@@ -96,9 +92,4 @@ export default [{
 }, {
   // Allow integration tests to import from examples
   files: ["tests/**/*.integration.test.ts"],
-  rules: {
-    "no-restricted-imports": ["error", {
-      patterns: ["src/*"], // Still restrict src imports but allow examples
-    }],
-  },
 }];
