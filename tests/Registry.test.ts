@@ -424,4 +424,67 @@ describe('Registry findScopedInstance error cases', () => {
 
     expect(() => registry.get(['testLib'], { scopes: ['postgres'] })).toThrow('No instance found matching scopes: postgres');
   });
+
+  describe('getCoordinates', () => {
+    it('should return empty array when no instances are registered', () => {
+      const coordinates = registry.getCoordinates();
+      expect(coordinates).toEqual([]);
+    });
+
+    it('should return all coordinates from registered instances', () => {
+      const coordinate1 = { kta: ['lib1'], scopes: ['scope1'], toString: () => 'lib1 - scope1' } as Coordinate<'lib1'>;
+      const coordinate2 = { kta: ['lib2'], scopes: ['scope2'], toString: () => 'lib2 - scope2' } as Coordinate<'lib2'>;
+      const coordinate3 = { kta: ['nested', 'lib3'], scopes: [], toString: () => 'nested, lib3 - ' } as unknown as Coordinate<'nested'>;
+
+      const lib1 = {
+        coordinate: coordinate1,
+        registry: {} as Registry,
+      } as unknown as Instance<'lib1'>;
+
+      const lib2 = {
+        coordinate: coordinate2,
+        registry: {} as Registry,
+      } as unknown as Instance<'lib2'>;
+
+      const lib3 = {
+        coordinate: coordinate3,
+        registry: {} as Registry,
+      } as unknown as Instance<'nested'>;
+
+      registry.register(['lib1'], lib1, { scopes: ['scope1'] });
+      registry.register(['lib2'], lib2, { scopes: ['scope2'] });
+      registry.register(['nested', 'lib3'], lib3);
+
+      const coordinates = registry.getCoordinates();
+
+      expect(coordinates).toHaveLength(3);
+      expect(coordinates).toContain(coordinate1);
+      expect(coordinates).toContain(coordinate2);
+      expect(coordinates).toContain(coordinate3);
+    });
+
+    it('should return coordinates from instances with same key path but different scopes', () => {
+      const coordinate1 = { kta: ['lib'], scopes: ['scope1'], toString: () => 'lib - scope1' } as Coordinate<'lib'>;
+      const coordinate2 = { kta: ['lib'], scopes: ['scope2'], toString: () => 'lib - scope2' } as Coordinate<'lib'>;
+
+      const lib1 = {
+        coordinate: coordinate1,
+        registry: {} as Registry,
+      } as unknown as Instance<'lib'>;
+
+      const lib2 = {
+        coordinate: coordinate2,
+        registry: {} as Registry,
+      } as unknown as Instance<'lib'>;
+
+      registry.register(['lib'], lib1, { scopes: ['scope1'] });
+      registry.register(['lib'], lib2, { scopes: ['scope2'] });
+
+      const coordinates = registry.getCoordinates();
+
+      expect(coordinates).toHaveLength(2);
+      expect(coordinates).toContain(coordinate1);
+      expect(coordinates).toContain(coordinate2);
+    });
+  });
 });

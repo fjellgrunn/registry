@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import LibLogger from '@/logger';
 import { Instance, isInstance } from './Instance';
-import { createCoordinate } from './Coordinate';
+import { Coordinate, createCoordinate } from './Coordinate';
 import {
   InstanceFactory,
   InstanceTree,
@@ -179,12 +179,36 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
     return null;
   };
 
+  const getCoordinates = (): Coordinate<any, any | never, any | never, any | never, any | never, any | never>[] => {
+    const coordinates: Coordinate<any, any | never, any | never, any | never, any | never, any | never>[] = [];
+
+    const traverseTree = (node: InstanceTree): void => {
+      for (const keyType in node) {
+        const treeNode = node[keyType];
+
+        // Collect coordinates from instances at this level
+        for (const scopedInstance of treeNode.instances) {
+          coordinates.push(scopedInstance.instance.coordinate);
+        }
+
+        // Recursively traverse children if they exist
+        if (treeNode.children) {
+          traverseTree(treeNode.children);
+        }
+      }
+    };
+
+    traverseTree(instanceTree);
+    return coordinates;
+  };
+
   const registry: Registry = {
     type,
     registryHub,
     createInstance,
     register,
     get,
+    getCoordinates,
     instanceTree,
   };
 

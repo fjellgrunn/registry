@@ -26,10 +26,10 @@
   <g transform="translate(110,60)">
 
     <!-- Grid lines (Y-axis - memory in KB) -->
-    <line x1="0" y1="344.5968259745526" x2="990" y2="344.5968259745526" class="grid"/>
-    <text x="-10" y="348.5968259745526" text-anchor="end" class="label">2KB</text>
-    <line x1="0" y1="148.4097749337363" x2="990" y2="148.4097749337363" class="grid"/>
-    <text x="-10" y="152.4097749337363" text-anchor="end" class="label">5KB</text>
+    <line x1="0" y1="355.57592837740003" x2="990" y2="355.57592837740003" class="grid"/>
+    <text x="-10" y="359.57592837740003" text-anchor="end" class="label">2KB</text>
+    <line x1="0" y1="153.13821696732998" x2="990" y2="153.13821696732998" class="grid"/>
+    <text x="-10" y="157.13821696732998" text-anchor="end" class="label">5KB</text>
     <line x1="0" y1="0" x2="990" y2="0" class="grid"/>
     <text x="-10" y="4" text-anchor="end" class="label">10KB</text>
     <line x1="0" y1="0" x2="0" y2="460" class="grid"/>
@@ -61,17 +61,17 @@
     <!-- Axis labels -->
     <text x="495" y="510" text-anchor="middle" class="axis-title">Instance Count - Log Scale</text>
     <text transform="rotate(-90,-70,230)" x="-70" y="230" text-anchor="middle" class="axis-title">Memory Usage (KB)</text>
-    <path d="M 0 250.78578577238122 L 99.33989856911381 275.4368165087373 L 230.6601014308862 302.8847437800938 L 330 329.7254216692126 L 429.3398985691138 317.3838255384124 L 560.6601014308862 344.01997498373333 L 660 345.867686714848 L 759.3398985691139 359.97551438289184 L 890.6601014308862 355.4639184055187 L 990 412.22272389292004" class="per-instance"/>
-    <circle cx="0" cy="250.78578577238122" r="4" class="per-instance-dot"/>
-    <circle cx="99.33989856911381" cy="275.4368165087373" r="4" class="per-instance-dot"/>
-    <circle cx="230.6601014308862" cy="302.8847437800938" r="4" class="per-instance-dot"/>
-    <circle cx="330" cy="329.7254216692126" r="4" class="per-instance-dot"/>
-    <circle cx="429.3398985691138" cy="317.3838255384124" r="4" class="per-instance-dot"/>
-    <circle cx="560.6601014308862" cy="344.01997498373333" r="4" class="per-instance-dot"/>
-    <circle cx="660" cy="345.867686714848" r="4" class="per-instance-dot"/>
-    <circle cx="759.3398985691139" cy="359.97551438289184" r="4" class="per-instance-dot"/>
-    <circle cx="890.6601014308862" cy="355.4639184055187" r="4" class="per-instance-dot"/>
-    <circle cx="990" cy="412.22272389292004" r="4" class="per-instance-dot"/>
+    <path d="M 0 240.70120928043835 L 99.33989856911381 282.22270579627764 L 230.6601014308862 327.2110056876071 L 330 354.03530806378257 L 429.3398985691138 346.21437843228813 L 560.6601014308862 360.1862852477646 L 660 352.43697251573866 L 759.3398985691139 365.33853358657484 L 890.6601014308862 349.28769665195966 L 990 410.70050555725993" class="per-instance"/>
+    <circle cx="0" cy="240.70120928043835" r="4" class="per-instance-dot"/>
+    <circle cx="99.33989856911381" cy="282.22270579627764" r="4" class="per-instance-dot"/>
+    <circle cx="230.6601014308862" cy="327.2110056876071" r="4" class="per-instance-dot"/>
+    <circle cx="330" cy="354.03530806378257" r="4" class="per-instance-dot"/>
+    <circle cx="429.3398985691138" cy="346.21437843228813" r="4" class="per-instance-dot"/>
+    <circle cx="560.6601014308862" cy="360.1862852477646" r="4" class="per-instance-dot"/>
+    <circle cx="660" cy="352.43697251573866" r="4" class="per-instance-dot"/>
+    <circle cx="759.3398985691139" cy="365.33853358657484" r="4" class="per-instance-dot"/>
+    <circle cx="890.6601014308862" cy="349.28769665195966" r="4" class="per-instance-dot"/>
+    <circle cx="990" cy="410.70050555725993" r="4" class="per-instance-dot"/>
     <!-- Legend -->
     <g transform="translate(20, 20)">
       <rect x="0" y="0" width="190" height="60" fill="white" stroke="#ccc" stroke-width="1"/>
