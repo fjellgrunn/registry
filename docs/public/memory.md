@@ -1,7 +1,7 @@
 # Registry Memory Consumption Analysis
 
-> **Generated:** 2025-07-19T19:08:20.039Z
-> **Version:** 4.4.5
+> **Generated:** 2025-07-21T04:04:11.643Z
+> **Version:** 4.4.7
 > **Node.js:** v22.0.0
 > **Test Environment:** darwin arm64
 
@@ -15,14 +15,14 @@
 
 | Operation | Description | Memory Delta | Per Instance | Avg Time (ms) | Threshold | Status |
 |-----------|-------------|--------------|--------------|---------------|-----------|--------|
-| registryCreation | Memory overhead of creating a Registry instance | 66.21 kB | N/A | 0.000 | 83.01 kB | ✅ PASS |
-| registryHubCreation | Memory overhead of creating a RegistryHub instance | 73.34 kB | N/A | 0.000 | 83.01 kB | ✅ PASS |
-| coordinateCreation | Memory overhead of creating Coordinate instances | 112.55 kB | 1.13 kB | 0.001 | 146.48 kB | ✅ PASS |
-| instanceCreation | Memory overhead of creating Instance objects | 158.27 kB | 1.58 kB | 0.001 | 244.14 kB | ✅ PASS |
-| registryStorage | Memory growth when registering instances in registry | 310.70 kB | 3.11 kB | 0.005 | 390.63 kB | ✅ PASS |
-| multiLevelTree | Memory overhead of multi-level instance tree structures | 212.92 kB | 4.26 kB | 0.005 | 585.94 kB | ✅ PASS |
-| scopedInstances | Memory overhead of instances with multiple scopes | 315.40 kB | 3.15 kB | 0.003 | 610.35 kB | ✅ PASS |
-| registryHubIntegration | Memory overhead of RegistryHub managing multiple registries | 281.44 kB | 2.81 kB | 0.012 | 2.29 MB | ✅ PASS |
+| registryCreation | Memory overhead of creating a Registry instance | 72.50 kB | N/A | 0.000 | 83.01 kB | ✅ PASS |
+| registryHubCreation | Memory overhead of creating a RegistryHub instance | 79.55 kB | N/A | 0.001 | 83.01 kB | ✅ PASS |
+| coordinateCreation | Memory overhead of creating Coordinate instances | 112.55 kB | 1.13 kB | 0.001 | 488.28 kB | ✅ PASS |
+| instanceCreation | Memory overhead of creating Instance objects | 158.22 kB | 1.58 kB | 0.001 | 244.14 kB | ✅ PASS |
+| registryStorage | Memory growth when registering instances in registry | 310.70 kB | 3.11 kB | 0.004 | 390.63 kB | ✅ PASS |
+| multiLevelTree | Memory overhead of multi-level instance tree structures | 215.16 kB | 4.30 kB | 0.005 | 585.94 kB | ✅ PASS |
+| scopedInstances | Memory overhead of instances with multiple scopes | 304.58 kB | 3.05 kB | 0.003 | 610.35 kB | ✅ PASS |
+| registryHubIntegration | Memory overhead of RegistryHub managing multiple registries | 276.75 kB | 2.77 kB | 0.008 | 2.29 MB | ✅ PASS |
 
 ## Memory Efficiency Scaling Analysis (Statistical)
 
@@ -30,138 +30,138 @@
 
 | Instance Count | Iterations | Memory Per Instance (Avg ± StdDev) | Time (Avg ± StdDev) | Status |
 |----------------|------------|-------------------------------------|---------------------|--------|
-| 10 | 50 | 3.73 kB ± 5.09 kB | 0.04 ± 0.14 ms | ✅ PASS |
-| 20 | 50 | 2.59 kB ± 1.67 kB | 0.09 ± 0.37 ms | ✅ PASS |
-| 50 | 50 | 2.31 kB ± 1.73 kB | 0.15 ± 0.63 ms | ✅ PASS |
-| 100 | 50 | 2.16 kB ± 1.75 kB | 0.31 ± 0.40 ms | ✅ PASS |
-| 200 | 50 | 2.28 kB ± 2.28 kB | 0.72 ± 1.37 ms | ✅ PASS |
-| 500 | 25 | 1.89 kB ± 1.35 kB | 3.35 ± 5.85 ms | ✅ PASS |
-| 1,000 | 25 | 2.05 kB ± 1.72 kB | 2.23 ± 2.49 ms | ✅ PASS |
-| 2,000 | 25 | 1.85 kB ± 1.52 kB | 5.32 ± 3.99 ms | ✅ PASS |
-| 5,000 | 10 | 1.51 kB ± 905 B | 13.19 ± 6.27 ms | ✅ PASS |
-| 10,000 | 10 | 1.76 kB ± 909 B | 18.37 ± 2.89 ms | ✅ PASS |
+| 10 | 50 | 3.10 kB ± 4.00 kB | 0.06 ± 0.16 ms | ✅ PASS |
+| 20 | 50 | 2.76 kB ± 2.08 kB | 0.11 ± 0.46 ms | ✅ PASS |
+| 50 | 50 | 2.43 kB ± 2.83 kB | 0.10 ± 0.35 ms | ✅ PASS |
+| 100 | 50 | 2.14 kB ± 1.76 kB | 0.17 ± 0.36 ms | ✅ PASS |
+| 200 | 50 | 2.27 kB ± 2.26 kB | 0.63 ± 1.35 ms | ✅ PASS |
+| 500 | 25 | 2.01 kB ± 1.43 kB | 2.73 ± 3.86 ms | ✅ PASS |
+| 1,000 | 25 | 1.99 kB ± 1.75 kB | 5.18 ± 6.83 ms | ✅ PASS |
+| 2,000 | 25 | 1.86 kB ± 1.59 kB | 4.94 ± 3.50 ms | ✅ PASS |
+| 5,000 | 10 | 1.90 kB ± 1.11 kB | 16.26 ± 4.33 ms | ✅ PASS |
+| 10,000 | 10 | 1.46 kB ± 816 B | 21.16 ± 5.97 ms | ✅ PASS |
 
 ### Detailed Statistical Analysis
 
 #### 10 Instances (50 iterations)
 
 **Memory Per Instance:**
-- Average: 3.73 kB
-- Range: 200 B - 27.14 kB
-- Standard Deviation: 5.09 kB
+- Average: 3.10 kB
+- Range: 200 B - 28.18 kB
+- Standard Deviation: 4.00 kB
 
 **Creation Time:**
-- Average: 0.04 ms
-- Range: 0.01 - 1.03 ms
-- Standard Deviation: 0.14 ms
+- Average: 0.06 ms
+- Range: 0.01 - 1.14 ms
+- Standard Deviation: 0.16 ms
 
 #### 20 Instances (50 iterations)
 
 **Memory Per Instance:**
-- Average: 2.59 kB
-- Range: 200 B - 8.97 kB
-- Standard Deviation: 1.67 kB
+- Average: 2.76 kB
+- Range: 200 B - 12.40 kB
+- Standard Deviation: 2.08 kB
 
 **Creation Time:**
-- Average: 0.09 ms
-- Range: 0.02 - 2.65 ms
-- Standard Deviation: 0.37 ms
+- Average: 0.11 ms
+- Range: 0.02 - 3.28 ms
+- Standard Deviation: 0.46 ms
 
 #### 50 Instances (50 iterations)
 
 **Memory Per Instance:**
-- Average: 2.31 kB
-- Range: 200 B - 9.98 kB
-- Standard Deviation: 1.73 kB
+- Average: 2.43 kB
+- Range: 200 B - 18.86 kB
+- Standard Deviation: 2.83 kB
 
 **Creation Time:**
-- Average: 0.15 ms
-- Range: 0.05 - 4.55 ms
-- Standard Deviation: 0.63 ms
+- Average: 0.10 ms
+- Range: 0.04 - 2.56 ms
+- Standard Deviation: 0.35 ms
 
 #### 100 Instances (50 iterations)
 
 **Memory Per Instance:**
-- Average: 2.16 kB
+- Average: 2.14 kB
 - Range: 200 B - 10.54 kB
-- Standard Deviation: 1.75 kB
+- Standard Deviation: 1.76 kB
 
 **Creation Time:**
-- Average: 0.31 ms
-- Range: 0.08 - 3.04 ms
-- Standard Deviation: 0.40 ms
+- Average: 0.17 ms
+- Range: 0.08 - 2.65 ms
+- Standard Deviation: 0.36 ms
 
 #### 200 Instances (50 iterations)
 
 **Memory Per Instance:**
-- Average: 2.28 kB
+- Average: 2.27 kB
 - Range: 200 B - 11.64 kB
-- Standard Deviation: 2.28 kB
+- Standard Deviation: 2.26 kB
 
 **Creation Time:**
-- Average: 0.72 ms
-- Range: 0.17 - 7.75 ms
-- Standard Deviation: 1.37 ms
+- Average: 0.63 ms
+- Range: 0.17 - 7.49 ms
+- Standard Deviation: 1.35 ms
 
 #### 500 Instances (25 iterations)
 
 **Memory Per Instance:**
-- Average: 1.89 kB
+- Average: 2.01 kB
 - Range: 200 B - 7.61 kB
-- Standard Deviation: 1.35 kB
+- Standard Deviation: 1.43 kB
 
 **Creation Time:**
-- Average: 3.35 ms
-- Range: 0.41 - 26.01 ms
-- Standard Deviation: 5.85 ms
+- Average: 2.73 ms
+- Range: 0.43 - 14.56 ms
+- Standard Deviation: 3.86 ms
 
 #### 1,000 Instances (25 iterations)
 
 **Memory Per Instance:**
-- Average: 2.05 kB
-- Range: 200 B - 7.63 kB
-- Standard Deviation: 1.72 kB
+- Average: 1.99 kB
+- Range: 200 B - 7.61 kB
+- Standard Deviation: 1.75 kB
 
 **Creation Time:**
-- Average: 2.23 ms
-- Range: 0.84 - 8.48 ms
-- Standard Deviation: 2.49 ms
+- Average: 5.18 ms
+- Range: 0.81 - 31.10 ms
+- Standard Deviation: 6.83 ms
 
 #### 2,000 Instances (25 iterations)
 
 **Memory Per Instance:**
-- Average: 1.85 kB
-- Range: 449 B - 6.68 kB
-- Standard Deviation: 1.52 kB
+- Average: 1.86 kB
+- Range: 607 B - 6.69 kB
+- Standard Deviation: 1.59 kB
 
 **Creation Time:**
-- Average: 5.32 ms
-- Range: 1.86 - 14.81 ms
-- Standard Deviation: 3.99 ms
+- Average: 4.94 ms
+- Range: 1.82 - 11.65 ms
+- Standard Deviation: 3.50 ms
 
 #### 5,000 Instances (10 iterations)
 
 **Memory Per Instance:**
-- Average: 1.51 kB
-- Range: 200 B - 3.86 kB
-- Standard Deviation: 905 B
+- Average: 1.90 kB
+- Range: 1.26 kB - 4.30 kB
+- Standard Deviation: 1.11 kB
 
 **Creation Time:**
-- Average: 13.19 ms
-- Range: 4.91 - 24.69 ms
-- Standard Deviation: 6.27 ms
+- Average: 16.26 ms
+- Range: 11.01 - 21.74 ms
+- Standard Deviation: 4.33 ms
 
 #### 10,000 Instances (10 iterations)
 
 **Memory Per Instance:**
-- Average: 1.76 kB
-- Range: 1.28 kB - 3.58 kB
-- Standard Deviation: 909 B
+- Average: 1.46 kB
+- Range: 200 B - 3.61 kB
+- Standard Deviation: 816 B
 
 **Creation Time:**
-- Average: 18.37 ms
-- Range: 13.29 - 25.13 ms
-- Standard Deviation: 2.89 ms
+- Average: 21.16 ms
+- Range: 14.28 - 32.53 ms
+- Standard Deviation: 5.97 ms
 
 
 ### Memory Efficiency Pattern (Statistical Summary)
@@ -170,16 +170,16 @@ The following data shows per-instance memory efficiency with confidence interval
 
 ```
 Instance Count | Avg Per Instance | StdDev %
-           10 |          3.73 kB | 136.7%
-           20 |          2.59 kB | 64.5%
-           50 |          2.31 kB | 74.7%
-          100 |          2.16 kB | 81.0%
-          200 |          2.28 kB | 99.8%
-          500 |          1.89 kB | 71.3%
-         1000 |          2.05 kB | 83.9%
-         2000 |          1.85 kB | 82.1%
-         5000 |          1.51 kB | 58.6%
-        10000 |          1.76 kB | 50.5%
+           10 |          3.10 kB | 129.1%
+           20 |          2.76 kB | 75.4%
+           50 |          2.43 kB | 116.5%
+          100 |          2.14 kB | 82.3%
+          200 |          2.27 kB | 99.4%
+          500 |          2.01 kB | 71.3%
+         1000 |          1.99 kB | 88.0%
+         2000 |          1.86 kB | 85.3%
+         5000 |          1.90 kB | 58.6%
+        10000 |          1.46 kB | 54.7%
 ```
 
 ### Statistical Reliability
@@ -191,8 +191,8 @@ Instance Count | Avg Per Instance | StdDev %
 
 ### Scaling Characteristics (Statistical)
 
-- **Per-Instance Memory Change**: -30.2% (2.16 kB → 1.51 kB)
-- **Memory Efficiency**: Needs optimization
+- **Per-Instance Memory Change**: -11.3% (2.14 kB → 1.90 kB)
+- **Memory Efficiency**: Good
 - **Per-Instance Consistency**: Excellent (< 1KB variation)
 - **Statistical Confidence**: High (multiple iterations with standard deviation analysis)
 
@@ -202,12 +202,12 @@ Instance Count | Avg Per Instance | StdDev %
 
 **Description:** Memory overhead of creating a Registry instance
 **Iterations:** 100
-**Total Memory Delta:** 66.21 kB
+**Total Memory Delta:** 72.50 kB
 **Memory Per Instance:** N/A
 **Average Time:** 0.000 ms
 
 **Memory Breakdown:**
-- Heap Used: 66.21 kB
+- Heap Used: 72.50 kB
 - Heap Total: 0 B
 - External: 40 B
 - RSS: 0 B
@@ -220,12 +220,12 @@ Instance Count | Avg Per Instance | StdDev %
 
 **Description:** Memory overhead of creating a RegistryHub instance
 **Iterations:** 100
-**Total Memory Delta:** 73.34 kB
+**Total Memory Delta:** 79.55 kB
 **Memory Per Instance:** N/A
-**Average Time:** 0.000 ms
+**Average Time:** 0.001 ms
 
 **Memory Breakdown:**
-- Heap Used: 73.34 kB
+- Heap Used: 79.55 kB
 - Heap Total: 0 B
 - External: 0 B
 - RSS: 0 B
@@ -248,7 +248,7 @@ Instance Count | Avg Per Instance | StdDev %
 - External: 0 B
 - RSS: 0 B
 
-**Memory Threshold:** 146.48 kB
+**Memory Threshold:** 488.28 kB
 **Time Threshold:** 0.5 ms
 **Status:** ✅ PASS
 
@@ -256,12 +256,12 @@ Instance Count | Avg Per Instance | StdDev %
 
 **Description:** Memory overhead of creating Instance objects
 **Iterations:** 100
-**Total Memory Delta:** 158.27 kB
+**Total Memory Delta:** 158.22 kB
 **Memory Per Instance:** 1.58 kB
 **Average Time:** 0.001 ms
 
 **Memory Breakdown:**
-- Heap Used: 158.27 kB
+- Heap Used: 158.22 kB
 - Heap Total: 0 B
 - External: 0 B
 - RSS: 0 B
@@ -276,7 +276,7 @@ Instance Count | Avg Per Instance | StdDev %
 **Iterations:** 100
 **Total Memory Delta:** 310.70 kB
 **Memory Per Instance:** 3.11 kB
-**Average Time:** 0.005 ms
+**Average Time:** 0.004 ms
 
 **Memory Breakdown:**
 - Heap Used: 310.70 kB
@@ -292,12 +292,12 @@ Instance Count | Avg Per Instance | StdDev %
 
 **Description:** Memory overhead of multi-level instance tree structures
 **Iterations:** 50
-**Total Memory Delta:** 212.92 kB
-**Memory Per Instance:** 4.26 kB
+**Total Memory Delta:** 215.16 kB
+**Memory Per Instance:** 4.30 kB
 **Average Time:** 0.005 ms
 
 **Memory Breakdown:**
-- Heap Used: 212.92 kB
+- Heap Used: 215.16 kB
 - Heap Total: 0 B
 - External: 0 B
 - RSS: 0 B
@@ -310,15 +310,15 @@ Instance Count | Avg Per Instance | StdDev %
 
 **Description:** Memory overhead of instances with multiple scopes
 **Iterations:** 100
-**Total Memory Delta:** 315.40 kB
-**Memory Per Instance:** 3.15 kB
+**Total Memory Delta:** 304.58 kB
+**Memory Per Instance:** 3.05 kB
 **Average Time:** 0.003 ms
 
 **Memory Breakdown:**
-- Heap Used: 315.40 kB
+- Heap Used: 304.58 kB
 - Heap Total: 0 B
 - External: 0 B
-- RSS: 16.00 kB
+- RSS: 0 B
 
 **Memory Threshold:** 610.35 kB
 **Time Threshold:** 2 ms
@@ -328,12 +328,12 @@ Instance Count | Avg Per Instance | StdDev %
 
 **Description:** Memory overhead of RegistryHub managing multiple registries
 **Iterations:** 20
-**Total Memory Delta:** 281.44 kB
-**Memory Per Instance:** 2.81 kB
-**Average Time:** 0.012 ms
+**Total Memory Delta:** 276.75 kB
+**Memory Per Instance:** 2.77 kB
+**Average Time:** 0.008 ms
 
 **Memory Breakdown:**
-- Heap Used: 281.44 kB
+- Heap Used: 276.75 kB
 - Heap Total: 0 B
 - External: 0 B
 - RSS: 0 B
@@ -353,7 +353,7 @@ The following memory constraints are enforced to ensure optimal memory usage:
 
 ### Per-Instance Overhead
 - **Instance Creation**: ≤ 2.44 kB per instance
-- **Coordinate Creation**: ≤ 1.46 kB per coordinate
+- **Coordinate Creation**: ≤ 4.88 kB per coordinate
 - **Instance Tree Node**: ≤ 3.91 kB per tree node
 - **Maximum Memory Per Instance**: ≤ 4.88 kB
 
@@ -361,7 +361,7 @@ The following memory constraints are enforced to ensure optimal memory usage:
 
 The memory efficiency analysis focuses on per-instance memory overhead and how it scales with the number of instances.
 
-- **Registry Overhead Efficiency**: 20.2% under constraint limit
+- **Registry Overhead Efficiency**: 12.7% under constraint limit
 - **Per-Instance Efficiency**: 67.6% under constraint limit
 
 ## Performance Characteristics

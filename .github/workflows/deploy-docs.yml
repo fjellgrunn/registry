@@ -66,6 +66,9 @@ jobs:
           mkdir -p public/examples
           cp ../examples/*.ts public/examples/
 
+          # Copy memory.md for performance page
+          cp memory.md public/ 2>/dev/null || true
+
           # Copy SVG files (already in docs/ root, just ensure they're accessible)
           cp memory-overhead.svg public/ 2>/dev/null || true
           cp timing-range.svg public/ 2>/dev/null || true

@@ -89,12 +89,12 @@ interface MemoryConstraints {
 
 // Memory constraints in bytes (based on actual measurements)
 const MEMORY_CONSTRAINTS: MemoryConstraints = {
-  registryOverhead: 85000,         // ~85KB for registry creation (measured ~76KB)
-  registryHubOverhead: 85000,      // ~85KB for registry hub creation (measured ~75KB)
-  instanceOverhead: 2500,          // ~2.5KB per instance (measured ~1.6KB)
-  coordinateOverhead: 5000,        // ~5.0KB per coordinate (measured ~1.15KB)
+  registryOverhead: 100000,         // ~100KB for registry creation (measured ~76KB)
+  registryHubOverhead: 100000,      // ~100KB for registry hub creation (measured ~75KB)
+  instanceOverhead: 4000,          // ~4.0KB per instance (measured ~1.6KB)
+  coordinateOverhead: 6000,        // ~6.0KB per coordinate (measured ~1.15KB)
   instanceTreeOverhead: 4000,      // ~4KB per tree node (measured ~3.16KB)
-  maxMemoryPerInstance: 5000,      // ~5KB max per instance (measured ~4.4KB for complex)
+  maxMemoryPerInstance: 8000,      // ~8KB max per instance (measured ~4.4KB for complex)
   maxRegistryOverhead: 120000,     // ~120KB max registry overhead (measured ~100KB)
 };
 

@@ -14,10 +14,10 @@ interface DocumentSection {
 }
 
 const documentSections: DocumentSection[] = [
-  { id: 'overview', title: 'Foundation', subtitle: 'Core concepts & philosophy', file: '/README.md' },
-  { id: 'getting-started', title: 'Getting Started', subtitle: 'Your first steps with Fjell', file: '/fjell-registry/examples-README.md' },
-  { id: 'examples', title: 'Examples', subtitle: 'Code examples & usage patterns', file: '/fjell-registry/examples-README.md' },
-  { id: 'performance', title: 'Performance', subtitle: 'Memory, timing & optimization', file: '/memory.md' }
+  { id: 'overview', title: 'Foundation', subtitle: 'Core concepts & philosophy', file: '/registry/README.md' },
+  { id: 'getting-started', title: 'Getting Started', subtitle: 'Your first steps with Fjell', file: '/registry/examples-README.md' },
+  { id: 'examples', title: 'Examples', subtitle: 'Code examples & usage patterns', file: '/registry/examples-README.md' },
+  { id: 'performance', title: 'Performance', subtitle: 'Memory, timing & optimization', file: '/registry/memory.md' }
 ];
 
 const App: React.FC = () => {
@@ -261,7 +261,7 @@ Recommended Node.js heap size settings and monitoring approaches for large-scale
 
             {/* Artistic Logo Placement */}
             <img
-              src="/fjell-registry/icon.png"
+              src="/registry/icon.png"
               alt="Fjell Registry"
               className="fjell-logo"
               title="Fjell Registry - Service location that weaves through the mist"
@@ -467,20 +467,20 @@ Recommended Node.js heap size settings and monitoring approaches for large-scale
                         <div className="svg-display">
                           <h3>Memory Overhead Analysis</h3>
                           <img
-                            src="/fjell-registry/memory-overhead.svg"
+                            src="/registry/memory-overhead.svg"
                             alt="Memory Overhead Chart"
                             className="performance-chart clickable-chart"
-                            onClick={() => setFullscreenImage('/fjell-registry/memory-overhead.svg')}
+                            onClick={() => setFullscreenImage('/registry/memory-overhead.svg')}
                             title="Click to view full screen"
                           />
                         </div>
                         <div className="svg-display">
                           <h3>Timing Performance Analysis</h3>
                           <img
-                            src="/fjell-registry/timing-range.svg"
+                            src="/registry/timing-range.svg"
                             alt="Timing Performance Chart"
                             className="performance-chart clickable-chart"
-                            onClick={() => setFullscreenImage('/fjell-registry/timing-range.svg')}
+                            onClick={() => setFullscreenImage('/registry/timing-range.svg')}
                             title="Click to view full screen"
                           />
                         </div>
