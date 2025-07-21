@@ -44,3 +44,9 @@ RELEASE_NOTES.md
 output/
 input/
 processed/
+
+docs/memory-data
+docs/memory-overhead.svg
+docs/memory.md
+doces/timing-range.svg
+docs/timing.md
