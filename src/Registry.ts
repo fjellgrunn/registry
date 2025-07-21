@@ -9,6 +9,7 @@ import {
   RegistryHub,
   ScopedInstance
 } from './types';
+import { ClientIdentifier, RegistryStatistics, RegistryStats, ServiceClient } from './RegistryStats';
 
 // Re-export types for backward compatibility
 export type { Registry, RegistryHub, InstanceFactory, RegistryFactory } from './types';
@@ -47,6 +48,38 @@ const findScopedInstance = (
 export const createRegistry = (type: string, registryHub?: RegistryHub): Registry => {
   const instanceTree: InstanceTree = {};
 
+  // Statistics tracking
+  const registryStats = new RegistryStats();
+
+  /**
+   * Creates a proxied Registry that automatically injects client information for service-to-service calls
+   */
+  const createProxiedRegistry = (callingCoordinate: Coordinate<any, any | never, any | never, any | never, any | never, any | never>): Registry => {
+    const serviceClient: ServiceClient = {
+      registryType: type,
+      coordinate: {
+        kta: callingCoordinate.kta,
+        scopes: callingCoordinate.scopes
+      }
+    };
+
+    return {
+      ...registry,
+      get: <
+        S extends string,
+        L1 extends string = never,
+        L2 extends string = never,
+        L3 extends string = never,
+        L4 extends string = never,
+        L5 extends string = never,
+      >(kta: S[], options?: { scopes?: string[]; client?: ClientIdentifier }): Instance<S, L1, L2, L3, L4, L5> | null => {
+        // Automatically inject the calling service as the client if no client is specified
+        const clientToUse = options?.client || serviceClient;
+        return registry.get(kta, { ...options, client: clientToUse });
+      }
+    };
+  };
+
   const createInstance = <
     S extends string,
     L1 extends string = never,
@@ -64,9 +97,12 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
     // Create coordinate for the instance
     const coordinate = createCoordinate(kta as any, scopes);
 
-    // Use factory to create the instance with the new context parameter
+    // Create a proxied registry that automatically tracks this service as the client
+    const proxiedRegistry = createProxiedRegistry(coordinate);
+
+    // Use factory to create the instance with the proxied registry
     const instance = factory(coordinate, {
-      registry,
+      registry: proxiedRegistry,
       registryHub,
     });
 
@@ -145,7 +181,10 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
     L3 extends string = never,
     L4 extends string = never,
     L5 extends string = never,
-  >(kta: S[], options?: { scopes?: string[] }): Instance<S, L1, L2, L3, L4, L5> | null => {
+  >(kta: S[], options?: { scopes?: string[]; client?: ClientIdentifier }): Instance<S, L1, L2, L3, L4, L5> | null => {
+    // Track statistics with kta, scopes, and client
+    registryStats.recordGetCall(kta, options?.scopes, options?.client);
+
     const keyPath = [...kta].reverse();
     let currentLevel = instanceTree;
 
@@ -202,6 +241,10 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
     return coordinates;
   };
 
+  const getStatistics = (): RegistryStatistics => {
+    return registryStats.getStatistics();
+  };
+
   const registry: Registry = {
     type,
     registryHub,
@@ -209,6 +252,7 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
     register,
     get,
     getCoordinates,
+    getStatistics,
     instanceTree,
   };
 

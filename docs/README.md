@@ -4,11 +4,11 @@ This is a React-based documentation site for the Fjell Registry package. It prov
 
 ## Features
 
-- 📱 **Responsive Design** - Works on desktop, tablet, and mobile
-- 🎨 **Modern UI** - Clean, modern interface with Fjell branding
-- 🔍 **Syntax Highlighting** - Code blocks with proper syntax highlighting
-- 📖 **Markdown Support** - Full GitHub Flavored Markdown support
-- 🚀 **Fast Loading** - Built with Vite for optimal performance
+- **Responsive Design** - Works on desktop, tablet, and mobile
+- **Modern UI** - Clean, modern interface with Fjell branding
+- **Syntax Highlighting** - Code blocks with proper syntax highlighting
+- **Markdown Support** - Full GitHub Flavored Markdown support
+- **Fast Loading** - Built with Vite for optimal performance
 
 ## Development
 

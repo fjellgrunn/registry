@@ -327,7 +327,10 @@ describe('Registry createInstance', () => {
     expect(userInstance).toBeDefined();
     expect(userInstance.coordinate.kta).toEqual(['User']);
     expect(userInstance.coordinate.scopes).toEqual(['firestore']);
-    expect(userInstance.registry).toBe(registry);
+    // The registry should be a proxied version with the same type
+    expect(userInstance.registry.type).toBe(registry.type);
+    expect(typeof userInstance.registry.get).toBe('function');
+    expect(typeof userInstance.registry.register).toBe('function');
 
     // Verify it was automatically registered
     expect(registry.get(['User'], { scopes: ['firestore'] })).toBe(userInstance);
@@ -485,6 +488,152 @@ describe('Registry findScopedInstance error cases', () => {
       expect(coordinates).toHaveLength(2);
       expect(coordinates).toContain(coordinate1);
       expect(coordinates).toContain(coordinate2);
+    });
+  });
+
+  describe('getStatistics', () => {
+    it('should track get call statistics correctly', () => {
+      // Create test instances
+      const lib1 = {
+        coordinate: {} as Coordinate<'lib1'>,
+        registry: {} as Registry,
+      } as unknown as Instance<'lib1'>;
+
+      const lib2 = {
+        coordinate: {} as Coordinate<'lib2'>,
+        registry: {} as Registry,
+      } as unknown as Instance<'lib2'>;
+
+      // Register instances
+      registry.register(['lib1'], lib1);
+      registry.register(['lib2'], lib2);
+
+      // Initial statistics should show no get calls
+      let stats = registry.getStatistics();
+      expect(stats.totalGetCalls).toBe(0);
+      expect(stats.coordinateCallRecords).toHaveLength(0);
+
+      // Call get method multiple times
+      registry.get(['lib1']);
+      registry.get(['lib1']);
+      registry.get(['lib2']);
+
+      // Check updated statistics
+      stats = registry.getStatistics();
+      expect(stats.totalGetCalls).toBe(3);
+      expect(stats.coordinateCallRecords).toHaveLength(2);
+
+      // Find the records
+      const lib1Record = stats.coordinateCallRecords.find(r => r.kta.join('.') === 'lib1');
+      const lib2Record = stats.coordinateCallRecords.find(r => r.kta.join('.') === 'lib2');
+
+      expect(lib1Record).toBeDefined();
+      expect(lib1Record!.count).toBe(2);
+      expect(lib1Record!.scopes).toEqual([]);
+
+      expect(lib2Record).toBeDefined();
+      expect(lib2Record!.count).toBe(1);
+      expect(lib2Record!.scopes).toEqual([]);
+    });
+
+    it('should return a copy of statistics to prevent external mutation', () => {
+      const lib = {
+        coordinate: {} as Coordinate<'test'>,
+        registry: {} as Registry,
+      } as unknown as Instance<'test'>;
+
+      registry.register(['test'], lib);
+      registry.get(['test']);
+
+      const stats1 = registry.getStatistics();
+      const stats2 = registry.getStatistics();
+
+      // Should be different array instances
+      expect(stats1.coordinateCallRecords).not.toBe(stats2.coordinateCallRecords);
+
+      // But with same content
+      expect(stats1.coordinateCallRecords).toEqual(stats2.coordinateCallRecords);
+    });
+
+    it('should track statistics for nested coordinates', () => {
+      const nestedLib = {
+        coordinate: {} as Coordinate<'services', 'auth'>,
+        registry: {} as Registry,
+      } as unknown as Instance<'services', 'auth'>;
+
+      registry.register(['services', 'auth'], nestedLib);
+
+      registry.get(['services', 'auth']);
+      registry.get(['services', 'auth']);
+
+      const stats = registry.getStatistics();
+      expect(stats.totalGetCalls).toBe(2);
+
+      const record = stats.coordinateCallRecords.find(r => r.kta.join('.') === 'services.auth');
+      expect(record).toBeDefined();
+      expect(record!.count).toBe(2);
+      expect(record!.scopes).toEqual([]);
+    });
+
+    it('should track statistics with different scopes separately', () => {
+      const prodLib = {
+        coordinate: {} as Coordinate<'auth'>,
+        registry: {} as Registry,
+      } as unknown as Instance<'auth'>;
+
+      const devLib = {
+        coordinate: {} as Coordinate<'auth'>,
+        registry: {} as Registry,
+      } as unknown as Instance<'auth'>;
+
+      // Register same service with different scopes
+      registry.register(['auth'], prodLib, { scopes: ['production'] });
+      registry.register(['auth'], devLib, { scopes: ['development'] });
+
+      // Call with different scopes
+      registry.get(['auth'], { scopes: ['production'] });
+      registry.get(['auth'], { scopes: ['production'] });
+      registry.get(['auth'], { scopes: ['development'] });
+
+      const stats = registry.getStatistics();
+      expect(stats.totalGetCalls).toBe(3);
+      expect(stats.coordinateCallRecords).toHaveLength(2);
+
+      // Find the records
+      const prodRecord = stats.coordinateCallRecords.find(r =>
+        r.kta.join('.') === 'auth' && r.scopes.includes('production')
+      );
+      const devRecord = stats.coordinateCallRecords.find(r =>
+        r.kta.join('.') === 'auth' && r.scopes.includes('development')
+      );
+
+      expect(prodRecord).toBeDefined();
+      expect(prodRecord!.count).toBe(2);
+      expect(prodRecord!.scopes).toEqual(['production']);
+
+      expect(devRecord).toBeDefined();
+      expect(devRecord!.count).toBe(1);
+      expect(devRecord!.scopes).toEqual(['development']);
+    });
+
+    it('should handle multiple scopes correctly', () => {
+      const lib = {
+        coordinate: {} as Coordinate<'cache'>,
+        registry: {} as Registry,
+      } as unknown as Instance<'cache'>;
+
+      registry.register(['cache'], lib, { scopes: ['redis', 'production'] });
+
+      registry.get(['cache'], { scopes: ['redis', 'production'] });
+      registry.get(['cache'], { scopes: ['production', 'redis'] }); // Different order
+
+      const stats = registry.getStatistics();
+      expect(stats.totalGetCalls).toBe(2);
+      expect(stats.coordinateCallRecords).toHaveLength(1); // Should be same record due to scope normalization
+
+      const record = stats.coordinateCallRecords[0];
+      expect(record.count).toBe(2);
+      expect(record.scopes.sort()).toEqual(['production', 'redis']);
     });
   });
 });

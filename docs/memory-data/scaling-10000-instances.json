@@ -1,125 +1,125 @@
 {
   "instanceCount": 10000,
   "iterations": 10,
-  "timestamp": "2025-07-21T04:04:11.637Z",
+  "timestamp": "2025-07-21T06:44:48.334Z",
   "measurements": [
     {
       "instanceCount": 10000,
-      "memoryPerInstance": 1496.5888,
-      "time": 32.52887499999997
+      "memoryPerInstance": 1460.6544,
+      "time": 16.19404099999997
     },
     {
       "instanceCount": 10000,
-      "memoryPerInstance": 200,
-      "time": 31.254792000000066
+      "memoryPerInstance": 3494.3232,
+      "time": 22.372333000000026
     },
     {
       "instanceCount": 10000,
-      "memoryPerInstance": 1336.1224,
-      "time": 21.119542000000024
+      "memoryPerInstance": 1307.9168,
+      "time": 18.643916999999874
     },
     {
       "instanceCount": 10000,
-      "memoryPerInstance": 3693.02,
-      "time": 23.408000000000015
+      "memoryPerInstance": 3691.9744,
+      "time": 23.463417000000163
     },
     {
       "instanceCount": 10000,
-      "memoryPerInstance": 1296.088,
-      "time": 19.141708000000108
+      "memoryPerInstance": 1323.3856,
+      "time": 21.127250000000004
     },
     {
       "instanceCount": 10000,
-      "memoryPerInstance": 1405.6936,
-      "time": 14.283083999999917
+      "memoryPerInstance": 1329.6144,
+      "time": 17.475250000000187
     },
     {
       "instanceCount": 10000,
-      "memoryPerInstance": 1333.1032,
-      "time": 18.000541000000112
+      "memoryPerInstance": 1454.6656,
+      "time": 14.237750000000005
     },
     {
       "instanceCount": 10000,
-      "memoryPerInstance": 1317.4712,
-      "time": 19.70833400000015
+      "memoryPerInstance": 1319.1456,
+      "time": 18.568209000000024
     },
     {
       "instanceCount": 10000,
-      "memoryPerInstance": 1341.0752,
-      "time": 17.651374999999916
+      "memoryPerInstance": 1319.2376,
+      "time": 17.907791999999972
     },
     {
       "instanceCount": 10000,
-      "memoryPerInstance": 1514.268,
-      "time": 14.481999999999971
+      "memoryPerInstance": 1335.7472,
+      "time": 17.873458000000028
     }
   ],
   "stats": {
     "instanceCount": 10000,
     "iterations": 10,
     "memoryPerInstance": {
-      "min": 200,
-      "max": 3693.02,
-      "average": 1493.34304,
-      "stdDev": 816.2638572597995
+      "min": 1307.9168,
+      "max": 3691.9744,
+      "average": 1803.6664800000003,
+      "stdDev": 897.3867040400329
     },
     "time": {
-      "min": 14.283083999999917,
-      "max": 32.52887499999997,
-      "average": 21.157825100000025,
-      "stdDev": 5.971368041277779
+      "min": 14.237750000000005,
+      "max": 23.463417000000163,
+      "average": 18.786341700000026,
+      "stdDev": 2.6648820301838776
     },
     "status": "PASS",
     "measurements": [
       {
         "instanceCount": 10000,
-        "memoryPerInstance": 1496.5888,
-        "time": 32.52887499999997
+        "memoryPerInstance": 1460.6544,
+        "time": 16.19404099999997
       },
       {
         "instanceCount": 10000,
-        "memoryPerInstance": 200,
-        "time": 31.254792000000066
+        "memoryPerInstance": 3494.3232,
+        "time": 22.372333000000026
       },
       {
         "instanceCount": 10000,
-        "memoryPerInstance": 1336.1224,
-        "time": 21.119542000000024
+        "memoryPerInstance": 1307.9168,
+        "time": 18.643916999999874
       },
       {
         "instanceCount": 10000,
-        "memoryPerInstance": 3693.02,
-        "time": 23.408000000000015
+        "memoryPerInstance": 3691.9744,
+        "time": 23.463417000000163
       },
       {
         "instanceCount": 10000,
-        "memoryPerInstance": 1296.088,
-        "time": 19.141708000000108
+        "memoryPerInstance": 1323.3856,
+        "time": 21.127250000000004
       },
       {
         "instanceCount": 10000,
-        "memoryPerInstance": 1405.6936,
-        "time": 14.283083999999917
+        "memoryPerInstance": 1329.6144,
+        "time": 17.475250000000187
       },
       {
         "instanceCount": 10000,
-        "memoryPerInstance": 1333.1032,
-        "time": 18.000541000000112
+        "memoryPerInstance": 1454.6656,
+        "time": 14.237750000000005
       },
       {
         "instanceCount": 10000,
-        "memoryPerInstance": 1317.4712,
-        "time": 19.70833400000015
+        "memoryPerInstance": 1319.1456,
+        "time": 18.568209000000024
       },
       {
         "instanceCount": 10000,
-        "memoryPerInstance": 1341.0752,
-        "time": 17.651374999999916
+        "memoryPerInstance": 1319.2376,
+        "time": 17.907791999999972
       },
       {
         "instanceCount": 10000,
-        "memoryPerInstance": 1514.268,
-        "time": 14.481999999999971
+        "memoryPerInstance": 1335.7472,
+        "time": 17.873458000000028
       }
     ]
   }

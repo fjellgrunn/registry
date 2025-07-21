@@ -2,6 +2,7 @@
 import LibLogger from '@/logger';
 import { CoordinateWithRegistry, Registry, RegistryFactory, RegistryHub } from './types';
 import { Instance } from './Instance';
+import { ClientIdentifier } from './RegistryStats';
 import {
   DuplicateRegistryTypeError,
   RegistryTypeNotFoundError,
@@ -64,7 +65,7 @@ export const createRegistryHub = (): RegistryHub => {
   const get = (
     type: string,
     kta: string[],
-    options?: { scopes?: string[] },
+    options?: { scopes?: string[]; client?: ClientIdentifier },
   ): Instance<any, any | never, any | never, any | never, any | never, any | never> | null => {
     logger.debug(`Looking up instance for type: ${type}, kta: ${kta.join('.')}, scopes: ${options?.scopes?.join(',') || 'none'}`);
 

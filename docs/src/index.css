@@ -31,10 +31,4 @@ code {
   font-size: 0.875em;
 }
 
-pre code {
-  display: block;
-  padding: 1rem;
-  overflow-x: auto;
-  border-radius: 0.5rem;
-  background-color: #1e293b !important;
-}
+/* Removed conflicting pre code styles - handled in App.css */

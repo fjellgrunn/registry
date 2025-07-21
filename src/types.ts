@@ -1,5 +1,6 @@
 import { Instance } from './Instance';
 import { Coordinate } from './Coordinate';
+import { ClientIdentifier, RegistryStatistics } from './RegistryStats';
 
 /**
  * Represents a coordinate along with information about which registry contains it.
@@ -26,7 +27,11 @@ export interface RegistryHub {
   /**
    * Retrieves an instance by delegating to the appropriate registry.
    */
-  readonly get: (type: string, kta: string[], options?: { scopes?: string[] }) => Instance<any, any | never, any | never, any | never, any | never, any | never> | null;
+  readonly get: (
+    type: string,
+    kta: string[],
+    options?: { scopes?: string[]; client?: ClientIdentifier }
+  ) => Instance<any, any | never, any | never, any | never, any | never, any | never> | null;
 
   /**
    * Retrieves a registry instance by its type key.
@@ -134,7 +139,7 @@ export interface Registry {
    */
   get: (
     kta: string[],
-    options?: { scopes?: string[] },
+    options?: { scopes?: string[]; client?: ClientIdentifier },
   ) => Instance<any, any | never, any | never, any | never, any | never, any | never> | null;
 
   /** The tree structure representing the hierarchy of instances */
@@ -144,4 +149,9 @@ export interface Registry {
    * Retrieves all coordinates currently registered in the registry.
    */
   getCoordinates: () => Coordinate<any, any | never, any | never, any | never, any | never, any | never>[];
+
+  /**
+   * Retrieves statistics about get() method calls, including total calls and per-coordinate call counts.
+   */
+  getStatistics: () => RegistryStatistics;
 }

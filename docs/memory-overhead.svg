@@ -26,10 +26,10 @@
   <g transform="translate(110,60)">
 
     <!-- Grid lines (Y-axis - memory in KB) -->
-    <line x1="0" y1="344.5968259745526" x2="990" y2="344.5968259745526" class="grid"/>
-    <text x="-10" y="348.5968259745526" text-anchor="end" class="label">2KB</text>
-    <line x1="0" y1="148.4097749337363" x2="990" y2="148.4097749337363" class="grid"/>
-    <text x="-10" y="152.4097749337363" text-anchor="end" class="label">5KB</text>
+    <line x1="0" y1="377.79776837534143" x2="990" y2="377.79776837534143" class="grid"/>
+    <text x="-10" y="381.79776837534143" text-anchor="end" class="label">2KB</text>
+    <line x1="0" y1="162.708642531701" x2="990" y2="162.708642531701" class="grid"/>
+    <text x="-10" y="166.708642531701" text-anchor="end" class="label">5KB</text>
     <line x1="0" y1="0" x2="990" y2="0" class="grid"/>
     <text x="-10" y="4" text-anchor="end" class="label">10KB</text>
     <line x1="0" y1="0" x2="0" y2="460" class="grid"/>
@@ -61,17 +61,17 @@
     <!-- Axis labels -->
     <text x="495" y="510" text-anchor="middle" class="axis-title">Instance Count - Log Scale</text>
     <text transform="rotate(-90,-70,230)" x="-70" y="230" text-anchor="middle" class="axis-title">Memory Usage (KB)</text>
-    <path d="M 0 250.78578577238122 L 99.33989856911381 275.4368165087373 L 230.6601014308862 302.8847437800938 L 330 329.7254216692126 L 429.3398985691138 317.3838255384124 L 560.6601014308862 344.01997498373333 L 660 345.867686714848 L 759.3398985691139 359.97551438289184 L 890.6601014308862 355.4639184055187 L 990 412.22272389292004" class="per-instance"/>
-    <circle cx="0" cy="250.78578577238122" r="4" class="per-instance-dot"/>
-    <circle cx="99.33989856911381" cy="275.4368165087373" r="4" class="per-instance-dot"/>
-    <circle cx="230.6601014308862" cy="302.8847437800938" r="4" class="per-instance-dot"/>
-    <circle cx="330" cy="329.7254216692126" r="4" class="per-instance-dot"/>
-    <circle cx="429.3398985691138" cy="317.3838255384124" r="4" class="per-instance-dot"/>
-    <circle cx="560.6601014308862" cy="344.01997498373333" r="4" class="per-instance-dot"/>
-    <circle cx="660" cy="345.867686714848" r="4" class="per-instance-dot"/>
-    <circle cx="759.3398985691139" cy="359.97551438289184" r="4" class="per-instance-dot"/>
-    <circle cx="890.6601014308862" cy="355.4639184055187" r="4" class="per-instance-dot"/>
-    <circle cx="990" cy="412.22272389292004" r="4" class="per-instance-dot"/>
+    <path d="M 0 304.9579731338267 L 99.33989856911381 306.7071557553624 L 230.6601014308862 337.98595780742846 L 330 358.8317366954122 L 429.3398985691138 346.7041163638394 L 560.6601014308862 377.92412127359637 L 660 374.76521167374966 L 759.3398985691139 395.4321432144372 L 890.6601014308862 402.2848600999703 L 990 407.6195166880606" class="per-instance"/>
+    <circle cx="0" cy="304.9579731338267" r="4" class="per-instance-dot"/>
+    <circle cx="99.33989856911381" cy="306.7071557553624" r="4" class="per-instance-dot"/>
+    <circle cx="230.6601014308862" cy="337.98595780742846" r="4" class="per-instance-dot"/>
+    <circle cx="330" cy="358.8317366954122" r="4" class="per-instance-dot"/>
+    <circle cx="429.3398985691138" cy="346.7041163638394" r="4" class="per-instance-dot"/>
+    <circle cx="560.6601014308862" cy="377.92412127359637" r="4" class="per-instance-dot"/>
+    <circle cx="660" cy="374.76521167374966" r="4" class="per-instance-dot"/>
+    <circle cx="759.3398985691139" cy="395.4321432144372" r="4" class="per-instance-dot"/>
+    <circle cx="890.6601014308862" cy="402.2848600999703" r="4" class="per-instance-dot"/>
+    <circle cx="990" cy="407.6195166880606" r="4" class="per-instance-dot"/>
     <!-- Legend -->
     <g transform="translate(20, 20)">
       <rect x="0" y="0" width="190" height="60" fill="white" stroke="#ccc" stroke-width="1"/>
@@ -95,7 +95,7 @@
       <text x="150" y="25" class="metadata-value">2025-07-21</text>
 
       <text x="0" y="45" class="metadata-label">Package Version:</text>
-      <text x="150" y="45" class="metadata-value">@fjell/registry v4.4.7</text>
+      <text x="150" y="45" class="metadata-value">@fjell/registry v4.4.10</text>
 
       <text x="0" y="65" class="metadata-label">Node.js Version:</text>
       <text x="150" y="65" class="metadata-value">v22.0.0 (darwin arm64)</text>

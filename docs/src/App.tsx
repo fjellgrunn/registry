@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import remarkGfm from 'remark-gfm'
 import './App.css'
 
@@ -26,6 +26,7 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState(true)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null)
+  const [version, setVersion] = useState<string>('4.4.10')
 
   useEffect(() => {
     const loadDocuments = async () => {
@@ -51,7 +52,25 @@ const App: React.FC = () => {
       setLoading(false)
     }
 
+    const loadVersion = async () => {
+      try {
+        const response = await fetch('/registry/package.json')
+        if (response.ok) {
+          const packageData = await response.json()
+          setVersion(packageData.version)
+          console.log('Version loaded:', packageData.version)
+        } else {
+          console.error('Failed to fetch package.json:', response.status)
+          setVersion('4.4.10') // Fallback version
+        }
+      } catch (error) {
+        console.error('Error loading version:', error)
+        setVersion('4.4.10') // Fallback version
+      }
+    }
+
     loadDocuments()
+    loadVersion()
   }, [])
 
   const getFallbackContent = (sectionId: string): string => {
@@ -206,7 +225,16 @@ Recommended Node.js heap size settings and monitoring approaches for large-scale
 
           <div className="header-actions">
             <a
-              href="https://github.com/getfjell/fjell-registry"
+              href={`https://github.com/getfjell/registry/releases/tag/v${version}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="version-badge"
+              title={`Release v${version}`}
+            >
+              v{version}
+            </a>
+            <a
+              href="https://github.com/getfjell/registry"
               target="_blank"
               rel="noopener noreferrer"
               className="header-link"
@@ -236,11 +264,6 @@ Recommended Node.js heap size settings and monitoring approaches for large-scale
       <div className="layout">
         <nav className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
           <div className="nav-content">
-            <div className="nav-header">
-              <h3 className="nav-title">Explore</h3>
-              <p className="nav-subtitle">Navigate through concepts</p>
-            </div>
-
             <div className="nav-sections">
               {documentSections.map((section) => (
                 <button
@@ -314,7 +337,7 @@ Recommended Node.js heap size settings and monitoring approaches for large-scale
                             const match = /language-(\w+)/.exec(className || '')
                             return !props.inline && match ? (
                               <SyntaxHighlighter
-                                style={oneDark as { [key: string]: React.CSSProperties }}
+                                style={oneLight as { [key: string]: React.CSSProperties }}
                                 language={match[1]}
                                 PreTag="div"
                                 {...props}
@@ -349,7 +372,7 @@ Recommended Node.js heap size settings and monitoring approaches for large-scale
                             <summary>View Code</summary>
                             <div className="example-code-block">
                               <SyntaxHighlighter
-                                style={oneDark as { [key: string]: React.CSSProperties }}
+                                style={oneLight as { [key: string]: React.CSSProperties }}
                                 language="bash"
                                 PreTag="div"
                               >
@@ -366,7 +389,7 @@ Recommended Node.js heap size settings and monitoring approaches for large-scale
                             <summary>View Code</summary>
                             <div className="example-code-block">
                               <SyntaxHighlighter
-                                style={oneDark as { [key: string]: React.CSSProperties }}
+                                style={oneLight as { [key: string]: React.CSSProperties }}
                                 language="bash"
                                 PreTag="div"
                               >
@@ -383,7 +406,7 @@ Recommended Node.js heap size settings and monitoring approaches for large-scale
                             <summary>View Code</summary>
                             <div className="example-code-block">
                               <SyntaxHighlighter
-                                style={oneDark as { [key: string]: React.CSSProperties }}
+                                style={oneLight as { [key: string]: React.CSSProperties }}
                                 language="bash"
                                 PreTag="div"
                               >
@@ -394,13 +417,13 @@ Recommended Node.js heap size settings and monitoring approaches for large-scale
                         </div>
 
                         <div className="example-card">
-                          <h3>🔍 Coordinate Discovery</h3>
+                          <h3>Coordinate Discovery</h3>
                           <p>Service introspection and discovery patterns.</p>
                           <details>
                             <summary>View Code</summary>
                             <div className="example-code-block">
                               <SyntaxHighlighter
-                                style={oneDark as { [key: string]: React.CSSProperties }}
+                                style={oneLight as { [key: string]: React.CSSProperties }}
                                 language="bash"
                                 PreTag="div"
                               >
@@ -417,7 +440,7 @@ Recommended Node.js heap size settings and monitoring approaches for large-scale
                             <summary>View Code</summary>
                             <div className="example-code-block">
                               <SyntaxHighlighter
-                                style={oneDark as { [key: string]: React.CSSProperties }}
+                                style={oneLight as { [key: string]: React.CSSProperties }}
                                 language="bash"
                                 PreTag="div"
                               >
@@ -437,7 +460,7 @@ Recommended Node.js heap size settings and monitoring approaches for large-scale
                             const match = /language-(\w+)/.exec(className || '')
                             return !props.inline && match ? (
                               <SyntaxHighlighter
-                                style={oneDark as { [key: string]: React.CSSProperties }}
+                                style={oneLight as { [key: string]: React.CSSProperties }}
                                 language={match[1]}
                                 PreTag="div"
                                 {...props}
@@ -494,7 +517,7 @@ Recommended Node.js heap size settings and monitoring approaches for large-scale
                           const match = /language-(\w+)/.exec(className || '')
                           return !props.inline && match ? (
                             <SyntaxHighlighter
-                              style={oneDark as { [key: string]: React.CSSProperties }}
+                              style={oneLight as { [key: string]: React.CSSProperties }}
                               language={match[1]}
                               PreTag="div"
                               {...props}

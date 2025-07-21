@@ -10,6 +10,21 @@
   --color-text-light: #718096;
   --color-text-muted: #A0AEC0;
 
+  /* Missing surface variables */
+  --surface-01: #FFFFFF;
+  --surface-02: #F7FAFC;
+  --surface-03: #EDF2F7;
+
+  /* Missing border variables */
+  --border-secondary: #CBD5E0;
+
+  /* Missing accent variables */
+  --accent-primary: #667EEA;
+  --accent-secondary: #764BA2;
+
+  /* Missing text variables */
+  --text-secondary: #718096;
+
   --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gradient-text: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   --gradient-subtle: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
@@ -208,6 +223,46 @@ body {
   box-shadow: 0 8px 32px rgba(240, 147, 251, 0.3);
 }
 
+.version-badge {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  font-size: 0.8rem;
+  border: 1px solid rgba(102, 126, 234, 0.5);
+  border-radius: 1.5rem;
+  transition: var(--transition-fast);
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+  position: relative;
+  overflow: hidden;
+}
+
+.version-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.version-badge:hover::before {
+  left: 100%;
+}
+
+.version-badge:hover {
+  border-color: rgba(102, 126, 234, 0.8);
+  color: #667eea;
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+}
+
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -278,26 +333,7 @@ body {
   filter: grayscale(0) brightness(1.2);
 }
 
-.nav-header {
-  margin-bottom: 3rem;
-  animation: mystery-fade-in 1s ease-out 0.8s both;
-}
-
-.nav-title {
-  margin: 0 0 0.5rem 0;
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--color-text);
-  letter-spacing: -0.01em;
-}
-
-.nav-subtitle {
-  margin: 0;
-  font-size: 0.875rem;
-  color: var(--color-text-light);
-  font-weight: 400;
-}
+/* Removed nav-header, nav-title, and nav-subtitle styles - no longer needed */
 
 .nav-sections {
   display: flex;
@@ -584,13 +620,33 @@ body {
   border-radius: 1rem;
   overflow: hidden;
   border: 1px solid var(--color-border);
+  background: var(--color-surface);
 }
 
 .content pre code {
-  background: none;
-  padding: 0;
+  display: block;
+  padding: 1.5rem !important;
   font-size: 0.875rem;
   font-weight: 400;
+  line-height: 1.6;
+  overflow-x: auto;
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+}
+
+/* Ensure SyntaxHighlighter components have consistent styling */
+.content pre>div {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.content pre code>span {
+  padding: 0;
+  margin: 0;
 }
 
 /* ===== NAVIGATION SUGGESTIONS ===== */
@@ -791,6 +847,12 @@ body {
 
   .header-link {
     display: none;
+  }
+
+  .version-badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    /* Keep version badge visible on mobile */
   }
 
   .sidebar {

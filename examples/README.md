@@ -33,6 +33,18 @@ Shows how each key path maps to different implementations via scopes using the r
 
 Perfect for enterprise applications that need clean separation of concerns and organized service architecture.
 
+### 4. `registry-statistics-example.ts` 📊 **Usage Analytics**
+**Track and monitor registry usage patterns with scope-aware analytics!** Demonstrates advanced statistics tracking:
+- **Scope-Aware Tracking**: Separate statistics for each kta + scopes combination
+- **Total Call Monitoring**: Track overall `get()` method usage
+- **Detailed Coordinate Records**: Individual tracking for each service/scope pair
+- **Environment Analysis**: Aggregate statistics by environment (prod/dev)
+- **Most/Least Used Services**: Identify usage patterns and bottlenecks
+- **Immutable Statistics**: Safe access to tracking data without affecting internal state
+- **Normalized Scope Handling**: Consistent tracking regardless of scope order
+
+Perfect for monitoring, optimization, understanding service usage patterns, and analyzing environment-specific behavior in production applications.
+
 ## Key Concepts Demonstrated
 
 ### Simple Usage (simple-example.ts)
@@ -162,9 +174,16 @@ npx tsx examples/coordinates-example.ts
 # Run the RegistryHub cross-registry coordinate discovery example
 npx tsx examples/registry-hub-coordinates-example.ts
 
+# Run the registry statistics tracking example
+npx tsx examples/registry-statistics-example.ts
+
 # Or in Node.js
 node -r esbuild-register examples/simple-example.ts
+node -r esbuild-register examples/multi-level-keys.ts
 node -r esbuild-register examples/registry-hub-types.ts
+node -r esbuild-register examples/coordinates-example.ts
+node -r esbuild-register examples/registry-hub-coordinates-example.ts
+node -r esbuild-register examples/registry-statistics-example.ts
 ```
 
 ## Integration with Real Fjell Registry
