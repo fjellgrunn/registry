@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@fjell/core": "^4.4.7",
+    "@fjell/eslint-config": "link:../fjell-eslint-config",
     "@fjell/logging": "^4.4.7",
     "deepmerge": "^4.3.1"
   },

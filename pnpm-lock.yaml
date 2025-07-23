@@ -4,16 +4,23 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@fjell/core': link:../fjell-core
+  '@fjell/logging': link:../fjell-logging
+
 importers:
 
   .:
     dependencies:
       '@fjell/core':
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: link:../fjell-core
+        version: link:../fjell-core
+      '@fjell/eslint-config':
+        specifier: link:../fjell-eslint-config
+        version: link:../fjell-eslint-config
       '@fjell/logging':
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: link:../fjell-logging
+        version: link:../fjell-logging
       deepmerge:
         specifier: ^4.3.1
         version: 4.3.1
@@ -81,21 +88,15 @@ importers:
 
   docs:
     dependencies:
+      '@fjell/docs-template':
+        specifier: file:../../fjell-docs-template
+        version: file:../fjell-docs-template(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react:
         specifier: ^19.1.0
         version: 19.1.0
       react-dom:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
-      react-markdown:
-        specifier: ^10.1.0
-        version: 10.1.0(@types/react@19.1.8)(react@19.1.0)
-      react-syntax-highlighter:
-        specifier: ^15.6.1
-        version: 15.6.1(react@19.1.0)
-      remark-gfm:
-        specifier: ^4.0.1
-        version: 4.0.1
     devDependencies:
       '@testing-library/jest-dom':
         specifier: ^6.6.3
@@ -466,11 +467,11 @@ packages:
     resolution: {integrity: sha512-1+WqvgNMhmlAambTvT3KPtCl/Ibr68VldY2XY40SL1CE0ZXiakFR/cbTspaF5HsnpDMvcYYoJHfl4980NBjGag==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@fjell/core@4.4.7':
-    resolution: {integrity: sha512-urHgEX6uLrbZKiYjhOJx6WZ7dylBvsAxoIfyhA+WE8JasiqFWUzg2YNX5DNOYsqruTe6FSM1dQ/dbHqz/wAFbQ==}
-
-  '@fjell/logging@4.4.7':
-    resolution: {integrity: sha512-ned1kfEpFZSDraH/KRaRodoozyBB7PwlrQuiAmBiUUadfBKx6mx56fZIFRlzb/XUHZIypw237I+4P/bsx7cEzg==}
+  '@fjell/docs-template@file:../fjell-docs-template':
+    resolution: {directory: ../fjell-docs-template, type: directory}
+    peerDependencies:
+      react: ^19.1.0
+      react-dom: ^19.1.0
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1820,10 +1821,6 @@ packages:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
 
-  luxon@3.7.1:
-    resolution: {integrity: sha512-RkRWjA926cTvz5rAb1BqyWkKbbjzCGchDUIKMCUvNi17j6f6j8uHGDV82Aqcqtzd+icoYpELmG3ksgGiFNNcNg==}
-    engines: {node: '>=12'}
-
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
@@ -3019,13 +3016,16 @@ snapshots:
       '@eslint/core': 0.15.1
       levn: 0.4.1
 
-  '@fjell/core@4.4.7':
+  '@fjell/docs-template@file:../fjell-docs-template(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@fjell/logging': 4.4.7
-      deepmerge: 4.3.1
-      luxon: 3.7.1
-
-  '@fjell/logging@4.4.7': {}
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      react-markdown: 10.1.0(@types/react@19.1.8)(react@19.1.0)
+      react-syntax-highlighter: 15.6.1(react@19.1.0)
+      remark-gfm: 4.0.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
 
   '@humanfs/core@0.19.1': {}
 
@@ -4457,8 +4457,6 @@ snapshots:
   lru-cache@6.0.0:
     dependencies:
       yallist: 4.0.0
-
-  luxon@3.7.1: {}
 
   lz-string@1.5.0: {}
 
