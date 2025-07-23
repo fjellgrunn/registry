@@ -51,9 +51,15 @@ jobs:
 
       - name: Build documentation site
         run: |
+          # Build the template package first
+          cd ../fjell-docs-template
+          pnpm install
+          pnpm run build
+          cd fjell-registry
+
           # Change to docs directory and install dependencies
           cd docs
-          pnpm install --frozen-lockfile
+          pnpm install --no-frozen-lockfile
 
           # Copy README.md to public directory so it can be fetched
           mkdir -p public
