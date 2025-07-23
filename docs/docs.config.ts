@@ -4,13 +4,23 @@ interface DocsConfig {
   port: number;
   branding: {
     theme: string;
+    tagline: string;
+    logo?: string;
     backgroundImage?: string;
+    primaryColor?: string;
+    accentColor?: string;
+    github?: string;
+    npm?: string;
   };
   sections: Array<{
     id: string;
     title: string;
     subtitle: string;
     file: string;
+  }>;
+  filesToCopy: Array<{
+    source: string;
+    destination: string;
   }>;
   plugins?: any[];
   version: {
@@ -22,88 +32,63 @@ interface DocsConfig {
 }
 
 const config: DocsConfig = {
-  projectName: 'fjell-http-api',
-  basePath: '/http-api/',
-  port: 3002,
+  projectName: 'Fjell Registry',
+  basePath: '/registry/',
+  port: 3001,
   branding: {
-    theme: 'http-api',
-    backgroundImage: '/pano.png'
+    theme: 'registry',
+    tagline: 'Common Registry for Fjell',
+    backgroundImage: '/pano.png',
+    github: 'https://github.com/getfjell/registry',
+    npm: 'https://www.npmjs.com/package/@fjell/registry'
   },
   sections: [
     {
       id: 'overview',
       title: 'Foundation',
       subtitle: 'Core concepts & philosophy',
-      file: ''
+      file: '/registry/README.md'
     },
     {
       id: 'getting-started',
       title: 'Getting Started',
-      subtitle: 'Your first HTTP API calls',
-      file: ''
+      subtitle: 'Your first registry operations',
+      file: '/registry/GETTING_STARTED.md'
     },
     {
       id: 'api-reference',
       title: 'API Reference',
       subtitle: 'Complete method documentation',
-      file: ''
+      file: '/registry/API.md'
     },
     {
       id: 'examples',
       title: 'Examples',
       subtitle: 'Code examples & usage patterns',
-      file: '/http-api/examples/README.md'
+      file: '/registry/examples-README.md'
+    }
+  ],
+  filesToCopy: [
+    {
+      source: '../README.md',
+      destination: 'public/README.md'
+    },
+    {
+      source: '../examples/README.md',
+      destination: 'public/examples-README.md'
+    },
+    {
+      source: '../GETTING_STARTED.md',
+      destination: 'public/GETTING_STARTED.md'
+    },
+    {
+      source: '../API.md',
+      destination: 'public/API.md'
     }
   ],
   plugins: [],
   version: {
     source: 'package.json'
-  },
-  customContent: {
-    'overview': () => {
-      return `# Foundation
-
-Core concepts and philosophy behind Fjell HTTP API.
-
-This library provides a simple and powerful HTTP client for making API requests with comprehensive error handling and response parsing.`;
-    },
-    'getting-started': () => {
-      return `# Getting Started
-
-Your first HTTP API calls with Fjell.
-
-## Installation
-
-\`\`\`bash
-npm install @fjell/http-api
-\`\`\`
-
-## Basic Usage
-
-\`\`\`typescript
-import { HttpClient } from '@fjell/http-api'
-
-const client = new HttpClient({
-  baseURL: 'https://api.example.com'
-})
-
-const response = await client.get('/users')
-\`\`\``;
-    },
-    'api-reference': () => {
-      return `# API Reference
-
-Complete method documentation for Fjell HTTP API.
-
-## Methods
-
-### GET Requests
-### POST Requests
-### PUT Requests
-### DELETE Requests
-
-Complete documentation coming soon...`;
-    }
   }
 }
 

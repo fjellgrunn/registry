@@ -48,5 +48,6 @@ processed/
 docs/memory-data
 docs/memory-overhead.svg
 docs/memory.md
+docs/docs.config.js
 doces/timing-range.svg
 docs/timing.md
