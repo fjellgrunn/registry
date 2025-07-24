@@ -1,6 +1,6 @@
 {
   "name": "@fjell/registry",
-  "version": "4.4.16",
+  "version": "4.4.17",
   "keywords": [
     "registry",
     "fjell"
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@fjell/core": "^4.4.13",
-    "@fjell/logging": "^4.4.14",
+    "@fjell/logging": "^4.4.17",
     "deepmerge": "^4.3.1"
   },
   "devDependencies": {

@@ -1,3 +1,5 @@
+import { AllItemTypeArrays } from '@fjell/core';
+
 /**
  * Represents a service client (another service making the request)
  */
@@ -70,7 +72,14 @@ export class RegistryStats {
   /**
    * Records a get() call for the specified coordinate and client
    */
-  recordGetCall(kta: string[], scopes?: string[], client?: ClientIdentifier): void {
+  recordGetCall<
+    S extends string = any,
+    L1 extends string = any | never,
+    L2 extends string = any | never,
+    L3 extends string = any | never,
+    L4 extends string = any | never,
+    L5 extends string = any | never,
+  >(kta: AllItemTypeArrays<S, L1, L2, L3, L4, L5>, scopes?: string[], client?: ClientIdentifier): void {
     this.totalCalls++;
 
     const ktaKey = kta.join('.');

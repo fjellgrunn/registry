@@ -1,6 +1,7 @@
 import { Instance } from './Instance';
 import { Coordinate } from './Coordinate';
 import { ClientIdentifier, RegistryStatistics } from './RegistryStats';
+import { AllItemTypeArrays } from '@fjell/core';
 
 /**
  * Represents a coordinate along with information about which registry contains it.
@@ -119,7 +120,7 @@ export interface Registry {
     L4 extends string = never,
     L5 extends string = never
   >(
-    kta: S[],
+    kta: AllItemTypeArrays<S, L1, L2, L3, L4, L5>,
     scopes: string[],
     factory: InstanceFactory<S, L1, L2, L3, L4, L5>
   ) => Instance<S, L1, L2, L3, L4, L5>;
@@ -128,19 +129,33 @@ export interface Registry {
    * Registers an existing instance in the registry (for migration/advanced use cases).
    * @deprecated Use createInstance instead for new code
    */
-  register: (
-    kta: string[],
-    instance: Instance<any, any | never, any | never, any | never, any | never, any | never>,
+  register: <
+    S extends string,
+    L1 extends string = never,
+    L2 extends string = never,
+    L3 extends string = never,
+    L4 extends string = never,
+    L5 extends string = never
+  >(
+    kta: AllItemTypeArrays<S, L1, L2, L3, L4, L5>,
+    instance: Instance<S, L1, L2, L3, L4, L5>,
     options?: { scopes?: string[] },
   ) => void;
 
   /**
    * Retrieves an instance from the registry.
    */
-  get: (
-    kta: string[],
+  get: <
+    S extends string,
+    L1 extends string = never,
+    L2 extends string = never,
+    L3 extends string = never,
+    L4 extends string = never,
+    L5 extends string = never
+  >(
+    kta: AllItemTypeArrays<S, L1, L2, L3, L4, L5>,
     options?: { scopes?: string[]; client?: ClientIdentifier },
-  ) => Instance<any, any | never, any | never, any | never, any | never, any | never> | null;
+  ) => Instance<S, L1, L2, L3, L4, L5> | null;
 
   /** The tree structure representing the hierarchy of instances */
   instanceTree: InstanceTree;
