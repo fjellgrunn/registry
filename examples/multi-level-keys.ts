@@ -14,13 +14,21 @@
  */
 
 // Import the actual registry functionality
+import { AllItemTypeArrays } from '@fjell/core';
 import { createRegistry } from '../src/Registry';
 import { createInstance } from '../src/Instance';
 import type { Registry } from '../src/types';
 
 // Helper function to require a service (throw if not found)
-function requireService(registry: Registry, keyPath: string[], options?: { scopes?: string[] }): any {
-  const result = registry.get(keyPath, options);
+function requireService<
+  S extends string,
+  L1 extends string = never,
+  L2 extends string = never,
+  L3 extends string = never,
+  L4 extends string = never,
+  L5 extends string = never,
+>(registry: Registry, keyPath: AllItemTypeArrays<S, L1, L2, L3, L4, L5>, options?: { scopes?: string[] }): any {
+  const result = registry.get<S, L1, L2, L3, L4, L5>(keyPath, options);
   if (!result) {
     throw new Error(`Required service '${keyPath.join('.')}' not found`);
   }

@@ -2,6 +2,7 @@
 import LibLogger from '@/logger';
 import { Instance, isInstance } from './Instance';
 import { Coordinate, createCoordinate } from './Coordinate';
+import { AllItemTypeArrays } from '@fjell/core';
 import {
   InstanceFactory,
   InstanceTree,
@@ -72,7 +73,7 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
         L3 extends string = never,
         L4 extends string = never,
         L5 extends string = never,
-      >(kta: S[], options?: { scopes?: string[]; client?: ClientIdentifier }): Instance<S, L1, L2, L3, L4, L5> | null => {
+      >(kta: AllItemTypeArrays<S, L1, L2, L3, L4, L5>, options?: { scopes?: string[]; client?: ClientIdentifier }): Instance<S, L1, L2, L3, L4, L5> | null => {
         // Automatically inject the calling service as the client if no client is specified
         const clientToUse = options?.client || serviceClient;
         return registry.get(kta, { ...options, client: clientToUse });
@@ -88,7 +89,7 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
     L4 extends string = never,
     L5 extends string = never,
   >(
-    kta: S[],
+    kta: AllItemTypeArrays<S, L1, L2, L3, L4, L5>,
     scopes: string[],
     factory: InstanceFactory<S, L1, L2, L3, L4, L5>
   ): Instance<S, L1, L2, L3, L4, L5> => {
@@ -124,7 +125,7 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
     L3 extends string = never,
     L4 extends string = never,
     L5 extends string = never,
-  >(kta: S[], instance: Instance<S, L1, L2, L3, L4, L5>, options?: { scopes?: string[] }): void => {
+  >(kta: AllItemTypeArrays<S, L1, L2, L3, L4, L5>, instance: Instance<S, L1, L2, L3, L4, L5>, options?: { scopes?: string[] }): void => {
     const keyPath = [...kta].reverse(); // Work from most specific to least specific
     let currentLevel = instanceTree;
 
@@ -169,7 +170,7 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
     L3 extends string = never,
     L4 extends string = never,
     L5 extends string = never,
-  >(kta: S[], instance: Instance<S, L1, L2, L3, L4, L5>, options?: { scopes?: string[] }): void => {
+  >(kta: AllItemTypeArrays<S, L1, L2, L3, L4, L5>, instance: Instance<S, L1, L2, L3, L4, L5>, options?: { scopes?: string[] }): void => {
     logger.debug('Using deprecated register method. Consider using createInstance instead.');
     registerInternal(kta, instance, options);
   };
@@ -181,7 +182,7 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
     L3 extends string = never,
     L4 extends string = never,
     L5 extends string = never,
-  >(kta: S[], options?: { scopes?: string[]; client?: ClientIdentifier }): Instance<S, L1, L2, L3, L4, L5> | null => {
+  >(kta: AllItemTypeArrays<S, L1, L2, L3, L4, L5>, options?: { scopes?: string[]; client?: ClientIdentifier }): Instance<S, L1, L2, L3, L4, L5> | null => {
     // Track statistics with kta, scopes, and client
     registryStats.recordGetCall(kta, options?.scopes, options?.client);
 

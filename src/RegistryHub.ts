@@ -7,6 +7,7 @@ import {
   DuplicateRegistryTypeError,
   RegistryTypeNotFoundError,
 } from './errors/RegistryHubError';
+import { AllItemTypeArrays } from '@fjell/core';
 
 // Re-export types for backward compatibility
 export type { RegistryHub } from './types';
@@ -62,11 +63,18 @@ export const createRegistryHub = (): RegistryHub => {
     logger.debug(`Successfully registered registry with type: ${type}`);
   };
 
-  const get = (
-    type: string,
-    kta: string[],
-    options?: { scopes?: string[]; client?: ClientIdentifier },
-  ): Instance<any, any | never, any | never, any | never, any | never, any | never> | null => {
+  const get = <
+    S extends string,
+    L1 extends string = never,
+    L2 extends string = never,
+    L3 extends string = never,
+    L4 extends string = never,
+    L5 extends string = never,
+  >(
+      type: string,
+      kta: AllItemTypeArrays<S, L1, L2, L3, L4, L5>,
+      options?: { scopes?: string[]; client?: ClientIdentifier },
+    ): Instance<S, L1, L2, L3, L4, L5> | null => {
     logger.debug(`Looking up instance for type: ${type}, kta: ${kta.join('.')}, scopes: ${options?.scopes?.join(',') || 'none'}`);
 
     const registry = registries[type];
@@ -122,7 +130,7 @@ export const createRegistryHub = (): RegistryHub => {
     getRegisteredTypes,
     getAllCoordinates,
     unregisterRegistry,
-  };
+  } as unknown as RegistryHub;
 
   return hub;
 };
