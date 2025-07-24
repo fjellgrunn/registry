@@ -11,9 +11,9 @@ export abstract class RegistryError extends Error {
     this.registryType = registryType;
     this.context = context;
 
-    // Maintains proper stack trace for where our error was thrown
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor);
+    // Maintains proper stack trace for where our error was thrown (Node.js specific)
+    if (typeof Error.captureStackTrace === 'function') {
+      (Error as any).captureStackTrace(this, this.constructor);
     }
   }
 
