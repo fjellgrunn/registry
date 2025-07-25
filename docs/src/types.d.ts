@@ -21,6 +21,10 @@ declare module '@fjell/docs-template' {
       subtitle: string;
       file: string;
     }>;
+    filesToCopy: Array<{
+      source: string;
+      destination: string;
+    }>;
     plugins?: any[];
     version: {
       source: string;
@@ -34,11 +38,15 @@ declare module '@fjell/docs-template' {
     config: DocsConfig;
   }
 
-  export const DocsApp: React.ComponentType<DocsAppProps>;
+  export const DocsApp: any;
 }
 
-declare module '../docs.config.ts' {
-  import type { DocsConfig } from '@fjell/docs-template'
-  const config: DocsConfig
-  export default config
+declare module '@fjell/docs-template/config' {
+  export function createDocsViteConfig(options?: {
+    basePath?: string;
+    port?: number;
+    plugins?: any[];
+    packageJsonPath?: string;
+    defineVars?: Record<string, any>;
+  }): any;
 }
