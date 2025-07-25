@@ -28,12 +28,11 @@
     }
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
+    "src"
   ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "tests"
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
   ]
 }
