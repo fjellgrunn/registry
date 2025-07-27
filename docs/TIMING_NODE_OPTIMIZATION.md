@@ -5,7 +5,7 @@ This document outlines Node.js runtime parameters that can be tuned to minimize 
 ## Quick Start: Optimized Timing Test
 
 ```bash
-pnpm run test:timing:optimized
+npm run test:timing:optimized
 ```
 
 This runs timing tests with pre-configured optimal Node.js flags.
@@ -171,10 +171,10 @@ Test that optimizations are working:
 
 ```bash
 # Run normal timing tests
-pnpm run test:timing
+npm run test:timing
 
 # Run optimized timing tests
-pnpm run test:timing:optimized
+npm run test:timing:optimized
 
 # Compare results - optimized should show:
 # 1. Lower timing variance (smaller standard deviations)

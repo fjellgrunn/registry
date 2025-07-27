@@ -567,7 +567,7 @@ The Fjell Registry includes comprehensive memory profiling to ensure optimal per
 
 ```bash
 # Run memory tests and generate documentation
-pnpm run test:memory
+npm run test:memory
 ```
 
 #### Memory Test Coverage

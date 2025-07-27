@@ -15,32 +15,32 @@ This is a React-based documentation site for the Fjell Registry package. It prov
 ### Prerequisites
 
 - Node.js 22+
-- pnpm
+- npm
 
 ### Local Development
 
 ```bash
 # Install dependencies
-pnpm install
+npm install
 
 # Start development server
-pnpm run dev
+npm run dev
 
 # Build for production
-pnpm run build
+npm run build
 
 # Preview production build
-pnpm run preview
+npm run preview
 ```
 
 ### Testing
 
 ```bash
 # Run tests
-pnpm run test
+npm run test
 
 # Run tests in watch mode
-pnpm run test:watch
+npm run test:watch
 ```
 
 ## Deployment
@@ -69,6 +69,6 @@ The site is configured to:
 The documentation site automatically reflects changes to the main README.md file. To update the site itself:
 
 1. Make changes to the React components in `src/`
-2. Test locally with `pnpm run dev`
+2. Test locally with `npm run dev`
 3. Commit your changes
 4. The site will automatically deploy via GitHub Actions

@@ -25,10 +25,10 @@
     "dev": "concurrently \"tsc --watch --noEmit\" \"vite build --watch\"",
     "lint": "eslint . --ext .ts --fix",
     "clean": "rimraf dist",
-    "test": "pnpm run lint && vitest run --coverage",
-    "test:memory:optimized": "pnpm run lint && NODE_OPTIONS=\"--max-old-space-size=8192 --max-semi-space-size=1024\" vitest run tests/memory.test.ts",
-    "test:timing:optimized": "pnpm run lint && NODE_OPTIONS=\"--max-old-space-size=8192 --max-semi-space-size=1024\" vitest run tests/timing.test.ts",
-    "prepublishOnly": "pnpm run clean && pnpm run build"
+    "test": "npm run lint && vitest run --coverage",
+    "test:memory:optimized": "npm run lint && NODE_OPTIONS=\"--max-old-space-size=8192 --max-semi-space-size=1024\" vitest run tests/memory.test.ts",
+    "test:timing:optimized": "npm run lint && NODE_OPTIONS=\"--max-old-space-size=8192 --max-semi-space-size=1024\" vitest run tests/timing.test.ts",
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
     "@fjell/core": "^4.4.7",
@@ -57,7 +57,6 @@
     "vite-plugin-node": "^7.0.0",
     "vitest": "^3.2.4"
   },
-  "packageManager": "pnpm@10.13.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/getfjell/registry.git"

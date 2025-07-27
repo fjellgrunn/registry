@@ -10,10 +10,10 @@ The timing test system measures the performance of key operations in the fjell-r
 
 ```bash
 # Run timing tests specifically
-pnpm run test:timing
+npm run test:timing
 
 # Run all tests (including timing tests)
-pnpm test
+npm test
 ```
 
 ## Measured Operations
