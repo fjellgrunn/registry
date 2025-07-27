@@ -1,7 +1,7 @@
 {
   "name": "@fjell/registry",
   "description": "Dependency injection and service location system for the Fjell ecosystem",
-  "version": "4.4.22",
+  "version": "4.4.23",
   "keywords": [
     "registry",
     "dependency-injection",
@@ -23,7 +23,7 @@
     "dev": "concurrently \"tsc --noEmit --watch\" \"node build.js --watch\"",
     "build": "npm run lint && tsc --noEmit && node build.js",
     "typecheck": "tsc --noEmit",
-    "clean": "rimraf dist",
+    "clean": "rm -rf dist",
     "test": "npm run lint && vitest run --coverage",
     "prepublishOnly": "npm run clean && npm run build",
     "docs:dev": "cd docs && npm run dev",
@@ -48,7 +48,6 @@
     "esbuild": "^0.25.8",
     "eslint": "^9.32.0",
     "jsdom": "^26.1.0",
-    "rimraf": "^6.0.1",
     "typescript": "^5.8.3",
     "vitest": "3.2.4"
   },
