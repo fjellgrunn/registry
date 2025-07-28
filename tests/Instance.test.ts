@@ -1,8 +1,8 @@
 /* eslint-disable no-undefined */
 import { describe, expect, test, vi } from 'vitest';
-import { createInstance, isInstance } from '@/Instance';
-import { Registry } from '@/Registry';
-import { Coordinate } from '@/Coordinate';
+import { createInstance, isInstance } from '../src/Instance';
+import { Registry } from '../src/Registry';
+import { Coordinate } from '../src/Coordinate';
 
 vi.mock('@fjell/logging', () => {
   const logger = {

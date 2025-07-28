@@ -1,8 +1,8 @@
 import { describe, expect, test, vi } from 'vitest';
-import { createCoordinate } from '@/Coordinate';
+import { createCoordinate } from '../src/Coordinate';
 import { ItemTypeArray } from '@fjell/core';
 
-vi.mock('@/logger', () => ({
+vi.mock('../src/logger', () => ({
   default: {
     get: vi.fn(() => ({
       get: vi.fn().mockReturnThis(),

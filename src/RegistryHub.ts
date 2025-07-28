@@ -1,5 +1,5 @@
 
-import LibLogger from '@/logger';
+import LibLogger from './logger';
 import { CoordinateWithRegistry, Registry, RegistryFactory, RegistryHub } from './types';
 import { Instance } from './Instance';
 import { ClientIdentifier } from './RegistryStats';

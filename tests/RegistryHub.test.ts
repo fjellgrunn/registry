@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { createRegistryHub, RegistryHub } from '@/RegistryHub';
-import { createRegistry, Registry } from '@/Registry';
-import { createInstance } from '@/Instance';
-import { createCoordinate } from '@/Coordinate';
+import { createRegistryHub, RegistryHub } from '../src/RegistryHub';
+import { createRegistry, Registry } from '../src/Registry';
+import { createInstance } from '../src/Instance';
+import { createCoordinate } from '../src/Coordinate';
 
 describe('RegistryHub', () => {
   let hub: RegistryHub;

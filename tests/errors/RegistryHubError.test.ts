@@ -6,8 +6,8 @@ import {
   RegistryFactoryError,
   RegistryHubError,
   RegistryTypeNotFoundError
-} from '@/errors/RegistryHubError';
-import { RegistryError } from '@/errors/RegistryError';
+} from '../../src/errors/RegistryHubError';
+import { RegistryError } from '../../src/errors/RegistryError';
 
 describe('RegistryHubError', () => {
   describe('DuplicateRegistryTypeError', () => {

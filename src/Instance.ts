@@ -1,6 +1,6 @@
 /* eslint-disable no-undefined */
 /* eslint-disable indent */
-import LibLogger from "@/logger";
+import LibLogger from "./logger";
 import { Registry } from "./Registry";
 import { Coordinate } from "./Coordinate";
 

@@ -7,8 +7,8 @@ import {
   NoInstancesAvailableError,
   NoInstancesRegisteredError,
   ScopeNotFoundError
-} from '@/errors/InstanceError';
-import { RegistryError } from '@/errors/RegistryError';
+} from '../../src/errors/InstanceError';
+import { RegistryError } from '../../src/errors/RegistryError';
 
 describe('InstanceError', () => {
   // Create a concrete implementation for testing the abstract base class

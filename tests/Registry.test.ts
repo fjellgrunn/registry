@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { Instance } from '@/Instance';
-import { createRegistry, Registry } from '@/Registry';
-import { Coordinate } from '@/Coordinate';
+import { Instance } from '../src/Instance';
+import { createRegistry, Registry } from '../src/Registry';
+import { Coordinate } from '../src/Coordinate';
 
-vi.mock('@/logger', () => {
+vi.mock('../src/logger', () => {
   return {
     default: {
       get: vi.fn(() => ({

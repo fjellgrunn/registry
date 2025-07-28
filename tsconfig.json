@@ -20,12 +20,7 @@
     "outDir": "dist",
     "rootDir": "src",
     "sourceMap": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    }
+    "baseUrl": "."
   },
   "include": [
     "src"

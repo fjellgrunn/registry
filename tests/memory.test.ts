@@ -1,13 +1,13 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
-import { createRegistry, Registry } from '@/Registry';
-import { createRegistryHub, RegistryHub } from '@/RegistryHub';
-import { createInstance } from '@/Instance';
-import { createCoordinate } from '@/Coordinate';
+import { createRegistry, Registry } from '../src/Registry';
+import { createRegistryHub, RegistryHub } from '../src/RegistryHub';
+import { createInstance } from '../src/Instance';
+import { createCoordinate } from '../src/Coordinate';
 import fs from 'fs/promises';
 import path from 'path';
 
 // Mock logger to avoid noise during memory tests
-vi.mock('@/logger', () => {
+vi.mock('../src/logger', () => {
   return {
     default: {
       get: vi.fn(() => ({

@@ -1,6 +1,6 @@
 import { ItemTypeArray } from "@fjell/core";
 
-import LibLogger from "@/logger";
+import LibLogger from "./logger";
 
 const logger = LibLogger.get("Coordinate");
 

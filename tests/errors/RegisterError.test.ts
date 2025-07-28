@@ -4,7 +4,7 @@ import {
   InvalidInstanceRegistrationError,
   RegistryCreationError,
   RegistryError,
-} from '@/errors/RegistryError';
+} from '../../src/errors/RegistryError';
 
 // Concrete implementation for testing the abstract RegistryError class
 class TestRegistryError extends RegistryError {

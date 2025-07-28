@@ -4,8 +4,8 @@ import {
   InvalidCoordinateError,
   InvalidKTAError,
   InvalidScopesError
-} from '@/errors/CoordinateError';
-import { RegistryError } from '@/errors/RegistryError';
+} from '../../src/errors/CoordinateError';
+import { RegistryError } from '../../src/errors/RegistryError';
 
 // Concrete implementation of abstract CoordinateError for testing
 class TestCoordinateError extends CoordinateError {
