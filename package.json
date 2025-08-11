@@ -32,9 +32,9 @@
     "docs:test": "cd docs && npm run test"
   },
   "dependencies": {
-    "@fjell/core": "^4.4.32",
-    "@fjell/logging": "^4.4.38",
-    "@fjell/eslint-config": "^2.0.0"
+    "@fjell/core": "^4.4.34",
+    "@fjell/logging": "^4.4.40",
+    "@fjell/eslint-config": "^1.1.19"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
