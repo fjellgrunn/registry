@@ -1,7 +1,7 @@
 {
   "name": "@fjell/registry",
   "description": "Dependency injection and service location system for the Fjell ecosystem",
-  "version": "4.4.29",
+  "version": "4.4.30",
   "keywords": [
     "registry",
     "dependency-injection",
@@ -14,9 +14,15 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./browser": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     }
   },
+  "browser": "./dist/index.js",
   "type": "module",
   "scripts": {
     "lint": "eslint . --ext .ts --fix",
