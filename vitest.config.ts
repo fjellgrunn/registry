@@ -7,5 +7,16 @@ export default defineConfig({
     setupFiles: ['./tests/setup.ts'],
     globals: true,
     testTimeout: 30000,
+    coverage: {
+      exclude: [
+        'build.js',
+        'docs/**',
+        'coverage/**',
+        'output/**',
+        '**/*.config.*',
+        '**/*.d.ts',
+        'dist/**',
+      ]
+    }
   },
 })
