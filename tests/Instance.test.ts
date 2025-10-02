@@ -1,4 +1,4 @@
-/* eslint-disable no-undefined */
+ 
 import { describe, expect, test, vi } from 'vitest';
 import { createInstance, isInstance } from '../src/Instance';
 import { Registry } from '../src/Registry';
