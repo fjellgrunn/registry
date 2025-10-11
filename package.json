@@ -48,6 +48,7 @@
     "@fjell/eslint-config": "^1.1.25",
     "@swc/core": "^1.13.2",
     "@tsconfig/recommended": "^1.0.10",
+    "@types/node": "^22.10.0",
     "@typescript-eslint/eslint-plugin": "^8.38.0",
     "@typescript-eslint/parser": "^8.38.0",
     "@vitest/coverage-v8": "3.2.4",
