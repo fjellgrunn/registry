@@ -1,7 +1,7 @@
 {
   "name": "@fjell/registry",
   "description": "Dependency injection and service location system for the Fjell ecosystem",
-  "version": "4.4.49",
+  "version": "4.4.50",
   "keywords": [
     "registry",
     "dependency-injection",
@@ -39,7 +39,7 @@
     "docs:test": "cd docs && npm run test"
   },
   "dependencies": {
-    "@fjell/core": "^4.4.47",
+    "@fjell/core": "^4.4.48",
     "@fjell/logging": "^4.4.47"
   },
   "devDependencies": {
