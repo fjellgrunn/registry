@@ -2,7 +2,7 @@ import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { createRegistry, Registry } from '../src/Registry';
 import { createRegistryHub } from '../src/RegistryHub';
 import { createInstance } from '../src/Instance';
-import { createCoordinate } from '../src/Coordinate';
+import { createCoordinate } from '@fjell/core';
 import fs from 'fs/promises';
 import path from 'path';
 

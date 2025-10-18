@@ -1,7 +1,6 @@
 import { Instance } from './Instance';
-import { Coordinate } from './Coordinate';
 import { ClientIdentifier, RegistryStatistics } from './RegistryStats';
-import { AllItemTypeArrays } from '@fjell/core';
+import { AllItemTypeArrays, Coordinate } from '@fjell/core';
 
 /**
  * Represents a coordinate along with information about which registry contains it.
