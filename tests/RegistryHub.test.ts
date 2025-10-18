@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { createRegistryHub, RegistryHub } from '../src/RegistryHub';
 import { createRegistry, Registry } from '../src/Registry';
 import { createInstance } from '../src/Instance';
-import { createCoordinate } from '../src/Coordinate';
+import { createCoordinate } from '@fjell/core';
 
 describe('RegistryHub', () => {
   let hub: RegistryHub;
