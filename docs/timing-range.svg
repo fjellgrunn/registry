@@ -31,18 +31,18 @@
   <g transform="translate(110,60)">
 
     <!-- Grid lines (logarithmic scale) -->
-    <line x1="0" y1="439.6738525316008" x2="1015" y2="439.6738525316008" class="grid"/>
-    <text x="-10" y="443.6738525316008" text-anchor="end" class="label">0.10µs</text>
-    <line x1="0" y1="379.1276259723642" x2="1015" y2="379.1276259723642" class="grid"/>
-    <text x="-10" y="383.1276259723642" text-anchor="end" class="label">0.20µs</text>
-    <line x1="0" y1="299.089868044294" x2="1015" y2="299.089868044294" class="grid"/>
-    <text x="-10" y="303.089868044294" text-anchor="end" class="label">0.50µs</text>
-    <line x1="0" y1="238.54364148505738" x2="1015" y2="238.54364148505738" class="grid"/>
-    <text x="-10" y="242.54364148505738" text-anchor="end" class="label">1.0µs</text>
-    <line x1="0" y1="177.99741492582075" x2="1015" y2="177.99741492582075" class="grid"/>
-    <text x="-10" y="181.99741492582075" text-anchor="end" class="label">2.0µs</text>
-    <line x1="0" y1="97.95965699775047" x2="1015" y2="97.95965699775047" class="grid"/>
-    <text x="-10" y="101.95965699775047" text-anchor="end" class="label">5.0µs</text>
+    <line x1="0" y1="447.85515426368823" x2="1015" y2="447.85515426368823" class="grid"/>
+    <text x="-10" y="451.85515426368823" text-anchor="end" class="label">0.10µs</text>
+    <line x1="0" y1="393.7980718876039" x2="1015" y2="393.7980718876039" class="grid"/>
+    <text x="-10" y="397.7980718876039" text-anchor="end" class="label">0.20µs</text>
+    <line x1="0" y1="322.3384959670175" x2="1015" y2="322.3384959670175" class="grid"/>
+    <text x="-10" y="326.3384959670175" text-anchor="end" class="label">0.50µs</text>
+    <line x1="0" y1="268.28141359093314" x2="1015" y2="268.28141359093314" class="grid"/>
+    <text x="-10" y="272.28141359093314" text-anchor="end" class="label">1.0µs</text>
+    <line x1="0" y1="214.2243312148488" x2="1015" y2="214.2243312148488" class="grid"/>
+    <text x="-10" y="218.2243312148488" text-anchor="end" class="label">2.0µs</text>
+    <line x1="0" y1="142.76475529426233" x2="1015" y2="142.76475529426233" class="grid"/>
+    <text x="-10" y="146.76475529426233" text-anchor="end" class="label">5.0µs</text>
     <line x1="0" y1="0" x2="0" y2="460" class="grid"/>
     <text x="0" y="480" text-anchor="middle" class="label">10</text>
     <line x1="76.38636139973525" y1="0" x2="76.38636139973525" y2="460" class="grid"/>
@@ -78,34 +78,34 @@
     <!-- Axis labels -->
     <text x="507.5" y="510" text-anchor="middle" class="axis-title">Tree Size (items) - Log Scale</text>
     <text transform="rotate(-90,-70,230)" x="-70" y="230" text-anchor="middle" class="axis-title">Execution Time (µs)</text>
-    <path d="M 0 183.74219273756637 L 76.38636139973525 223.89145467565274 L 177.36363860026475 234.2706865118436 L 253.75 239.93460910391713 L 330.1363613997352 60.54622655923657 L 431.1136386002648 249.1458897664275 L 507.5 242.01576337289072 L 583.8863613997353 250.04042186345234 L 684.8636386002647 256.93756050209964 L 761.25 231.33428564636418 L 837.6363613997353 242.10943212643505 L 938.6136386002647 243.40743729789392 L 1015 226.7115043802504" class="register-mean"/>
-    <path d="M 0 394.0215947700867 L 76.38636139973525 398.55939780963445 L 177.36363860026475 399.45377344076337 L 253.75 392.5091596213301 L 330.1363613997352 383.5035546863084 L 431.1136386002648 384.4404788574505 L 507.5 375.3139046207418 L 583.8863613997353 357.58766750778307 L 684.8636386002647 348.18897092186955 L 761.25 308.27600172039786 L 837.6363613997353 344.96315545446606 L 938.6136386002647 341.49780171939426 L 1015 314.7465670481934" class="lookup-mean"/>
-    <circle cx="0" cy="183.74219273756637" r="4" class="register-dot"/>
-    <circle cx="76.38636139973525" cy="223.89145467565274" r="4" class="register-dot"/>
-    <circle cx="177.36363860026475" cy="234.2706865118436" r="4" class="register-dot"/>
-    <circle cx="253.75" cy="239.93460910391713" r="4" class="register-dot"/>
-    <circle cx="330.1363613997352" cy="60.54622655923657" r="4" class="register-dot"/>
-    <circle cx="431.1136386002648" cy="249.1458897664275" r="4" class="register-dot"/>
-    <circle cx="507.5" cy="242.01576337289072" r="4" class="register-dot"/>
-    <circle cx="583.8863613997353" cy="250.04042186345234" r="4" class="register-dot"/>
-    <circle cx="684.8636386002647" cy="256.93756050209964" r="4" class="register-dot"/>
-    <circle cx="761.25" cy="231.33428564636418" r="4" class="register-dot"/>
-    <circle cx="837.6363613997353" cy="242.10943212643505" r="4" class="register-dot"/>
-    <circle cx="938.6136386002647" cy="243.40743729789392" r="4" class="register-dot"/>
-    <circle cx="1015" cy="226.7115043802504" r="4" class="register-dot"/>
-    <circle cx="0" cy="394.0215947700867" r="4" class="lookup-dot"/>
-    <circle cx="76.38636139973525" cy="398.55939780963445" r="4" class="lookup-dot"/>
-    <circle cx="177.36363860026475" cy="399.45377344076337" r="4" class="lookup-dot"/>
-    <circle cx="253.75" cy="392.5091596213301" r="4" class="lookup-dot"/>
-    <circle cx="330.1363613997352" cy="383.5035546863084" r="4" class="lookup-dot"/>
-    <circle cx="431.1136386002648" cy="384.4404788574505" r="4" class="lookup-dot"/>
-    <circle cx="507.5" cy="375.3139046207418" r="4" class="lookup-dot"/>
-    <circle cx="583.8863613997353" cy="357.58766750778307" r="4" class="lookup-dot"/>
-    <circle cx="684.8636386002647" cy="348.18897092186955" r="4" class="lookup-dot"/>
-    <circle cx="761.25" cy="308.27600172039786" r="4" class="lookup-dot"/>
-    <circle cx="837.6363613997353" cy="344.96315545446606" r="4" class="lookup-dot"/>
-    <circle cx="938.6136386002647" cy="341.49780171939426" r="4" class="lookup-dot"/>
-    <circle cx="1015" cy="314.7465670481934" r="4" class="lookup-dot"/>
+    <path d="M 0 54.057082376084395 L 76.38636139973525 255.3808274385681 L 177.36363860026475 267.1747774985838 L 253.75 272.640911151537 L 330.1363613997352 266.58328886830134 L 431.1136386002648 275.4369049587641 L 507.5 266.87877881671716 L 583.8863613997353 267.33602667225045 L 684.8636386002647 281.230186169557 L 761.25 276.3521237220249 L 837.6363613997353 239.74949003051853 L 938.6136386002647 276.42203977006426 L 1015 265.0982917146745" class="register-mean"/>
+    <path d="M 0 405.94291762391566 L 76.38636139973525 398.45577862545105 L 177.36363860026475 396.31636156849913 L 253.75 386.7246044975637 L 330.1363613997352 396.25617571132506 L 431.1136386002648 400.3343183080271 L 507.5 398.0219393132392 L 583.8863613997353 368.1848490885468 L 684.8636386002647 353.85496094513456 L 761.25 355.8245187821344 L 837.6363613997353 327.26763797208105 L 938.6136386002647 360.6323407876762 L 1015 356.0919189706335" class="lookup-mean"/>
+    <circle cx="0" cy="54.057082376084395" r="4" class="register-dot"/>
+    <circle cx="76.38636139973525" cy="255.3808274385681" r="4" class="register-dot"/>
+    <circle cx="177.36363860026475" cy="267.1747774985838" r="4" class="register-dot"/>
+    <circle cx="253.75" cy="272.640911151537" r="4" class="register-dot"/>
+    <circle cx="330.1363613997352" cy="266.58328886830134" r="4" class="register-dot"/>
+    <circle cx="431.1136386002648" cy="275.4369049587641" r="4" class="register-dot"/>
+    <circle cx="507.5" cy="266.87877881671716" r="4" class="register-dot"/>
+    <circle cx="583.8863613997353" cy="267.33602667225045" r="4" class="register-dot"/>
+    <circle cx="684.8636386002647" cy="281.230186169557" r="4" class="register-dot"/>
+    <circle cx="761.25" cy="276.3521237220249" r="4" class="register-dot"/>
+    <circle cx="837.6363613997353" cy="239.74949003051853" r="4" class="register-dot"/>
+    <circle cx="938.6136386002647" cy="276.42203977006426" r="4" class="register-dot"/>
+    <circle cx="1015" cy="265.0982917146745" r="4" class="register-dot"/>
+    <circle cx="0" cy="405.94291762391566" r="4" class="lookup-dot"/>
+    <circle cx="76.38636139973525" cy="398.45577862545105" r="4" class="lookup-dot"/>
+    <circle cx="177.36363860026475" cy="396.31636156849913" r="4" class="lookup-dot"/>
+    <circle cx="253.75" cy="386.7246044975637" r="4" class="lookup-dot"/>
+    <circle cx="330.1363613997352" cy="396.25617571132506" r="4" class="lookup-dot"/>
+    <circle cx="431.1136386002648" cy="400.3343183080271" r="4" class="lookup-dot"/>
+    <circle cx="507.5" cy="398.0219393132392" r="4" class="lookup-dot"/>
+    <circle cx="583.8863613997353" cy="368.1848490885468" r="4" class="lookup-dot"/>
+    <circle cx="684.8636386002647" cy="353.85496094513456" r="4" class="lookup-dot"/>
+    <circle cx="761.25" cy="355.8245187821344" r="4" class="lookup-dot"/>
+    <circle cx="837.6363613997353" cy="327.26763797208105" r="4" class="lookup-dot"/>
+    <circle cx="938.6136386002647" cy="360.6323407876762" r="4" class="lookup-dot"/>
+    <circle cx="1015" cy="356.0919189706335" r="4" class="lookup-dot"/>
     <!-- Legend -->
     <g transform="translate(20, 20)">
       <rect x="0" y="0" width="190" height="80" fill="white" stroke="#ccc" stroke-width="1"/>
@@ -132,7 +132,7 @@
       <text x="0" y="0" class="metadata-section">System Information</text>
 
       <text x="0" y="25" class="metadata-label">Test Date:</text>
-      <text x="150" y="25" class="metadata-value">2025-10-18</text>
+      <text x="150" y="25" class="metadata-value">2025-10-19</text>
 
       <text x="0" y="45" class="metadata-label">Package Version:</text>
       <text x="150" y="45" class="metadata-value">@fjell/registry v4.4.5</text>
