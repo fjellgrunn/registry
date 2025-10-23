@@ -15,6 +15,10 @@ export default defineConfig({
         'node_modules/**',
         'tests/**',
         'src/index.ts',
+        // Types-only definitions are not meaningful for runtime coverage
+        'src/types.ts',
+        // Example code isn't part of the production library surface
+        'examples/**',
         '**/*.d.ts',
         'dist/**',
         'build.js',
