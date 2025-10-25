@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .axis { stroke: #333; stroke-width: 1; }
+    .grid { stroke: #ddd; stroke-width: 0.5; }
+    .label { font-family: Arial, sans-serif; font-size: 14px; fill: #333; }
+    .title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #333; }
+    .subtitle { font-family: Arial, sans-serif; font-size: 12px; fill: #666; }
+    .register-mean { stroke: #e74c3c; stroke-width: 3; fill: none; }
+    .lookup-mean { stroke: #3498db; stroke-width: 3; fill: none; }
+    .register-band { fill: rgba(231, 76, 60, 0.2); stroke: #e74c3c; stroke-width: 1; }
+    .lookup-band { fill: rgba(52, 152, 219, 0.2); stroke: #3498db; stroke-width: 1; }
+    .register-dot { fill: #e74c3c; }
+    .lookup-dot { fill: #3498db; }
+    .legend { font-family: Arial, sans-serif; font-size: 12px; fill: #333; }
+    .axis-title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #333; }
+    .metadata-title { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #333; }
+    .metadata-section { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #444; }
+    .metadata-label { font-family: Arial, sans-serif; font-size: 10px; fill: #666; }
+    .metadata-value { font-family: Arial, sans-serif; font-size: 10px; fill: #333; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1200" height="800" fill="white"/>
+
+  <!-- Title -->
+  <text x="600" y="25" text-anchor="middle" class="title">Timing of Common Registry Operations</text>
+  <text x="600" y="45" text-anchor="middle" class="subtitle">Performance measurements across varying tree sizes</text>
+
+  <!-- Plot area -->
+  <g transform="translate(110,60)">
+
+    <!-- Grid lines (logarithmic scale) -->
+    <line x1="0" y1="431.3721909754535" x2="1015" y2="431.3721909754535" class="grid"/>
+    <text x="-10" y="435.3721909754535" text-anchor="end" class="label">0.10µs</text>
+    <line x1="0" y1="354.94001827817726" x2="1015" y2="354.94001827817726" class="grid"/>
+    <text x="-10" y="358.94001827817726" text-anchor="end" class="label">0.20µs</text>
+    <line x1="0" y1="253.90218183636495" x2="1015" y2="253.90218183636495" class="grid"/>
+    <text x="-10" y="257.90218183636495" text-anchor="end" class="label">0.50µs</text>
+    <line x1="0" y1="177.47000913908863" x2="1015" y2="177.47000913908863" class="grid"/>
+    <text x="-10" y="181.47000913908863" text-anchor="end" class="label">1.0µs</text>
+    <line x1="0" y1="101.03783644181237" x2="1015" y2="101.03783644181237" class="grid"/>
+    <text x="-10" y="105.03783644181237" text-anchor="end" class="label">2.0µs</text>
+    <line x1="0" y1="0" x2="1015" y2="0" class="grid"/>
+    <text x="-10" y="4" text-anchor="end" class="label">5.0µs</text>
+    <line x1="0" y1="0" x2="0" y2="460" class="grid"/>
+    <text x="0" y="480" text-anchor="middle" class="label">10</text>
+    <line x1="76.38636139973525" y1="0" x2="76.38636139973525" y2="460" class="grid"/>
+    <text x="76.38636139973525" y="480" text-anchor="middle" class="label">20</text>
+    <line x1="177.36363860026475" y1="0" x2="177.36363860026475" y2="460" class="grid"/>
+    <text x="177.36363860026475" y="480" text-anchor="middle" class="label">50</text>
+    <line x1="253.75" y1="0" x2="253.75" y2="460" class="grid"/>
+    <text x="253.75" y="480" text-anchor="middle" class="label">100</text>
+    <line x1="330.1363613997352" y1="0" x2="330.1363613997352" y2="460" class="grid"/>
+    <text x="330.1363613997352" y="480" text-anchor="middle" class="label">200</text>
+    <line x1="431.1136386002648" y1="0" x2="431.1136386002648" y2="460" class="grid"/>
+    <text x="431.1136386002648" y="480" text-anchor="middle" class="label">500</text>
+    <line x1="507.5" y1="0" x2="507.5" y2="460" class="grid"/>
+    <text x="507.5" y="480" text-anchor="middle" class="label">1k</text>
+    <line x1="583.8863613997353" y1="0" x2="583.8863613997353" y2="460" class="grid"/>
+    <text x="583.8863613997353" y="480" text-anchor="middle" class="label">2k</text>
+    <line x1="684.8636386002647" y1="0" x2="684.8636386002647" y2="460" class="grid"/>
+    <text x="684.8636386002647" y="480" text-anchor="middle" class="label">5k</text>
+    <line x1="761.25" y1="0" x2="761.25" y2="460" class="grid"/>
+    <text x="761.25" y="480" text-anchor="middle" class="label">10k</text>
+    <line x1="837.6363613997353" y1="0" x2="837.6363613997353" y2="460" class="grid"/>
+    <text x="837.6363613997353" y="480" text-anchor="middle" class="label">20k</text>
+    <line x1="938.6136386002647" y1="0" x2="938.6136386002647" y2="460" class="grid"/>
+    <text x="938.6136386002647" y="480" text-anchor="middle" class="label">50k</text>
+    <line x1="1015" y1="0" x2="1015" y2="460" class="grid"/>
+    <text x="1015" y="480" text-anchor="middle" class="label">100k</text>
+    <!-- Y-axis -->
+    <line x1="0" y1="0" x2="0" y2="460" class="axis"/>
+
+    <!-- X-axis -->
+    <line x1="0" y1="460" x2="1015" y2="460" class="axis"/>
+
+    <!-- Axis labels -->
+    <text x="507.5" y="510" text-anchor="middle" class="axis-title">Tree Size (items) - Log Scale</text>
+    <text transform="rotate(-90,-70,230)" x="-70" y="230" text-anchor="middle" class="axis-title">Execution Time (µs)</text>
+    <path d="M 0 146.71677384156686 L 76.38636139973525 148.9331395003619 L 177.36363860026475 151.10394661375352 L 253.75 134.54444139576373 L 330.1363613997352 129.66786130512872 L 431.1136386002648 156.6357739528906 L 507.5 144.3924393004084 L 583.8863613997353 149.6577161595999 L 684.8636386002647 149.7060538194969 L 761.25 151.21165291880914 L 837.6363613997353 165.39168230161175 L 938.6136386002647 146.44079543060008 L 1015 152.64578978867655" class="register-mean"/>
+    <path d="M 0 371.1707269730891 L 76.38636139973525 382.6152216041217 L 177.36363860026475 383.5678273027237 L 253.75 360.26052627567225 L 330.1363613997352 377.1558573433597 L 431.1136386002648 373.82620186455995 L 507.5 362.22254074091995 L 583.8863613997353 320.32782929438264 L 684.8636386002647 277.819169609913 L 761.25 266.51355454675735 L 837.6363613997353 307.5603355873458 L 938.6136386002647 300.0550240492298 L 1015 305.3243513353905" class="lookup-mean"/>
+    <circle cx="0" cy="146.71677384156686" r="4" class="register-dot"/>
+    <circle cx="76.38636139973525" cy="148.9331395003619" r="4" class="register-dot"/>
+    <circle cx="177.36363860026475" cy="151.10394661375352" r="4" class="register-dot"/>
+    <circle cx="253.75" cy="134.54444139576373" r="4" class="register-dot"/>
+    <circle cx="330.1363613997352" cy="129.66786130512872" r="4" class="register-dot"/>
+    <circle cx="431.1136386002648" cy="156.6357739528906" r="4" class="register-dot"/>
+    <circle cx="507.5" cy="144.3924393004084" r="4" class="register-dot"/>
+    <circle cx="583.8863613997353" cy="149.6577161595999" r="4" class="register-dot"/>
+    <circle cx="684.8636386002647" cy="149.7060538194969" r="4" class="register-dot"/>
+    <circle cx="761.25" cy="151.21165291880914" r="4" class="register-dot"/>
+    <circle cx="837.6363613997353" cy="165.39168230161175" r="4" class="register-dot"/>
+    <circle cx="938.6136386002647" cy="146.44079543060008" r="4" class="register-dot"/>
+    <circle cx="1015" cy="152.64578978867655" r="4" class="register-dot"/>
+    <circle cx="0" cy="371.1707269730891" r="4" class="lookup-dot"/>
+    <circle cx="76.38636139973525" cy="382.6152216041217" r="4" class="lookup-dot"/>
+    <circle cx="177.36363860026475" cy="383.5678273027237" r="4" class="lookup-dot"/>
+    <circle cx="253.75" cy="360.26052627567225" r="4" class="lookup-dot"/>
+    <circle cx="330.1363613997352" cy="377.1558573433597" r="4" class="lookup-dot"/>
+    <circle cx="431.1136386002648" cy="373.82620186455995" r="4" class="lookup-dot"/>
+    <circle cx="507.5" cy="362.22254074091995" r="4" class="lookup-dot"/>
+    <circle cx="583.8863613997353" cy="320.32782929438264" r="4" class="lookup-dot"/>
+    <circle cx="684.8636386002647" cy="277.819169609913" r="4" class="lookup-dot"/>
+    <circle cx="761.25" cy="266.51355454675735" r="4" class="lookup-dot"/>
+    <circle cx="837.6363613997353" cy="307.5603355873458" r="4" class="lookup-dot"/>
+    <circle cx="938.6136386002647" cy="300.0550240492298" r="4" class="lookup-dot"/>
+    <circle cx="1015" cy="305.3243513353905" r="4" class="lookup-dot"/>
+    <!-- Legend -->
+    <g transform="translate(20, 20)">
+      <rect x="0" y="0" width="190" height="80" fill="white" stroke="#ccc" stroke-width="1"/>
+
+      <!-- Register Instance Legend -->
+      <text x="10" y="20" class="legend" font-weight="bold">Register Instance</text>
+      <line x1="10" y1="30" x2="40" y2="30" class="register-mean"/>
+      <circle cx="25" cy="30" r="3" class="register-dot"/>
+      <text x="45" y="34" class="legend">Average Timing</text>
+
+      <!-- Lookup Instance Legend -->
+      <text x="10" y="55" class="legend" font-weight="bold">Lookup Instance</text>
+      <line x1="10" y1="65" x2="40" y2="65" class="lookup-mean"/>
+      <circle cx="25" cy="65" r="3" class="lookup-dot"/>
+      <text x="45" y="69" class="legend">Average Timing</text>
+    </g>
+
+  </g>
+
+  <!-- Test Metadata Section -->
+  <g transform="translate(50, 620)">
+    <!-- Left Column: System Information -->
+    <g transform="translate(20, 20)">
+      <text x="0" y="0" class="metadata-section">System Information</text>
+
+      <text x="0" y="25" class="metadata-label">Test Date:</text>
+      <text x="150" y="25" class="metadata-value">2025-10-25</text>
+
+      <text x="0" y="45" class="metadata-label">Package Version:</text>
+      <text x="150" y="45" class="metadata-value">@fjell/registry v4.4.5</text>
+
+      <text x="0" y="65" class="metadata-label">Node.js Version:</text>
+      <text x="150" y="65" class="metadata-value">v24.8.0 (darwin arm64)</text>
+
+      <text x="0" y="85" class="metadata-label">Platform:</text>
+      <text x="150" y="85" class="metadata-value">darwin arm64</text>
+
+      <text x="0" y="105" class="metadata-label">Compiler:</text>
+      <text x="150" y="105" class="metadata-value">TypeScript + Vite</text>
+    </g>
+
+    <!-- Center Column: Test Configuration -->
+    <g transform="translate(330, 20)">
+      <text x="0" y="0" class="metadata-section">Test Configuration</text>
+
+      <text x="0" y="25" class="metadata-label">Test Rounds:</text>
+      <text x="120" y="25" class="metadata-value">100 per tree size</text>
+
+      <text x="0" y="45" class="metadata-label">Iterations per Round:</text>
+      <text x="120" y="45" class="metadata-value">200 operations</text>
+
+      <text x="0" y="65" class="metadata-label">Total Measurements:</text>
+      <text x="120" y="65" class="metadata-value">20,000 per data point</text>
+    </g>
+
+    <!-- Right Column: Test Notes -->
+    <g transform="translate(600, 20)">
+      <text x="0" y="0" class="metadata-section">Test Notes</text>
+      <text x="0" y="25" class="metadata-label">• Performance measurements use Node.js performance.now() with microsecond precision</text>
+      <text x="0" y="42" class="metadata-label">• Each test includes warm-up iterations to minimize JIT compilation effects</text>
+      <text x="0" y="59" class="metadata-label">• Logging is mocked during timing tests to eliminate I/O overhead</text>
+      <text x="0" y="76" class="metadata-label">• Tests verify both mean performance and consistency (low standard deviation)</text>
+      <text x="0" y="93" class="metadata-label">• Statistical analysis ensures reliable performance measurements across all tree sizes</text>
+    </g>
+  </g>
+</svg>
