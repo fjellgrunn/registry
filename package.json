@@ -39,7 +39,7 @@
     "docs:test": "cd docs && npm run test"
   },
   "dependencies": {
-    "@fjell/core": "^4.4.69",
+    "@fjell/core": "^4.4.70",
     "@fjell/logging": "^4.4.60"
   },
   "devDependencies": {
