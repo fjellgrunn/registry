@@ -1,7 +1,7 @@
 {
   "name": "@fjell/registry",
   "description": "Dependency injection and service location system for the Fjell ecosystem",
-  "version": "4.4.78",
+  "version": "4.4.79",
   "keywords": [
     "registry",
     "dependency-injection",
@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@fjell/core": "^4.4.70",
-    "@fjell/logging": "^4.4.60"
+    "@fjell/logging": "^4.4.62"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
