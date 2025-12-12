@@ -261,7 +261,7 @@ describe('Registry', () => {
 
     expect(() => {
       registry.register(['testLib'], invalidInstance);
-    }).toThrow('Attempting to register a non-instance: testLib');
+    }).toThrow(/Attempting to register a non-instance: testLib.*Expected instance with operations property/);
   });
 
   it('should throw error when no instances are available for a registered key', () => {
@@ -375,7 +375,7 @@ describe('Registry createInstance', () => {
 
     expect(() => {
       registry.createInstance(['User'], ['firestore'], badFactory);
-    }).toThrow('Factory did not return a valid instance for: User');
+    }).toThrow(/Factory did not return a valid instance for: User.*Expected instance with operations property/);
   });
 
   it('should trigger logger debug calls during createInstance', () => {
@@ -425,7 +425,7 @@ describe('Registry findScopedInstance error cases', () => {
 
     registry.register(['testLib'], lib, { scopes: ['firestore'] });
 
-    expect(() => registry.get(['testLib'], { scopes: ['postgres'] })).toThrow('No instance found matching scopes: postgres');
+    expect(() => registry.get(['testLib'], { scopes: ['postgres'] })).toThrow(/No instance found matching scopes: postgres.*Available scopes/);
   });
 
   describe('getCoordinates', () => {
