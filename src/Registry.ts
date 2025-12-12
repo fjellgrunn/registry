@@ -39,7 +39,11 @@ const findScopedInstance = (
   });
 
   if (!matchingInstance) {
-    throw new Error(`No instance found matching scopes: ${requestedScopes.join(', ')}`);
+    const availableScopes = scopedInstances.map(si => si.scopes?.join(', ') || '(no scopes)');
+    throw new Error(
+      `No instance found matching scopes: ${requestedScopes.join(', ')}. ` +
+      `Available scopes: ${availableScopes.join(' | ')}`
+    );
   }
 
   return matchingInstance.instance;
@@ -108,7 +112,18 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
 
     // Validate the created instance
     if (!isInstance(instance)) {
-      throw new Error(`Factory did not return a valid instance for: ${kta.join('.')}`);
+      logger.error('Factory returned invalid instance', {
+        component: 'registry',
+        operation: 'getOrCreateInstance',
+        type,
+        kta,
+        returnedType: typeof instance,
+        suggestion: 'Ensure factory function returns a valid instance with operations property'
+      });
+      throw new Error(
+        `Factory did not return a valid instance for: ${kta.join('.')}. ` +
+        `Expected instance with operations property, got: ${typeof instance}`
+      );
     }
 
     // Register the instance
@@ -131,7 +146,18 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
     logger.debug(`Registering instance for key path and scopes`, keyPath, options?.scopes, `in registry type: ${type}`);
 
     if (!isInstance(instance)) {
-      throw new Error(`Attempting to register a non-instance: ${kta.join('.')}`);
+      logger.error('Attempting to register invalid instance', {
+        component: 'registry',
+        operation: 'registerInstance',
+        type,
+        kta,
+        providedType: typeof instance,
+        suggestion: 'Ensure you are registering a valid instance with operations property, not a factory or other object'
+      });
+      throw new Error(
+        `Attempting to register a non-instance: ${kta.join('.')}. ` +
+        `Expected instance with operations property, got: ${typeof instance}`
+      );
     }
 
     // Navigate to the correct location in the tree
