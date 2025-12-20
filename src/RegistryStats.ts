@@ -1,4 +1,4 @@
-import { AllItemTypeArrays } from '@fjell/core';
+import { AllItemTypeArrays } from '@fjell/types';
 
 /**
  * Represents a service client (another service making the request)
@@ -74,11 +74,11 @@ export class RegistryStats {
    */
   recordGetCall<
     S extends string = any,
-    L1 extends string = any | never,
-    L2 extends string = any | never,
-    L3 extends string = any | never,
-    L4 extends string = any | never,
-    L5 extends string = any | never,
+    L1 extends string = any,
+    L2 extends string = any,
+    L3 extends string = any,
+    L4 extends string = any,
+    L5 extends string = any,
   >(kta: AllItemTypeArrays<S, L1, L2, L3, L4, L5>, scopes?: string[], client?: ClientIdentifier): void {
     this.totalCalls++;
 

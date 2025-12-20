@@ -2,7 +2,7 @@
 /* eslint-disable indent */
 import LibLogger from "./logger";
 import { Registry } from "./Registry";
-import { Coordinate } from "@fjell/core";
+import { Coordinate } from "@fjell/types";
 
 const logger = LibLogger.get("Instance");
 

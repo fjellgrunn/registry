@@ -1,12 +1,13 @@
 import { Instance } from './Instance';
 import { ClientIdentifier, RegistryStatistics } from './RegistryStats';
-import { AllItemTypeArrays, Coordinate } from '@fjell/core';
+import { Coordinate } from "@fjell/types";
+import { AllItemTypeArrays } from '@fjell/types';
 
 /**
  * Represents a coordinate along with information about which registry contains it.
  */
 export interface CoordinateWithRegistry {
-  coordinate: Coordinate<any, any | never, any | never, any | never, any | never, any | never>;
+  coordinate: Coordinate<any, any, any, any, any, any>;
   registryType: string;
 }
 
@@ -31,7 +32,7 @@ export interface RegistryHub {
     type: string,
     kta: string[],
     options?: { scopes?: string[]; client?: ClientIdentifier }
-  ) => Instance<any, any | never, any | never, any | never, any | never, any | never> | null;
+  ) => Instance<any, any, any, any, any, any> | null;
 
   /**
    * Retrieves a registry instance by its type key.
@@ -93,7 +94,7 @@ export interface InstanceTreeNode {
 
 export interface ScopedInstance {
   scopes?: string[];
-  instance: Instance<any, any | never, any | never, any | never, any | never, any | never>;
+  instance: Instance<any, any, any, any, any, any>;
 }
 
 /**
@@ -162,7 +163,7 @@ export interface Registry {
   /**
    * Retrieves all coordinates currently registered in the registry.
    */
-  getCoordinates: () => Coordinate<any, any | never, any | never, any | never, any | never, any | never>[];
+  getCoordinates: () => Coordinate<any, any, any, any, any, any>[];
 
   /**
    * Retrieves statistics about get() method calls, including total calls and per-coordinate call counts.

@@ -1,7 +1,8 @@
 /* eslint-disable indent */
 import LibLogger from './logger';
 import { Instance, isInstance } from './Instance';
-import { AllItemTypeArrays, Coordinate, createCoordinate } from '@fjell/core';
+import { AllItemTypeArrays, Coordinate } from "@fjell/types";
+import { createCoordinate } from "@fjell/core";
 import {
   InstanceFactory,
   InstanceTree,
@@ -20,7 +21,7 @@ const findScopedInstance = (
   scopedInstances: ScopedInstance[],
   requestedScopes?: string[],
 
-): Instance<any, any | never, any | never, any | never, any | never, any | never> => {
+): Instance<any, any, any, any, any, any> => {
   if (!requestedScopes || requestedScopes.length === 0) {
     // Return first instance if no scopes specified
     const firstInstance = scopedInstances[0]?.instance;
@@ -58,7 +59,7 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
   /**
    * Creates a proxied Registry that automatically injects client information for service-to-service calls
    */
-  const createProxiedRegistry = (callingCoordinate: Coordinate<any, any | never, any | never, any | never, any | never, any | never>): Registry => {
+  const createProxiedRegistry = (callingCoordinate: { kta: string[]; scopes: string[] }): Registry => {
     const serviceClient: ServiceClient = {
       registryType: type,
       coordinate: {
@@ -99,7 +100,7 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
     logger.debug(`Creating and registering instance for key path and scopes`, kta, scopes, `in registry type: ${type}`);
 
     // Create coordinate for the instance
-    const coordinate = createCoordinate(kta as any, scopes);
+    const coordinate = createCoordinate(kta as any, scopes) as unknown as Coordinate<S, L1, L2, L3, L4, L5>;
 
     // Create a proxied registry that automatically tracks this service as the client
     const proxiedRegistry = createProxiedRegistry(coordinate);
@@ -244,8 +245,8 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
     return null;
   };
 
-  const getCoordinates = (): Coordinate<any, any | never, any | never, any | never, any | never, any | never>[] => {
-    const coordinates: Coordinate<any, any | never, any | never, any | never, any | never, any | never>[] = [];
+  const getCoordinates = (): Coordinate<any, any, any, any, any, any>[] => {
+    const coordinates: Coordinate<any, any, any, any, any, any>[] = [];
 
     const traverseTree = (node: InstanceTree): void => {
       for (const keyType in node) {
@@ -253,7 +254,7 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
 
         // Collect coordinates from instances at this level
         for (const scopedInstance of treeNode.instances) {
-          coordinates.push(scopedInstance.instance.coordinate);
+          coordinates.push(scopedInstance.instance.coordinate as Coordinate<any, any, any, any, any, any>);
         }
 
         // Recursively traverse children if they exist

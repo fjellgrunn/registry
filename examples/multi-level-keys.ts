@@ -14,7 +14,7 @@
  */
 
 // Import the actual registry functionality
-import { AllItemTypeArrays } from '@fjell/core';
+import { AllItemTypeArrays } from '@fjell/types';
 import { createRegistry } from '../src/Registry';
 import { createInstance } from '../src/Instance';
 import type { Registry } from '../src/types';

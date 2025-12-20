@@ -2,7 +2,7 @@
 import { describe, expect, test, vi } from 'vitest';
 import { createInstance, isInstance } from '../src/Instance';
 import { Registry } from '../src/Registry';
-import { Coordinate } from '@fjell/core';
+import { Coordinate } from "@fjell/types";
 
 vi.mock('@fjell/logging', () => {
   const logger = {

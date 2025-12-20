@@ -7,7 +7,7 @@ import {
   DuplicateRegistryTypeError,
   RegistryTypeNotFoundError,
 } from './errors/RegistryHubError';
-import { AllItemTypeArrays } from '@fjell/core';
+import { AllItemTypeArrays } from '@fjell/types';
 
 // Re-export types for backward compatibility
 export type { RegistryHub } from './types';

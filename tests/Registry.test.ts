@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Instance } from '../src/Instance';
 import { createRegistry, Registry } from '../src/Registry';
-import { Coordinate } from '@fjell/core';
+import { Coordinate } from "@fjell/types";
 
 vi.mock('../src/logger', () => {
   return {
