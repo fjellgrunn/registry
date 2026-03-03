@@ -58,3 +58,5 @@ docs/timing.md
 .env.development
 .env.test
 .env.production
+
+.kodrdriv*
