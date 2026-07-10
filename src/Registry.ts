@@ -22,12 +22,12 @@ const findScopedInstance = (
   scopedInstances: ScopedInstance[],
   requestedScopes?: string[],
 
-): Instance<any, any, any, any, any, any> => {
+): Instance<any, any, any, any, any, any> | null => {
   if (!requestedScopes || requestedScopes.length === 0) {
     // Return first instance if no scopes specified
     const firstInstance = scopedInstances[0]?.instance;
     if (!firstInstance) {
-      throw new Error('No instances available');
+      return null;
     }
     return firstInstance;
   }
@@ -42,10 +42,11 @@ const findScopedInstance = (
 
   if (!matchingInstance) {
     const availableScopes = scopedInstances.map(si => si.scopes?.join(', ') || '(no scopes)');
-    throw new Error(
+    logger.warning(
       `No instance found matching scopes: ${requestedScopes.join(', ')}. ` +
       `Available scopes: ${availableScopes.join(' | ')}`
     );
+    return null;
   }
 
   return matchingInstance.instance;
@@ -183,6 +184,26 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
       }
 
       if (isLeaf) {
+        // Check for duplicate scopes before adding
+        const newScopes = options?.scopes || [];
+        const existing = currentLevel[keyType].instances;
+        if (newScopes.length > 0) {
+          for (const existingEntry of existing) {
+            const existingScopes = existingEntry.scopes || [];
+            if (existingScopes.length === newScopes.length &&
+                newScopes.every(s => existingScopes.includes(s))) {
+              logger.warning('Duplicate scope registration detected — earlier entry will be shadowed', {
+                component: 'registry',
+                operation: 'registerInternal',
+                type,
+                kta,
+                scopes: newScopes,
+                suggestion: 'Ensure each scope combination is unique per key path to avoid silent shadowing'
+              });
+              break;
+            }
+          }
+        }
         // Add instance to the leaf node
         currentLevel[keyType].instances.push({
           scopes: options?.scopes,
@@ -234,7 +255,8 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
       const isLeaf = i === keyPath.length - 1;
 
       if (!currentLevel[keyType]) {
-        throw new Error(`Instance not found for key path: ${kta.join('.')}, Missing key: ${keyType}`);
+        logger.debug(`Instance not found for key path: ${kta.join('.')}, Missing key: ${keyType}`);
+        return null;
       }
 
       if (isLeaf) {
@@ -242,14 +264,20 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
         const scopedInstances = currentLevel[keyType].instances;
 
         if (scopedInstances.length === 0) {
-          throw new Error(`No instances registered for key path: ${kta.join('.')}`);
+          logger.debug(`No instances registered for key path: ${kta.join('.')}`);
+          return null;
         }
 
-        return findScopedInstance(scopedInstances, options?.scopes);
+        const found = findScopedInstance(scopedInstances, options?.scopes);
+        if (!found) {
+          return null;
+        }
+        return found;
       } else {
         // Continue navigation
         if (!currentLevel[keyType].children) {
-          throw new Error(`Instance not found for key path: ${kta.join('.')}, No children for: ${keyType}`);
+          logger.debug(`Instance not found for key path: ${kta.join('.')}, No children for: ${keyType}`);
+          return null;
         }
         currentLevel = currentLevel[keyType].children!;
       }

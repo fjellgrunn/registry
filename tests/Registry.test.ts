@@ -59,8 +59,8 @@ describe('Registry', () => {
     expect(() => registry.get([] as any)).toThrow(/Invalid KTA/);
   });
 
-  it('should return undefined for unregistered library', () => {
-    expect(() => registry.get(['nonExistentLib'])).toThrow();
+  it('should return null for unregistered library', () => {
+    expect(registry.get(['nonExistentLib'])).toBeNull();
   });
 
   it('should register and retrieve library with multi-element key array', () => {
@@ -72,13 +72,13 @@ describe('Registry', () => {
     expect(registry.get(['test', 'nested', 'lib'])).toBe(lib);
   });
 
-  it('should return undefined when partial key array match', () => {
+  it('should return null when partial key array match', () => {
     const lib = {
       coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
     } as unknown as Instance<'test'>;
     registry.register(['test', 'nested', 'lib'], lib);
-    expect(() => registry.get(['test', 'nested'])).toThrow();
+    expect(registry.get(['test', 'nested'])).toBeNull();
   });
 
   it('should handle multiple libraries with different key arrays', () => {
@@ -249,8 +249,7 @@ describe('Registry', () => {
       .toBe(elementSequelize1);
     expect(registry.get(['element', 'container', 'region', 'nation'], { scopes: ['sequelize'] }))
       .toBe(elementSequelize1);
-    expect(() => registry.get(['element', 'container', 'region', 'nation'], { scopes: ['sequelize', 'blamo'] }))
-      .toThrow();
+    expect(registry.get(['element', 'container', 'region', 'nation'], { scopes: ['sequelize', 'blamo'] })).toBeNull();
     expect(registry.get(['element2', 'container', 'region', 'nation']))
       .toBe(elementSequelize2);
     expect(registry.get(['element2', 'container', 'region', 'nation'], { scopes: ['firestore'] }))
@@ -273,7 +272,7 @@ describe('Registry', () => {
     }).toThrow(/Attempting to register a non-instance: testLib.*Expected instance with coordinate and registry properties/);
   });
 
-  it('should throw error when no instances are available for a registered key', () => {
+  it('should return null when no instances are available for a registered key', () => {
     // This is a tricky case to reproduce, but we can simulate it by manipulating the internal tree
     const lib = {
       coordinate: {} as Coordinate<'test'>,
@@ -282,13 +281,13 @@ describe('Registry', () => {
 
     registry.register(['testLib'], lib);
 
-    // Manually clear the instances to simulate the "No instances available" error
+    // Manually clear the instances to simulate the "No instances available" case
     (registry.instanceTree as any).testLib.instances = [];
 
-    expect(() => registry.get(['testLib'])).toThrow('No instances registered for key path: testLib');
+    expect(registry.get(['testLib'])).toBeNull();
   });
 
-  it('should throw error when trying to get instance with no children in path', () => {
+  it('should return null when trying to get instance with no children in path', () => {
     const lib = {
       coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
@@ -296,10 +295,10 @@ describe('Registry', () => {
 
     registry.register(['testLib'], lib);
 
-    // Manually remove children to simulate the error
+    // Manually remove children to simulate the missing children case
     (registry.instanceTree as any).testLib.children = null;
 
-    expect(() => registry.get(['testLib', 'nonexistent'])).toThrow('Missing key: nonexistent');
+    expect(registry.get(['testLib', 'nonexistent'])).toBeNull();
   });
 
   it('should trigger logger debug calls during registration', () => {
@@ -411,8 +410,8 @@ describe('Registry findScopedInstance error cases', () => {
     registry = createRegistry('test-scopedInstance');
   });
 
-  it('should throw error when no instances available in empty array', () => {
-    // This tests the "No instances available" error path in findScopedInstance
+  it('should return null when no instances available in empty array', () => {
+    // This tests the "No instances available" null-return path in findScopedInstance
     const lib = {
       coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
@@ -420,13 +419,13 @@ describe('Registry findScopedInstance error cases', () => {
 
     registry.register(['testLib'], lib);
 
-    // Clear instances to trigger the error
+    // Clear instances to trigger the null return
     (registry.instanceTree as any).testLib.instances = [];
 
-    expect(() => registry.get(['testLib'])).toThrow('No instances registered for key path: testLib');
+    expect(registry.get(['testLib'])).toBeNull();
   });
 
-  it('should throw error when no instance matches requested scopes', () => {
+  it('should return null when no instance matches requested scopes', () => {
     const lib = {
       coordinate: {} as Coordinate<'test'>,
       registry: {} as Registry,
@@ -434,7 +433,7 @@ describe('Registry findScopedInstance error cases', () => {
 
     registry.register(['testLib'], lib, { scopes: ['firestore'] });
 
-    expect(() => registry.get(['testLib'], { scopes: ['postgres'] })).toThrow(/No instance found matching scopes: postgres.*Available scopes/);
+    expect(registry.get(['testLib'], { scopes: ['postgres'] })).toBeNull();
   });
 
   describe('getCoordinates', () => {

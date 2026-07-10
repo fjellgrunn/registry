@@ -82,8 +82,8 @@ describe('Multi-Level Keys Example Integration Tests', () => {
 
       // Verify error handling is demonstrated
       expect(logOutput).toContain('Error handling');
-      expect(logOutput).toContain('❌ Service with wrong scope throws error');
-      expect(logOutput).toContain('❌ Caught expected error');
+      expect(logOutput).toContain('Missing service with wrong scope');
+      expect(logOutput).toContain('not found');
     });
 
     it('should demonstrate type safety and service retrieval', async () => {

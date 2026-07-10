@@ -142,10 +142,8 @@ describe('RegistryHub', () => {
       }).toThrow('No registry registered under type: nonexistent');
     });
 
-    it('should propagate registry get errors', () => {
-      expect(() => {
-        hub.get('services', ['nonexistent']);
-      }).toThrow('Instance not found for key path: nonexistent');
+    it('should return null when registry get returns null', () => {
+      expect(hub.get('services', ['nonexistent'])).toBeNull();
     });
   });
 
