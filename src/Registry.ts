@@ -11,6 +11,7 @@ import {
   ScopedInstance
 } from './types';
 import { ClientIdentifier, RegistryStatistics, RegistryStats, ServiceClient } from './RegistryStats';
+import { InvalidKTAError } from './errors/CoordinateError';
 
 // Re-export types for backward compatibility
 export type { Registry, RegistryHub, InstanceFactory, RegistryFactory } from './types';
@@ -99,6 +100,10 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
   ): Instance<S, L1, L2, L3, L4, L5> => {
     logger.debug(`Creating and registering instance for key path and scopes`, kta, scopes, `in registry type: ${type}`);
 
+    if (!kta || (kta as readonly string[]).length === 0) {
+      throw new InvalidKTAError(kta, 'KTA must contain at least one key type');
+    }
+
     // Create coordinate for the instance
     const coordinate = createCoordinate(kta as any, scopes) as unknown as Coordinate<S, L1, L2, L3, L4, L5>;
 
@@ -119,11 +124,11 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
         type,
         kta,
         returnedType: typeof instance,
-        suggestion: 'Ensure factory function returns a valid instance with operations property'
+        suggestion: 'Ensure factory function returns a valid instance with coordinate and registry properties'
       });
       throw new Error(
         `Factory did not return a valid instance for: ${kta.join('.')}. ` +
-        `Expected instance with operations property, got: ${typeof instance}`
+        `Expected instance with coordinate and registry properties, got: ${typeof instance}`
       );
     }
 
@@ -141,6 +146,10 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
     L4 extends string = never,
     L5 extends string = never,
   >(kta: AllItemTypeArrays<S, L1, L2, L3, L4, L5>, instance: Instance<S, L1, L2, L3, L4, L5>, options?: { scopes?: string[] }): void => {
+    if (!kta || (kta as readonly string[]).length === 0) {
+      throw new InvalidKTAError(kta, 'KTA must contain at least one key type');
+    }
+
     const keyPath = [...kta].reverse(); // Work from most specific to least specific
     let currentLevel = instanceTree;
 
@@ -153,11 +162,11 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
         type,
         kta,
         providedType: typeof instance,
-        suggestion: 'Ensure you are registering a valid instance with operations property, not a factory or other object'
+        suggestion: 'Ensure you are registering a valid instance with coordinate and registry properties, not a factory or other object'
       });
       throw new Error(
         `Attempting to register a non-instance: ${kta.join('.')}. ` +
-        `Expected instance with operations property, got: ${typeof instance}`
+        `Expected instance with coordinate and registry properties, got: ${typeof instance}`
       );
     }
 
@@ -211,6 +220,10 @@ export const createRegistry = (type: string, registryHub?: RegistryHub): Registr
   >(kta: AllItemTypeArrays<S, L1, L2, L3, L4, L5>, options?: { scopes?: string[]; client?: ClientIdentifier }): Instance<S, L1, L2, L3, L4, L5> | null => {
     // Track statistics with kta, scopes, and client
     registryStats.recordGetCall(kta, options?.scopes, options?.client);
+
+    if (!kta || (kta as readonly string[]).length === 0) {
+      throw new InvalidKTAError(kta, 'KTA must contain at least one key type');
+    }
 
     const keyPath = [...kta].reverse();
     let currentLevel = instanceTree;

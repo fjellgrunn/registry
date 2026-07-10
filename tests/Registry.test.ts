@@ -50,6 +50,15 @@ describe('Registry', () => {
     expect(registry.get(['testLib'])).toBe(lib);
   });
 
+  it('should reject empty KTA on register and get', () => {
+    const lib = {
+      coordinate: {} as Coordinate<'test'>,
+      registry: {} as Registry,
+    } as unknown as Instance<'test'>;
+    expect(() => registry.register([] as any, lib)).toThrow(/Invalid KTA/);
+    expect(() => registry.get([] as any)).toThrow(/Invalid KTA/);
+  });
+
   it('should return undefined for unregistered library', () => {
     expect(() => registry.get(['nonExistentLib'])).toThrow();
   });
@@ -261,7 +270,7 @@ describe('Registry', () => {
 
     expect(() => {
       registry.register(['testLib'], invalidInstance);
-    }).toThrow(/Attempting to register a non-instance: testLib.*Expected instance with operations property/);
+    }).toThrow(/Attempting to register a non-instance: testLib.*Expected instance with coordinate and registry properties/);
   });
 
   it('should throw error when no instances are available for a registered key', () => {
@@ -375,7 +384,7 @@ describe('Registry createInstance', () => {
 
     expect(() => {
       registry.createInstance(['User'], ['firestore'], badFactory);
-    }).toThrow(/Factory did not return a valid instance for: User.*Expected instance with operations property/);
+    }).toThrow(/Factory did not return a valid instance for: User.*Expected instance with coordinate and registry properties/);
   });
 
   it('should trigger logger debug calls during createInstance', () => {

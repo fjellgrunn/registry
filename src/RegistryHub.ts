@@ -52,6 +52,13 @@ export const createRegistryHub = (): RegistryHub => {
       throw new DuplicateRegistryTypeError(type);
     }
 
+    // Prevent cross-hub overwrite of an already-bound registry
+    if (registry.registryHub && registry.registryHub !== hub) {
+      throw new Error(
+        `Registry type "${type}" is already bound to a different RegistryHub`
+      );
+    }
+
     registries[type] = registry;
 
     // Ensure the created registry has a reference to this hub if not already set

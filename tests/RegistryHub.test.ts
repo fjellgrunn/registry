@@ -39,6 +39,15 @@ describe('RegistryHub', () => {
       expect(hub.getRegistry('services')).toBe(serviceRegistry);
       expect(hub.getRegistry('data')).toBe(dataRegistry);
     });
+
+    it('should reject registering a registry already bound to another hub', () => {
+      const otherHub = createRegistryHub();
+      otherHub.registerRegistry(serviceRegistry);
+
+      expect(() => {
+        hub.registerRegistry(serviceRegistry);
+      }).toThrow(/already bound to a different RegistryHub/);
+    });
   });
 
   describe('getRegistry', () => {
